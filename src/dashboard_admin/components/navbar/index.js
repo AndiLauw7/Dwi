@@ -1,9 +1,15 @@
 import React from 'react'
-import { Container, Dropdown, Nav, Navbar, Stack, } from 'react-bootstrap'
+import { Container, Dropdown, Nav, Navbar, NavDropdown, Stack, } from 'react-bootstrap'
 import avatarDummy from "../../../assets/img/null.png";
+import { RiFolderUserLine, RiHandCoinLine, RiLogoutCircleRLine, RiTeamLine, RiUser3Line } from 'react-icons/ri'
+import { Link, useNavigate } from 'react-router-dom';
 
 
 export default () => {
+
+    const navigate = useNavigate()
+
+    const user = "admin"
     return (
         <>
             <Navbar bg="dark" variant="dark" >
@@ -11,13 +17,47 @@ export default () => {
                     <Navbar.Brand>
                         SD Karya Bangsa
                     </Navbar.Brand>
+                    <Nav className="ms-auto pe-5" >
 
-                    <Nav className="ms-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#users">Data User</Nav.Link>
-                        <Nav.Link href="#peserta-didik">Data Peserta Didik</Nav.Link>
-                        <Nav.Link href="#pembayaran">Data Pembayaran</Nav.Link>
+                        <Nav.Link className='mx-2' onClick={() => navigate("/dashboard/home")}>Home</Nav.Link>
+
+                        <NavDropdown title="Laporan" className='mx-2'>
+
+
+                            <NavDropdown.Item onClick={() => navigate("/dashboard/laporan_data_siswa")}>
+                                Laporan Peserta Didik
+                            </NavDropdown.Item>
+
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item onClick={() => navigate("/dashboard/laporan_pembayaran")}>
+                                Laporan Pembayaran
+                            </NavDropdown.Item>
+                        </NavDropdown>
+
+                        {
+                            user !== "kepalasekolah" ? (
+                                <>
+
+                                    <NavDropdown title="Master" className='mx-2' >
+
+                                        <NavDropdown.Item onClick={() => navigate("/dashboard/master_data_siswa")}>
+                                            Data Peserta Didik
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item onClick={() => navigate("/dashboard/master_pembayaran")}>
+                                            Data Pembayaran
+                                        </NavDropdown.Item>
+                                    </NavDropdown>
+                                    <Nav.Link  className='mx-2' onClick={() => navigate("/dashboard/user")}>Users</Nav.Link>
+                                </>
+
+                            ) : ""
+                        }
+
+
                     </Nav>
+
+
 
                     <Nav>
                         <Stack>
@@ -40,62 +80,19 @@ export default () => {
                                     // onClick={() => navigate(`/profile/${id}`)}
                                     >
                                         <span>
-                                            <img
-                                                src="../assets/user2.svg"
-                                                alt="user-profile"
-                                                width={30}
-                                                height={30}
-                                                className="me-3"
-                                            />
+                                            <RiUser3Line size={30} />
                                         </span>
-                                        <span className="fw-bold">Profile</span>
+                                        <span className="fw-bold ms-3">Profile</span>
                                     </Dropdown.Item>
 
-                                    <Dropdown.Item
-                                        className="py-3"
-                                    // onClick={() => navigate("/new-journey")}
-                                    >
-                                        <span>
-                                            <img
-                                                src="../assets/write1.svg"
-                                                alt="write1"
-                                                width={30}
-                                                height={30}
-                                                className="me-3"
-                                            />
-                                        </span>
-                                        <span className="fw-bold">New Journey</span>
-                                    </Dropdown.Item>
-
-                                    <Dropdown.Item
-                                        className="py-3"
-                                    // onClick={() => navigate(`/bookmark/${id}`)}
-                                    >
-                                        <span>
-                                            <img
-                                                src="../assets/bookmark.svg"
-                                                alt="bookmark"
-                                                width={30}
-                                                height={30}
-                                                className="me-3"
-                                            />
-                                        </span>
-                                        <span className="fw-bold">Bookmark</span>
-                                    </Dropdown.Item>
                                     <Dropdown.Divider />
                                     <Dropdown.Item
-                                        // onClick={handleLogOut}
+                                    // onClick={handleLogOut}
                                     >
                                         <span>
-                                            <img
-                                                src="../assets/logout.svg"
-                                                alt="logout"
-                                                width={30}
-                                                height={30}
-                                                className="me-3"
-                                            />
+                                            <RiLogoutCircleRLine size={30} />
                                         </span>
-                                        <span className="fw-bold">Log Out</span>
+                                        <span className="fw-bold ms-3">Log Out</span>
                                     </Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
