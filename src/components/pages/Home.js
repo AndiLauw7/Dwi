@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { API } from "../../configAPI/api";
 import ModalLogin from "../Modals/ModalLogin";
 import ModalRegis from "../Modals/ModalRegis";
+
 import {
   Col,
   Container,
@@ -15,11 +16,12 @@ import {
 import NavbarUser from "../navbars/NavbarUser";
 import HomeTitle from "./HomeTitle";
 import CardPost from "../elements/CardPost";
+import { TentangSekolah } from "./TentangSekolah";
 import { UserContext } from "../../context/userContext";
 import Swal from "sweetalert2";
 
 function Home() {
-  document.title = "The Journey";
+  document.title = "| SD KARYA BANGSA";
 
   const [state, dispatch] = useContext(UserContext);
   const [journeys, setJourneys] = useState([]);
@@ -83,22 +85,6 @@ function Home() {
         {alert && alert}
 
         <div className="mx-5 py-3">
-          {/* <Col>
-						<h1>
-							<dt>Journey</dt>
-						</h1>
-						<InputGroup className="p-5  ">
-							<Form.Control
-								type="search"
-								placeholder="Find Journey"
-								aria-describedby="search"
-								onChange={(e) => setSearch(e.target.value)}
-							/>
-							<Button variant="primary" className="px-5" id="search">
-								Search
-							</Button>
-						</InputGroup>
-					</Col> */}
           <Row>
             <>
               {searchFilter.map((item, index) => (

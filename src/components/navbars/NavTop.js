@@ -19,41 +19,46 @@ function NavTop(props) {
   return (
     <Navbar className={props.shadow} bg="light" expand="lg" fixed="top">
       <Container fluid>
-      
+        <Navbar.Brand className="ps-3">
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <img
+              src={logo}
+              alt="logo"
+              width="60px"
+              className=" position-absolute1"
+            />
+            <a
+              style={{
+                fontSize: "15px",
+                fontWeight: "bolder",
+                padding: "0px  10px",
+                fontFamily: "sans-serif",
+              }}
+            >
+              SD KARYA BANGSA
+            </a>
+          </Link>
+        </Navbar.Brand>
 
-          <Navbar.Brand className="ps-3">
-            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
-
-              <img
-                src={logo}
-                alt="logo"
-                width="65px"
-                className=" position-absolute1"
-              />
-              <a style={{ fontSize: "24px", fontWeight: "bold", padding: "0px  10px" }}>
-                SD KARYA BANGSA
-              </a>
-            </Link>
-          </Navbar.Brand>
-         
-
-          <Nav >
-            <Nav.Link href="#home">Beranda</Nav.Link>
-            <Nav.Link href="#features">Tentang Sekolah</Nav.Link>
-            <Nav.Link href="#pricing">Informasi</Nav.Link>
-            <Nav.Link href="#pricing">Fasilitas Sekolah</Nav.Link>
-            <Nav.Link href="#pricing">Kontak</Nav.Link>
-          </Nav>
+        <Nav>
+          <Nav.Link href="#beranda">Beranda</Nav.Link>
+          <Nav.Link href="#tentangsekolah">Tentang Sekolah</Nav.Link>
+          <Nav.Link href="#fasilitas">Fasilitas Sekolah</Nav.Link>
+          <NavDropdown title="Informasi" id="basic-nav-dropdown">
+            <NavDropdown.Item href="#action/3.1">Pendaftaran</NavDropdown.Item>
+          </NavDropdown>
+          <Nav.Link href="#kontak">Kontak</Nav.Link>
+        </Nav>
 
         <div>
-          {/* <Button
+          <Button
             variant="primary"
             className="px-5 mx-3"
             onClick={() => setModalLogin(!modalLogin)}
           >
             Login
           </Button>
-          <Button
+          {/* <Button
             variant="primary"
             className="px-5"
             onClick={() => setModalRegis(!modalRegis)}

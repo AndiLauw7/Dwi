@@ -2,10 +2,16 @@ import React from "react";
 import NavTop from "../navbars/NavTop";
 import { Col, Container } from "react-bootstrap";
 import hero from "../../assets/img/sd.jpeg";
+import { TentangSekolah } from "./TentangSekolah";
+import { FasilitasSekolah } from "./FasilitasSekolah";
+import { Pendaftaraan } from "./Pendaftaraan";
+import { Kontak } from "./Kontak";
+import "../../assets/css/Style.css";
+import { Footer } from "../navbars/Footer";
 
 function HomeTitle() {
   return (
-    <>
+    <div>
       <div
         className="title-landing align-items-center text-white w-100 "
         style={{
@@ -39,19 +45,23 @@ function HomeTitle() {
             Generasi Mandiri Untuk Membangun Negeri
           </p>
         </div>
-        {/* <Col lg={6}>
-          <p
-            style={{
-              fontSize: "20px",
-              marginBottom: "100px",
-              color: "white",
-            }}
-          >
-            Generasi Mandiri Untuk Membangun Negeri
-          </p>
-        </Col> */}
       </Container>
-    </>
+      <Container>
+        <TentangSekolah />
+      </Container>
+      <Container className="mt-5">
+        <FasilitasSekolah />
+      </Container>
+      <Container fluid className="mt-5">
+        <Pendaftaraan />
+      </Container>
+      <Container fluid className="mt-5">
+        <Kontak />
+      </Container>
+      <Container fluid className="mb-0">
+        <Footer />
+      </Container>
+    </div>
   );
 }
 
