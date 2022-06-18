@@ -6,10 +6,12 @@ import { TentangSekolah } from "./TentangSekolah";
 import { FasilitasSekolah } from "./FasilitasSekolah";
 import { Pendaftaraan } from "./Pendaftaraan";
 import { Kontak } from "./Kontak";
+import "../../assets/css/Style.css";
+import { Footer } from "../navbars/Footer";
 
 function HomeTitle() {
   return (
-    <>
+    <div>
       <div
         className="title-landing align-items-center text-white w-100 "
         style={{
@@ -56,7 +58,10 @@ function HomeTitle() {
       <Container fluid className="mt-5">
         <Kontak />
       </Container>
-    </>
+      <Container fluid className="mb-0">
+        <Footer />
+      </Container>
+    </div>
   );
 }
 
