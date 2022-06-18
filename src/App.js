@@ -14,6 +14,7 @@ import Bookmark from "./components/pages/Bookmark";
 import Profile from "./components/pages/Profile";
 import AddJourney from "./components/pages/AddJourney";
 import UpdateJourney from "./components/pages/UpdateJourney";
+import Dashboard from "./dashboard_admin/index";
 
 
 //import API
@@ -27,46 +28,46 @@ function App() {
 	const navigate = useNavigate();
 	const [state, dispatch] = useContext(UserContext);
 
-	useEffect(() => {
-		if (localStorage.token) {
-			setAuthToken(localStorage.token);
-		}
+	// useEffect(() => {
+	// 	if (localStorage.token) {
+	// 		setAuthToken(localStorage.token);
+	// 	}
 
-		if (!state.isLogin) {
-			return navigate("/");
-		} else {
-			return navigate("/");
-		}
-	}, [state]);
+	// 	if (!state.isLogin) {
+	// 		return navigate("/");
+	// 	} else {
+	// 		return navigate("/");
+	// 	}
+	// }, [state]);
 
 	//always check auth
-	const checkUser = async () => {
-		try {
-			const response = await API.get("/check-auth");
-			if (response?.status === 404) {
-				return dispatch({
-					type: "AUTH_ERROR",
-				});
-			}
-			// Get user data
-			let payload = response.data.data.user;
-			// Get token from local storage
-			payload.token = localStorage.token;
+	// const checkUser = async () => {
+	// 	try {
+	// 		const response = await API.get("/check-auth");
+	// 		if (response?.status === 404) {
+	// 			return dispatch({
+	// 				type: "AUTH_ERROR",
+	// 			});
+	// 		}
+	// 		// Get user data
+	// 		let payload = response.data.data.user;
+	// 		// Get token from local storage
+	// 		payload.token = localStorage.token;
 
-			// Send data to useContext
+	// 		// Send data to useContext
 
-			dispatch({
-				type: "USER_SUCCESS",
-				payload,
-			});
-		} catch (error) {
-			// console.log(error);
-		}
-	};
+	// 		dispatch({
+	// 			type: "USER_SUCCESS",
+	// 			payload,
+	// 		});
+	// 	} catch (error) {
+	// 		// console.log(error);
+	// 	}
+	// };
 
-	useEffect(() => {
-		checkUser();
-	}, []);
+	// useEffect(() => {
+	// 	checkUser();
+	// }, []);
 
 	return (
 		<Routes>
@@ -76,6 +77,10 @@ function App() {
 			<Route exact path="/new-journey" element={<AddJourney />} />
 			<Route exact path="/bookmark/:id" element={<Bookmark />} />
 			<Route exact path="/update-journey/:id" element={<UpdateJourney />} />
+
+
+
+			<Route exact path="/dashboard" element={<Dashboard />} />
 
 			<Route
 				exact

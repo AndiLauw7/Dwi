@@ -27,7 +27,7 @@ function HomeTitle() {
 			<NavTop />
 			<Container>
 				<div className="h1 mb-3 mt-5 fw-bold text-white" style={{ fontSize: "50px" }}>
-					<p>The Journey </p>
+					<p>The</p>
 					<p>you ever dreamed of.</p>
 				</div>
 				<Col lg={6}>
