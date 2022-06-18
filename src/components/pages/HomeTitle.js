@@ -5,7 +5,6 @@ import hero from "../../assets/img/sd.jpeg";
 import { TentangSekolah } from "./TentangSekolah";
 import { FasilitasSekolah } from "./FasilitasSekolah";
 import { Pendaftaraan } from "./Pendaftaraan";
-import { Kontak } from "./Kontak";
 import "../../assets/css/Style.css";
 import { Footer } from "../navbars/Footer";
 
@@ -54,9 +53,6 @@ function HomeTitle() {
       </Container>
       <Container fluid className="mt-5">
         <Pendaftaraan />
-      </Container>
-      <Container fluid className="mt-5">
-        <Kontak />
       </Container>
       <Container fluid className="mb-0">
         <Footer />
