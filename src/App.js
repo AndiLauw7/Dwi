@@ -15,6 +15,7 @@ import Profile from "./components/pages/Profile";
 import AddJourney from "./components/pages/AddJourney";
 import UpdateJourney from "./components/pages/UpdateJourney";
 import Dashboard from "./dashboard_admin/index";
+import DashboardLogin from "./dashboard_admin/login";
 
 
 //import API
@@ -80,7 +81,8 @@ function App() {
 
 
 
-			<Route exact path="/dashboard" element={<Dashboard />} />
+			<Route path="/dashboard/*" element={<Dashboard />} />
+			<Route path="/dashboard/login" element={<DashboardLogin />} />
 
 			<Route
 				exact
