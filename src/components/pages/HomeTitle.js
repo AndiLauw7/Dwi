@@ -2,6 +2,7 @@ import React from "react";
 import NavTop from "../navbars/NavTop";
 import { Col, Container } from "react-bootstrap";
 import hero from "../../assets/img/sd.jpeg";
+import { TentangSekolah } from "./TentangSekolah";
 
 function HomeTitle() {
   return (
@@ -39,17 +40,9 @@ function HomeTitle() {
             Generasi Mandiri Untuk Membangun Negeri
           </p>
         </div>
-        {/* <Col lg={6}>
-          <p
-            style={{
-              fontSize: "20px",
-              marginBottom: "100px",
-              color: "white",
-            }}
-          >
-            Generasi Mandiri Untuk Membangun Negeri
-          </p>
-        </Col> */}
+      </Container>
+      <Container>
+        <TentangSekolah />
       </Container>
     </>
   );
