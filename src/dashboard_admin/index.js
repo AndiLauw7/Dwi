@@ -10,7 +10,7 @@ import User from './pages/User'
 
 
 export default  () => {
-  const user = "doni"
+  const user = "adad"
 
   const navigate = useNavigate()
 

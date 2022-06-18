@@ -84,7 +84,7 @@ function Home() {
         {state.isLogin ? <NavbarUser /> : <HomeTitle />}
         {alert && alert}
 
-        <div className="mx-5 py-3">
+        {/* <div className="mx-5 py-3">
           <Row>
             <>
               {searchFilter.map((item, index) => (
@@ -99,7 +99,7 @@ function Home() {
               ))}
             </>
           </Row>
-        </div>
+        </div> */}
         {modalRegis ? (
           <ModalRegis
             show={modalRegis}
