@@ -26,7 +26,7 @@ export const Pendaftaraan = () => {
         </Col>
         <Col md={6} className="justify-content-center text-center">
           <h1 className="mt-5" style={{ fontFamily: "monospace" }}>
-            Informasi
+            Informasi PPDB
           </h1>
           <Card className="text-center mt-5">
             <Card.Header>PPDB(Pendaftaran Peserta Didik Baru)</Card.Header>

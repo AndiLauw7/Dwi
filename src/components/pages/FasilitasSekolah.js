@@ -23,7 +23,7 @@ export const FasilitasSekolah = () => {
   return (
     <div
       className="tentang-sekolah"
-      style={{ backgroundColor: "rgba(0, 0, 0, 0.838)", borderRadius: "5px" }}
+      style={{ backgroundColor: "#212529", borderRadius: "5px" }}
     >
       <Row>
         <Col md={6}>
