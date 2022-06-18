@@ -3,6 +3,9 @@ import NavTop from "../navbars/NavTop";
 import { Col, Container } from "react-bootstrap";
 import hero from "../../assets/img/sd.jpeg";
 import { TentangSekolah } from "./TentangSekolah";
+import { FasilitasSekolah } from "./FasilitasSekolah";
+import { Pendaftaraan } from "./Pendaftaraan";
+import { Kontak } from "./Kontak";
 
 function HomeTitle() {
   return (
@@ -43,6 +46,15 @@ function HomeTitle() {
       </Container>
       <Container>
         <TentangSekolah />
+      </Container>
+      <Container className="mt-5">
+        <FasilitasSekolah />
+      </Container>
+      <Container fluid className="mt-5">
+        <Pendaftaraan />
+      </Container>
+      <Container fluid className="mt-5">
+        <Kontak />
       </Container>
     </>
   );

@@ -43,8 +43,10 @@ function NavTop(props) {
         <Nav>
           <Nav.Link href="#beranda">Beranda</Nav.Link>
           <Nav.Link href="#tentangsekolah">Tentang Sekolah</Nav.Link>
-          <Nav.Link href="#informasi">Informasi</Nav.Link>
           <Nav.Link href="#fasilitas">Fasilitas Sekolah</Nav.Link>
+          <NavDropdown title="Informasi" id="basic-nav-dropdown">
+            <NavDropdown.Item href="#action/3.1">Pendaftaran</NavDropdown.Item>
+          </NavDropdown>
           <Nav.Link href="#kontak">Kontak</Nav.Link>
         </Nav>
 
