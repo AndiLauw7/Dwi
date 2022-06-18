@@ -1,10 +1,14 @@
 import React from 'react'
+import MyPage from '../components/myPage'
 import Navbar from '../components/navbar'
 
 export default function LaporanDataSiswa() {
   return (
-    <>
-      <div>Laporan Data Siswa</div>
-    </>
+    <MyPage
+      title={"Home"}
+      url={window.location.pathname}
+    >
+
+    </MyPage>
   )
 }

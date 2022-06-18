@@ -1,10 +1,15 @@
 import React from 'react'
+import MyPage from '../components/myPage'
 import Navbar from '../components/navbar'
 
 export default function Home() {
+
   return (
-    <div>
-      <div>Home</div>
-    </div>
+    <MyPage
+      title={"Home"}
+      url={window.location.pathname}
+    >
+
+    </MyPage>
   )
 }

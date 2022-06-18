@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'
+import { Breadcrumb, Container } from 'react-bootstrap'
 import { Routes, Route, useNavigate } from 'react-router-dom'
+import Profile from './pages/Profile'
 import Navbar from './components/navbar'
 import Home from './pages/Home'
 import LaporanDataSiswa from './pages/LaporanDataSiswa'
@@ -9,37 +11,41 @@ import MasterDataSiswa from './pages/MasterDataSiswa'
 import User from './pages/User'
 
 
-export default  () => {
-  const user = "adad"
+export default () => {
+  const user = "admin"
 
   const navigate = useNavigate()
 
 
   useEffect(() => {
-    if(user === "admin" || user === "kepalasekolah"){
+    if (user === "admin" || user === "kepalasekolah") {
       console.log(user)
       return navigate("/dashboard/home")
     } else {
       return navigate("/dashboard/login")
-    } 
+    }
   }, [])
 
 
   return (
     <>
-    
-    <Navbar />
-    
-    <Routes basename='/dashboard' >
-      {/* <Routes> */}
-                <Route exact path="/home" element={<Home />} />
-                <Route exact path="/laporan_data_siswa" element={<LaporanDataSiswa />} />
-                <Route exact path="/laporan_pembayaran" element={<LaporanPembayaran />} />
-                <Route exact path="/master_data_siswa" element={<MasterDataSiswa />} />
-                <Route exact path="/master_pembayaran" element={<MasterDataPembayaran />} />
-                <Route exact path="/user" element={<User />} />
 
-            {/* </Routes> */}
+      
+
+        <Routes basename='/dashboard' >
+          {/* <Routes> */}
+          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/laporan_data_siswa" element={<LaporanDataSiswa />} />
+          <Route exact path="/laporan_pembayaran" element={<LaporanPembayaran />} />
+          <Route exact path="/master_data_siswa" element={<MasterDataSiswa />} />
+          <Route exact path="/master_pembayaran" element={<MasterDataPembayaran />} />
+          <Route exact path="/user" element={<User />} />
+          <Route exact path="/profile" element={<Profile />} />
+    </Routes>
+
+
+
+      {/* </Routes> */}
 
       {/* 
       if(user === admin){
@@ -57,7 +63,6 @@ export default  () => {
       {
          user === "kepalasekolah" ? ( <Route exact path="/*" element={<HomePage />} />)  : ( <Route exact path="/*" element={<Login />} /> )
       } */}
-    </Routes>
     </>
 
   )

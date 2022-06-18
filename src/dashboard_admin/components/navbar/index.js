@@ -77,7 +77,7 @@ export default () => {
                                 <Dropdown.Menu className="text-dark shadow">
                                     <Dropdown.Item
                                         className="py-3"
-                                    // onClick={() => navigate(`/profile/${id}`)}
+                                    onClick={() => navigate(`/dashboard/profile`)}
                                     >
                                         <span>
                                             <RiUser3Line size={30} />
