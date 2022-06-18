@@ -3,14 +3,14 @@ import { API } from "../../configAPI/api";
 import ModalLogin from "../Modals/ModalLogin";
 import ModalRegis from "../Modals/ModalRegis";
 import {
-	Col,
-	Container,
-	InputGroup,
-	Form,
-	Button,
-	Stack,
-	Row,
-	Card,
+  Col,
+  Container,
+  InputGroup,
+  Form,
+  Button,
+  Stack,
+  Row,
+  Card,
 } from "react-bootstrap";
 import NavbarUser from "../navbars/NavbarUser";
 import HomeTitle from "./HomeTitle";
@@ -19,72 +19,71 @@ import { UserContext } from "../../context/userContext";
 import Swal from "sweetalert2";
 
 function Home() {
-	document.title = "The Journey";
+  document.title = "The Journey";
 
-	const [state, dispatch] = useContext(UserContext);
-	const [journeys, setJourneys] = useState([]);
-	const [search, setSearch] = useState("");
-	const [bookmark, setBookmark] = useState(false);
-	const [modalLogin, setModalLogin] = useState(false);
-	const [modalRegis, setModalRegis] = useState(false);
-	const [alert, setAlert] = useState(null);
+  const [state, dispatch] = useContext(UserContext);
+  const [journeys, setJourneys] = useState([]);
+  const [search, setSearch] = useState("");
+  const [bookmark, setBookmark] = useState(false);
+  const [modalLogin, setModalLogin] = useState(false);
+  const [modalRegis, setModalRegis] = useState(false);
+  const [alert, setAlert] = useState(null);
 
-	const idUser = state.user.id;
+  const idUser = state.user.id;
 
-	const searchFilter = journeys.filter((journey) => {
-		return journey.title.toLowerCase().indexOf(search.toLowerCase()) !== -1;
-	});
+  const searchFilter = journeys.filter((journey) => {
+    return journey.title.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+  });
 
-	const getJourneys = async () => {
-		const response = await API.get("/journeys");
-		setJourneys(response.data.data.dataJourneys);
-	};
+  const getJourneys = async () => {
+    const response = await API.get("/journeys");
+    setJourneys(response.data.data.dataJourneys);
+  };
 
-	useEffect(() => {
-		getJourneys();
+  useEffect(() => {
+    getJourneys();
 
-		return () => {
-			setJourneys([])
-		}
-		
-	}, [state.isLogin]);
+    return () => {
+      setJourneys([]);
+    };
+  }, [state.isLogin]);
 
-	const handleBookmark = async (idJourney) => {
-		if (state?.isLogin) {
-			setBookmark(!bookmark);
+  const handleBookmark = async (idJourney) => {
+    if (state?.isLogin) {
+      setBookmark(!bookmark);
 
-			const config = {
-				headers: {
-					"Content-type": "application/json",
-				},
-			};
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
 
-			let data = {
-				idUser,
-				idJourney: idJourney,
-			};
+      let data = {
+        idUser,
+        idJourney: idJourney,
+      };
 
-			data = JSON.parse(JSON.stringify(data));
+      data = JSON.parse(JSON.stringify(data));
 
-			const response = await API.post("/bookmark", data, config);
-			if (response.status === 200) {
-				Swal.fire({
-					title: "success",
-					text: "Bookmark!",
-					icon: "success",
-				});
-			}
-		}
-	};
-	
-	return (
-		<div>
-			<Container fluid style={{ padding: 0 }}>
-				{state.isLogin ? <NavbarUser /> : <HomeTitle />}
-				{alert && alert}
+      const response = await API.post("/bookmark", data, config);
+      if (response.status === 200) {
+        Swal.fire({
+          title: "success",
+          text: "Bookmark!",
+          icon: "success",
+        });
+      }
+    }
+  };
 
-				<div className="mx-5 py-3">
-					<Col>
+  return (
+    <div>
+      <Container fluid style={{ padding: 0 }}>
+        {state.isLogin ? <NavbarUser /> : <HomeTitle />}
+        {alert && alert}
+
+        <div className="mx-5 py-3">
+          {/* <Col>
 						<h1>
 							<dt>Journey</dt>
 						</h1>
@@ -99,42 +98,42 @@ function Home() {
 								Search
 							</Button>
 						</InputGroup>
-					</Col>
-					<Row>
-						<>
-							{searchFilter.map((item, index) => (
-								<Col lg={3} key={index}>
-									<CardPost
-										item={item}
-										bookmark={bookmark}
-										handleBookmark={(id) => handleBookmark(id)}
-										handleModal={(value) => setModalLogin(value)}
-									/>
-								</Col>
-							))}
-						</>
-					</Row>
-				</div>
-				{modalRegis ? (
-					<ModalRegis
-						show={modalRegis}
-						onHide={() => setModalRegis(!modalRegis)}
-					/>
-				) : (
-					""
-				)}
-				{modalLogin ? (
-					<ModalLogin
-						show={modalLogin}
-						onHide={() => setModalLogin(!modalLogin)}
-						handleModalRegis={(value) => setModalRegis(value)}
-					/>
-				) : (
-					" "
-				)}
-			</Container>
-		</div>
-	);
+					</Col> */}
+          <Row>
+            <>
+              {searchFilter.map((item, index) => (
+                <Col lg={3} key={index}>
+                  <CardPost
+                    item={item}
+                    bookmark={bookmark}
+                    handleBookmark={(id) => handleBookmark(id)}
+                    handleModal={(value) => setModalLogin(value)}
+                  />
+                </Col>
+              ))}
+            </>
+          </Row>
+        </div>
+        {modalRegis ? (
+          <ModalRegis
+            show={modalRegis}
+            onHide={() => setModalRegis(!modalRegis)}
+          />
+        ) : (
+          ""
+        )}
+        {modalLogin ? (
+          <ModalLogin
+            show={modalLogin}
+            onHide={() => setModalLogin(!modalLogin)}
+            handleModalRegis={(value) => setModalRegis(value)}
+          />
+        ) : (
+          " "
+        )}
+      </Container>
+    </div>
+  );
 }
 
 export default Home;
