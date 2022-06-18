@@ -23,11 +23,19 @@ export const FasilitasSekolah = () => {
   return (
     <div
       className="tentang-sekolah"
-      style={{ backgroundColor: "  #5b41db", borderRadius: "5px" }}
+      style={{ backgroundColor: "#212529", borderRadius: "5px" }}
     >
       <Row>
         <Col md={6}>
-          <div style={{ justifyContent: "center", color: "white" }}>
+          <div
+            style={{
+              backgroundColor: "  #5b41db",
+              justifyContent: "center",
+              color: "white",
+              marginLeft: "25px",
+              paddingBottom: "10px",
+            }}
+          >
             <h1
               className="mt-5"
               style={{
@@ -62,9 +70,7 @@ export const FasilitasSekolah = () => {
               padding: "0",
               margin: "0",
             }}
-          >
-            NEWCOMERS
-          </p>
+          ></p>
           <motion.div ref={carousel} className="carousel">
             <motion.div
               drag="x"

@@ -84,22 +84,6 @@ function Home() {
         {state.isLogin ? <NavbarUser /> : <HomeTitle />}
         {alert && alert}
 
-        {/* <div className="mx-5 py-3">
-          <Row>
-            <>
-              {searchFilter.map((item, index) => (
-                <Col lg={3} key={index}>
-                  <CardPost
-                    item={item}
-                    bookmark={bookmark}
-                    handleBookmark={(id) => handleBookmark(id)}
-                    handleModal={(value) => setModalLogin(value)}
-                  />
-                </Col>
-              ))}
-            </>
-          </Row>
-        </div> */}
         {modalRegis ? (
           <ModalRegis
             show={modalRegis}
