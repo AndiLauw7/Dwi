@@ -12,7 +12,7 @@ import {
 } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 
-export const FasilitasSekolah = () => {
+export const FasilitasSekolah = ({id}) => {
   const [width, setWidth] = useState(0);
   const carousel = useRef();
 
@@ -22,10 +22,12 @@ export const FasilitasSekolah = () => {
   }, []);
   return (
     <div
+    id={id}
       className="tentang-sekolah"
-      style={{ backgroundColor: "#212529", borderRadius: "5px" }}
+      style={{ backgroundColor: "#212529", borderRadius: "5px", scrollMarginTop: "200px" }}
     >
-      <Row>
+      
+      <Row >
         <Col md={6}>
           <div
             style={{
