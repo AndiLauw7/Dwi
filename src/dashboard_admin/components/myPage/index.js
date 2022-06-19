@@ -23,22 +23,7 @@ export default ({ title, url, children }) => {
                     ) : ""}
                 <h3 className="fw-bold mt-5">{title}</h3>
 
-                <div className="d-flex justify-content-end my-3 mb-5 gap-3">
-                    <InputGroup style={{width: "300px"}}>
-                        <Form.Control
-                            type="search"
-                            placeholder="Find Journey"
-                            aria-describedby="search"
-                        // onChange={(e) => setSearch(e.target.value)}
-                        />
-                        <Button variant="primary" id="search">
-                        <i class="fa fa-search"></i>
-                        </Button>
-                    </InputGroup>
-                    <Button variant="primary" id="search">
-                        <i class="fa fa-plus-circle" /> Tambah
-                        </Button>
-                </div>
+               
 
                 {children}
             </Container>

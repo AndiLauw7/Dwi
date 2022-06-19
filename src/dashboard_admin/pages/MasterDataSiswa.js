@@ -20,12 +20,68 @@ const columns = [
 
 const data = [
     {
+        no: 1,
         name: "Fikri",
         no_hp: "0832432423",
         jenis_kelamin: "Laki-laki",
-        
+
     },
     {
+        no: 2,
+        name: "Fikri",
+        no_hp: "0832432423",
+        jenis_kelamin: "Laki-laki"
+    },
+    {
+        no: 3,
+        name: "Fikri",
+        no_hp: "0832432423",
+        jenis_kelamin: "Laki-laki"
+    },
+    {
+        no: 4,
+        name: "Fikri",
+        no_hp: "0832432423",
+        jenis_kelamin: "Laki-laki"
+    },
+    {
+        no: 5,
+        name: "Fikri",
+        no_hp: "0832432423",
+        jenis_kelamin: "Laki-laki"
+    },
+    {
+        no: 6,
+        name: "Fikri",
+        no_hp: "0832432423",
+        jenis_kelamin: "Laki-laki"
+    },
+    {
+        no: 7,
+        name: "Fikri",
+        no_hp: "0832432423",
+        jenis_kelamin: "Laki-laki"
+    },
+    {
+        no: 8,
+        name: "Fikri",
+        no_hp: "0832432423",
+        jenis_kelamin: "Laki-laki"
+    },
+    {
+        no: 9,
+        name: "Fikri",
+        no_hp: "0832432423",
+        jenis_kelamin: "Laki-laki"
+    },
+    {
+        no: 10,
+        name: "Fikri",
+        no_hp: "0832432423",
+        jenis_kelamin: "Laki-laki"
+    },
+    {
+        no: 11,
         name: "Fikri",
         no_hp: "0832432423",
         jenis_kelamin: "Laki-laki"
