@@ -47,7 +47,7 @@ function NavTop(props) {
             <Nav.Link href="#tentang-sekolah">Tentang Sekolah</Nav.Link>
             <Nav.Link href="#fasilitas">Fasilitas Sekolah</Nav.Link>
             <NavDropdown title="Informasi" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">
+              <NavDropdown.Item href="#ppdb">
                 Pendaftaran
               </NavDropdown.Item>
             </NavDropdown>
