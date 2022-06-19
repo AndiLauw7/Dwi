@@ -1,5 +1,5 @@
 import React from 'react'
-import { Breadcrumb, Container } from 'react-bootstrap'
+import { Breadcrumb, Button, Container, Form, InputGroup } from 'react-bootstrap'
 import Navbar from '../navbar';
 
 export default ({ title, url, children }) => {
@@ -20,12 +20,16 @@ export default ({ title, url, children }) => {
                                 {parseUrl[2]}
                             </Breadcrumb.Item>
                         </Breadcrumb>
-                    ) : "" }
-                        {children}
-            </Container>
+                    ) : ""}
+                <h3 className="fw-bold mt-5">{title}</h3>
+
                
 
-           
+                {children}
+            </Container>
+
+
+
         </>
     )
 }
