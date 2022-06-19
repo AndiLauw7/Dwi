@@ -46,7 +46,7 @@ function HomeTitle() {
         </div>
       </Container>
       <Container id="tentang-sekolah">
-        <TentangSekolah  />
+        <TentangSekolah />
       </Container>
       <Container className="mt-5" id="fasilitas">
         <FasilitasSekolah />

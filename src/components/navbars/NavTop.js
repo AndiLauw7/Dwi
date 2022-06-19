@@ -4,8 +4,12 @@ import logo from "../../assets/img/logo.png";
 import ModalRegis from "../Modals/ModalRegis";
 import ModalLogin from "../Modals/ModalLogin";
 import { Link, useNavigate } from "react-router-dom";
+import { animateScroll as scroll } from "react-scroll";
 
 function NavTop(props) {
+  const scrollToTop = () => {
+    scroll.scrollToTop();
+  };
   const navigate = useNavigate();
   const [modalRegis, setModalRegis] = useState(false);
   const [modalLogin, setModalLogin] = useState(false);
@@ -44,12 +48,18 @@ function NavTop(props) {
 
           <Nav>
             <Nav.Link>Beranda</Nav.Link>
-            <Nav.Link href="#tentang-sekolah">Tentang Sekolah</Nav.Link>
+            <Nav.Link
+              href="#tentang-sekolah"
+              offset={-100}
+              duration={500}
+              spy={true}
+              smooth={true}
+            >
+              Tentang Sekolah
+            </Nav.Link>
             <Nav.Link href="#fasilitas">Fasilitas Sekolah</Nav.Link>
             <NavDropdown title="Informasi" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#ppdb">
-                Pendaftaran
-              </NavDropdown.Item>
+              <NavDropdown.Item href="#ppdb">Pendaftaran</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link href="#kontak">Kontak</Nav.Link>
           </Nav>
