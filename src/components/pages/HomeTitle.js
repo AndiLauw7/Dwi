@@ -45,15 +45,15 @@ function HomeTitle() {
           </p>
         </div>
       </Container>
-      <Container id="tentang-sekolah">
-        <TentangSekolah  />
+      <Container >
+        <TentangSekolah  id="tentang-sekolah"/>
       </Container>
-      <Container className="mt-5" id="fasilitas">
-        <FasilitasSekolah />
-      </Container>
-      <Container fluid className="mt-5" id="ppdb">
-        <Pendaftaraan />
-      </Container>
+
+        <FasilitasSekolah id="fasilitas"/>
+
+
+        <Pendaftaraan id="ppdb"/>
+
       <Container fluid className="mb-0" id="kontak">
         <Footer />
       </Container>

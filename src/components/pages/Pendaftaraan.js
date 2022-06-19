@@ -3,12 +3,14 @@ import React from "react";
 import { Col, Row, Container, Card, Button } from "react-bootstrap";
 import Murid from "../../assets/img/anakSd.jpg";
 
-export const Pendaftaraan = () => {
+export const Pendaftaraan = ({id}) => {
   return (
     <div
+    id={id}
       style={{
         backgroundColor: "rgba(140, 140, 140, 5%",
-        borderRadius: "5px",
+        borderRadius: "5px", 
+        scrollMarginTop: "100px"
       }}
     >
       <Row>
