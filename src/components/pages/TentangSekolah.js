@@ -94,6 +94,7 @@ export const TentangSekolah = () => {
                 src={guru}
                 alt=""
                 style={{
+                  marginLeft: "12px",
                   height: "100%",
                   width: "100%",
                 }}

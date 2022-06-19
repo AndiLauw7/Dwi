@@ -12,7 +12,7 @@ import {
 } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 
-export const FasilitasSekolah = ({id}) => {
+export const FasilitasSekolah = ({ id }) => {
   const [width, setWidth] = useState(0);
   const carousel = useRef();
 
@@ -22,16 +22,20 @@ export const FasilitasSekolah = ({id}) => {
   }, []);
   return (
     <div
-    id={id}
+      id={id}
       className="tentang-sekolah"
-      style={{ backgroundColor: "#212529", borderRadius: "5px", scrollMarginTop: "200px" }}
+      style={{
+        backgroundColor: "#212529",
+        borderRadius: "5px",
+        scrollMarginTop: "200px",
+      }}
     >
-      
-      <Row >
+      <Row>
         <Col md={6}>
           <div
             style={{
               backgroundColor: "  #5b41db",
+              borderRadius: "20px",
               justifyContent: "center",
               color: "white",
               marginLeft: "25px",
@@ -44,9 +48,8 @@ export const FasilitasSekolah = ({id}) => {
                 fontWeight: "bold",
               }}
             >
-              {" "}
-              FASILITAS{" "}
-            </h1>{" "}
+              FASILITAS
+            </h1>
             <br />
             <p
               className="mb-5"
@@ -56,7 +59,7 @@ export const FasilitasSekolah = ({id}) => {
                 fontWeight: "bold",
               }}
             >
-              Fasilitas yang diberikan oleh <br /> SD Muhammadiyah 1 Krian untuk
+              Fasilitas yang diberikan oleh <br /> SD Karya Bangsa untuk
               <br /> menunjang kenyamanan proses <br /> belajar siswa – siswi (
               mencari ilmu ).
             </p>

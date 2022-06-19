@@ -47,7 +47,7 @@ function NavTop(props) {
           </Navbar.Brand>
 
           <Nav>
-            <Nav.Link>Beranda</Nav.Link>
+            <Nav.Link onClick={() => navigate("/")}>Beranda</Nav.Link>
             <Nav.Link
               href="#tentang-sekolah"
               offset={-100}

@@ -22,6 +22,7 @@ import { API, setAuthToken } from "./configAPI/api";
 import { TentangSekolah } from "./components/pages/TentangSekolah";
 import { FasilitasSekolah } from "./components/pages/FasilitasSekolah";
 import { Pendaftaraan } from "./components/pages/Pendaftaraan";
+import { FormRegister } from "./components/pages/FormRegister";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -84,7 +85,7 @@ function App() {
       <Route exact path="/tentang-sekolah" element={<TentangSekolah />} />
       <Route exact path="/fasilitas-sekolah" element={<FasilitasSekolah />} />
       <Route exact path="/info-ppdb" element={<Pendaftaraan />} />
-      <Route exact path="/form-ppdb" element={<Pendaftaraan />} />
+      <Route exact path="/form-ppdb" element={<FormRegister />} />
 
       <Route path="/dashboard/*" element={<Dashboard />} />
       <Route path="/dashboard/login" element={<DashboardLogin />} />

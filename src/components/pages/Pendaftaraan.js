@@ -1,16 +1,18 @@
 import React from "react";
 
 import { Col, Row, Container, Card, Button } from "react-bootstrap";
+import { Navigate, useNavigate } from "react-router-dom";
 import Murid from "../../assets/img/anakSd.jpg";
 
-export const Pendaftaraan = ({id}) => {
+export const Pendaftaraan = ({ id }) => {
+  const navigate = useNavigate();
   return (
     <div
-    id={id}
+      id={id}
       style={{
         backgroundColor: "rgba(140, 140, 140, 5%",
-        borderRadius: "5px", 
-        scrollMarginTop: "100px"
+        borderRadius: "5px",
+        scrollMarginTop: "100px",
       }}
     >
       <Row>
@@ -40,7 +42,11 @@ export const Pendaftaraan = ({id}) => {
               </Card.Text>
             </Card.Body>
           </Card>
-          <Button variant="primary" className="mt-3 ">
+          <Button
+            onClick={() => navigate("/form-ppdb")}
+            variant="primary"
+            className="mt-3 "
+          >
             Selengkapnya
           </Button>
         </Col>
