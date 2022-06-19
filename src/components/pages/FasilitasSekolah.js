@@ -33,7 +33,6 @@ export const FasilitasSekolah = () => {
               justifyContent: "center",
               color: "white",
               marginLeft: "25px",
-              paddingBottom: "10px",
             }}
           >
             <h1
