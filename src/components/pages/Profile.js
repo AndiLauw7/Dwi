@@ -4,7 +4,7 @@ import CardPost from "../elements/CardPost";
 
 import { Link, useParams } from "react-router-dom";
 import NavbarUser from "../navbars/NavbarUser";
-import avatarDummy from "../../assets/img/null.png";
+import avatarDummy from "../../assets/img/anakSd.jpg";
 import { UserContext } from "../../context/userContext";
 import { API } from "../../configAPI/api";
 import * as Icon from "react-bootstrap-icons";
