@@ -26,7 +26,9 @@ import { Pendaftaraan } from "./components/pages/Pendaftaraan";
 import { FormRegister } from "./components/pages/FormRegister";
 import HomeTitle from "./components/pages/HomeTitle";
 
-
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 function App() {
   const navigate = useNavigate();
@@ -35,19 +37,25 @@ function App() {
   const [state, dispatch] = useContext(UserContext);
   const user = state.user
 
+  console.log(user.id);
+
+  
+
 
 
   // useEffect(() => {
-  // 	if (localStorage.token) {
-  // 		setAuthToken(localStorage.token);
-  // 	}
+	// 	if (localStorage.token) {
+	// 		setAuthToken(localStorage.token);
+	// 	}
 
-  // 	 if ( state.user.role === "admin" || state.user.role === "kepalasekolah") {
-  // 		return navigate("/dashboard/home");
-  //   }else {
-  // 		return navigate("/");
-  // 	}
-  // }, [state.user]);
+	// 	if (!state.isLogin) {
+	// 		return navigate("/login");
+	// 	} else if(user.role === "admin" || user.role === "kepalasekolah"){
+	// 		return navigate("/dashboard");
+	// 	} else {
+  //     navigate("/")
+  //   }
+	// }, [state]);
 
   // always check auth
   const checkUser = async () => {
@@ -61,7 +69,6 @@ function App() {
           });
 
         }
-        console.log(response);
         let payload = response.data.data?.user;
         // Get token from local storage
         payload.token = localStorage?.token;
@@ -75,24 +82,20 @@ function App() {
           payload,
         });
 
-
-
-      // Get user data
-
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    if(user){
-  		setAuthToken(localStorage.token);
-  	
+    
+    if(user.id === undefined){
       checkUser();
-    } else {
       navigate(location.pathname)
+    } else {
+      navigate("login")
     }
-  }, [location.pathname]);
+  }, []);
 
   return (
     <Routes>
