@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import React from "react";
 import {
   Container,
@@ -234,4 +234,4 @@ export default () => {
         </>
     )
 }
->>>>>>> 61f03485c4a193f0f3a8d43f14627b0b7f7e5a6c
+
