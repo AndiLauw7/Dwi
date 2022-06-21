@@ -38,7 +38,7 @@ export default () => {
           <Nav className="ms-auto pe-5">
             <Nav.Link
               className="mx-2"
-              onClick={() => navigate("/dashboard/home")}
+              onClick={() => navigate("/dashboard")}
             >
               Home
             </Nav.Link>

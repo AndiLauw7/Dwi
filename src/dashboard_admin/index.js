@@ -19,9 +19,10 @@ export default () => {
   const user = state.user.role
 
   useEffect(() => {
+    console.log(user)
+
     if (user === "admin" || user === "kepalasekolah") {
-      console.log(user)
-      return navigate("/dashboard/home")
+      return navigate("/dashboard")
     } else {
       return navigate("/login")
     }
@@ -35,7 +36,7 @@ export default () => {
 
         <Routes basename='/dashboard' >
           {/* <Routes> */}
-          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/" element={<Home />} />
           <Route exact path="/laporan_data_siswa" element={<LaporanDataSiswa />} />
           <Route exact path="/laporan_pembayaran" element={<LaporanPembayaran />} />
           <Route exact path="/master_data_siswa" element={<MasterDataSiswa />} />
