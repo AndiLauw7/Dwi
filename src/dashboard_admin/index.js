@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Breadcrumb, Container } from 'react-bootstrap'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import Profile from './pages/Profile'
@@ -9,12 +9,14 @@ import LaporanPembayaran from './pages/LaporanPembayaran'
 import MasterDataPembayaran from './pages/MasterDataPembayaran'
 import MasterDataSiswa from './pages/MasterDataSiswa'
 import User from './pages/User'
+import { UserContext } from '../context/userContext'
 
 
 export default () => {
-  const user = "admin"
 
   const navigate = useNavigate()
+	const [state, dispatch] = useContext(UserContext);
+  const user = state.user.role
 
 
   useEffect(() => {
