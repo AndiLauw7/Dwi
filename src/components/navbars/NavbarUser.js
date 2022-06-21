@@ -3,7 +3,7 @@ import { UserContext } from "../../context/userContext";
 import { Navbar, Container, Stack, Nav, Dropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import logoBlack from "../../assets/img/logoBlack.png";
-import avatarDummy from "../../assets/img/null.png";
+import avatarDummy from "../../assets/img/anakSd.jpg";
 import Swal from "sweetalert2";
 import { API } from "../../configAPI/api";
 export const path = "http://localhost:4000/uploads/";

@@ -3,6 +3,7 @@ import React from "react";
 import { Col, Row, Container, Card, Button } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router-dom";
 import Murid from "../../assets/img/anakSd.jpg";
+import FotoJoin from "../../assets/img/PPDB.jpeg";
 
 export const Pendaftaraan = ({ id }) => {
   const navigate = useNavigate();
@@ -29,23 +30,28 @@ export const Pendaftaraan = ({ id }) => {
           </div>
         </Col>
         <Col md={6} className="justify-content-center text-center">
-          <h1 className="mt-5" style={{ fontFamily: "monospace" }}>
+          <h3 className="mt-2" style={{ fontFamily: "monospace" }}>
             Informasi PPDB
-          </h1>
-          <Card className="text-center mt-5">
+          </h3>
+          <Card className="text-center mt-1">
             <Card.Header>PPDB(Pendaftaran Peserta Didik Baru)</Card.Header>
             <Card.Body>
-              <Card.Title>Special title treatment</Card.Title>
-              <Card.Text>
-                With supporting text below as a natural lead-in to additional
-                content.
-              </Card.Text>
+              <img
+                style={{
+                  width: "250px",
+                  height: "375px",
+                }}
+                src={FotoJoin}
+                alt=""
+              />
+
+              {/* <Card.Text></Card.Text> */}
             </Card.Body>
           </Card>
           <Button
             onClick={() => navigate("/form-ppdb")}
             variant="primary"
-            className="mt-3 "
+            className="mt-1 "
           >
             Selengkapnya
           </Button>
