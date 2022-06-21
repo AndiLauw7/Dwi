@@ -32,8 +32,10 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation()
 
-  console.log(location);
   const [state, dispatch] = useContext(UserContext);
+  const user = state.user
+
+
 
   // useEffect(() => {
   // 	if (localStorage.token) {
@@ -64,6 +66,8 @@ function App() {
         // Get token from local storage
         payload.token = localStorage?.token;
 
+        console.log(payload);
+
         // Send data to useContext
 
         dispatch({
@@ -81,7 +85,9 @@ function App() {
   };
 
   useEffect(() => {
-    if(localStorage.token === undefined){
+    if(user){
+  		setAuthToken(localStorage.token);
+  	
       checkUser();
     } else {
       navigate(location.pathname)

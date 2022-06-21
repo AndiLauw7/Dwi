@@ -9,10 +9,13 @@ export default function Login() {
   const navigate = useNavigate();
   
 
+
 	const title = "Login";
 	document.title = "The Journey | " + title;
 
 	const [state, dispatch] = useContext(UserContext);
+  const user = state.user.role
+
 	const [message, setMessage] = useState(null);
 
 	const [form, setForm] = useState({
@@ -53,7 +56,7 @@ export default function Login() {
 						type: "LOGIN_SUCCESS",
 						payload: response.data.data.user,
 					});
-					navigate("/dashboard/home");
+					navigate("/dashboard");
 				}
 			}
 		} catch (error) {
@@ -65,13 +68,18 @@ export default function Login() {
 		}
 	};
 
+  console.log(localStorage.token);
+
   useEffect(() => {
-    if (localStorage.token === undefined) {
-      return navigate("/login")
+    console.log(state.user);
+    if (user === "admin" || user === "kepalasekolah") {
+      return navigate("/dashboard")
+
     } else {
-      return navigate("/")
+      return navigate("/login")
+
     }
-  }, [])
+  }, [user])
 
   return (
     <>

@@ -7,6 +7,7 @@ const initialState = {
   user: {},
 };
 
+
 const reducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -18,6 +19,7 @@ const reducer = (state, action) => {
       return {
         isLogin: true,
         user: payload,
+        
       };
     // Creaet case "AUTH_ERROR" here ...
     case "AUTH_ERROR" :
