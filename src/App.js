@@ -26,32 +26,74 @@ import { Pendaftaraan } from "./components/pages/Pendaftaraan";
 import { FormRegister } from "./components/pages/FormRegister";
 import HomeTitle from "./components/pages/HomeTitle";
 
+<<<<<<< HEAD
+=======
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
+>>>>>>> 3970b6682ef8432300314d30a35e659ee811f844
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const [state, dispatch] = useContext(UserContext);
+<<<<<<< HEAD
   const user = state.user;
+=======
+  const user = state.user
+
+  console.log(user.id);
+
+  
+
+
+>>>>>>> 3970b6682ef8432300314d30a35e659ee811f844
 
   // useEffect(() => {
-  // 	if (localStorage.token) {
-  // 		setAuthToken(localStorage.token);
-  // 	}
+	// 	if (localStorage.token) {
+	// 		setAuthToken(localStorage.token);
+	// 	}
 
-  // 	 if ( state.user.role === "admin" || state.user.role === "kepalasekolah") {
-  // 		return navigate("/dashboard/home");
-  //   }else {
-  // 		return navigate("/");
-  // 	}
-  // }, [state.user]);
+	// 	if (!state.isLogin) {
+	// 		return navigate("/login");
+	// 	} else if(user.role === "admin" || user.role === "kepalasekolah"){
+	// 		return navigate("/dashboard");
+	// 	} else {
+  //     navigate("/")
+  //   }
+	// }, [state]);
 
   // always check auth
   const checkUser = async () => {
     try {
+<<<<<<< HEAD
       const response = await API.get("/check-auth");
       if (response?.status === 404) {
         return dispatch({
           type: "AUTH_ERROR",
+=======
+ 
+        const response = await API.get("/check-auth");
+        if (response?.status === 404) {
+          return dispatch({
+            type: "AUTH_ERROR",
+
+          });
+
+        }
+        let payload = response.data.data?.user;
+        // Get token from local storage
+        payload.token = localStorage?.token;
+
+        console.log(payload);
+
+        // Send data to useContext
+
+        dispatch({
+          type: "USER_SUCCESS",
+          payload,
+>>>>>>> 3970b6682ef8432300314d30a35e659ee811f844
         });
       }
       console.log(response);
@@ -59,6 +101,7 @@ function App() {
       // Get token from local storage
       payload.token = localStorage?.token;
 
+<<<<<<< HEAD
       console.log(payload);
 
       // Send data to useContext
@@ -69,20 +112,31 @@ function App() {
       });
 
       // Get user data
+=======
+>>>>>>> 3970b6682ef8432300314d30a35e659ee811f844
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
+<<<<<<< HEAD
     if (user) {
       setAuthToken(localStorage.token);
 
       checkUser();
     } else {
       navigate(location.pathname);
+=======
+    
+    if(user.id === undefined){
+      checkUser();
+      navigate(location.pathname)
+    } else {
+      navigate("login")
+>>>>>>> 3970b6682ef8432300314d30a35e659ee811f844
     }
-  }, [location.pathname]);
+  }, []);
 
   return (
     <Routes>

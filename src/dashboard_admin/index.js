@@ -19,7 +19,6 @@ export default () => {
   const user = state.user.role
 
   useEffect(() => {
-    console.log(user)
 
     if (user === "admin" || user === "kepalasekolah") {
       return navigate("/dashboard")
