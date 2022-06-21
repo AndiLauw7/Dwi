@@ -18,13 +18,16 @@ export default () => {
 	const [state, dispatch] = useContext(UserContext);
   const user = state.user.role
 
+  console.log(user);
+
+
 
   useEffect(() => {
-    if (user !== "admin" || user !== "kepalasekolah") {
+    if (user === "admin" || user === "kepalasekolah") {
       console.log(user)
-      return navigate("/dashboard/login")
-    } else {
       return navigate("/dashboard/home")
+    } else {
+      return navigate("/login")
     }
   }, [])
 

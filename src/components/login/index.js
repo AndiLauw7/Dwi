@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Card, Col, Container, Row, Form, Button, Alert } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from "../../context/userContext";
@@ -7,6 +7,7 @@ import LOGO from "../../assets/img/logo.png"
 
 export default function Login() {
   const navigate = useNavigate();
+  
 
 	const title = "Login";
 	document.title = "The Journey | " + title;
@@ -63,6 +64,14 @@ export default function Login() {
 			setMessage(alert);
 		}
 	};
+
+  useEffect(() => {
+    if (!state.user) {
+      return navigate("/login")
+    } else {
+      return navigate("/")
+    }
+  }, [])
 
   return (
     <>

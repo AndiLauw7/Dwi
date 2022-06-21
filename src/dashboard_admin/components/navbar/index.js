@@ -17,7 +17,7 @@ export default () => {
         dispatch({
             type: "LOGOUT",
         });
-        navigate("/dashboard/login");
+        navigate("/login");
     }
 
     return (

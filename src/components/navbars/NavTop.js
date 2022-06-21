@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { animateScroll as scroll } from "react-scroll";
 
 function NavTop(props) {
+
   const scrollToTop = () => {
     scroll.scrollToTop();
   };
@@ -68,7 +69,7 @@ function NavTop(props) {
             <Button
               variant="primary"
               className="px-5 mx-3"
-              onClick={() => setModalLogin(!modalLogin)}
+              onClick={() => navigate("/login")}
             >
               Login
             </Button>
