@@ -26,16 +26,12 @@ import { Pendaftaraan } from "./components/pages/Pendaftaraan";
 import { FormRegister } from "./components/pages/FormRegister";
 import HomeTitle from "./components/pages/HomeTitle";
 
-
-
 function App() {
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
 
   const [state, dispatch] = useContext(UserContext);
-  const user = state.user
-
-
+  const user = state.user;
 
   // useEffect(() => {
   // 	if (localStorage.token) {
@@ -52,56 +48,50 @@ function App() {
   // always check auth
   const checkUser = async () => {
     try {
- 
-        const response = await API.get("/check-auth");
-        if (response?.status === 404) {
-          return dispatch({
-            type: "AUTH_ERROR",
-
-          });
-
-        }
-        console.log(response);
-        let payload = response.data.data?.user;
-        // Get token from local storage
-        payload.token = localStorage?.token;
-
-        console.log(payload);
-
-        // Send data to useContext
-
-        dispatch({
-          type: "USER_SUCCESS",
-          payload,
+      const response = await API.get("/check-auth");
+      if (response?.status === 404) {
+        return dispatch({
+          type: "AUTH_ERROR",
         });
+      }
+      console.log(response);
+      let payload = response.data.data?.user;
+      // Get token from local storage
+      payload.token = localStorage?.token;
 
+      console.log(payload);
 
+      // Send data to useContext
+
+      dispatch({
+        type: "USER_SUCCESS",
+        payload,
+      });
 
       // Get user data
-
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    if(user){
-  		setAuthToken(localStorage.token);
-  	
+    if (user) {
+      setAuthToken(localStorage.token);
+
       checkUser();
     } else {
-      navigate(location.pathname)
+      navigate(location.pathname);
     }
   }, [location.pathname]);
 
   return (
     <Routes>
       <Route exact path="/" element={<HomeTitle />} />
-      <Route exact path="/detail-journey/:id" element={<DetailJourney />} />
+      {/* <Route exact path="/detail-journey/:id" element={<DetailJourney />} />
       <Route exact path="/profile/:id" element={<Profile />} />
       <Route exact path="/new-journey" element={<AddJourney />} />
       <Route exact path="/bookmark/:id" element={<Bookmark />} />
-      <Route exact path="/update-journey/:id" element={<UpdateJourney />} />
+      <Route exact path="/update-journey/:id" element={<UpdateJourney />} /> */}
 
       <Route exact path="/tentang-sekolah" element={<TentangSekolah />} />
       <Route exact path="/fasilitas-sekolah" element={<FasilitasSekolah />} />
