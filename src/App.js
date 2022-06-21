@@ -32,17 +32,20 @@ function App() {
   const navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
 
-  // useEffect(() => {
-  // 	if (localStorage.token) {
-  // 		setAuthToken(localStorage.token);
-  // 	}
+  useEffect(() => {
+  	if (localStorage.token) {
+  		setAuthToken(localStorage.token);
+  	}
 
-  // 	if (!state.isLogin) {
-  // 		return navigate("/");
-  // 	} else {
-  // 		return navigate("/");
-  // 	}
-  // }, [state]);
+  	if (!state.isLogin) {
+  		return navigate("/");
+  	} else if (state.isLogin || state.user.role === "admin" || state.user.role === "kepalasekolah") {
+      console.log("jalan");
+  		return navigate("/dashboard/*");
+    }else {
+  		return navigate("/");
+  	}
+  }, [state]);
 
   //always check auth
   // const checkUser = async () => {
@@ -54,9 +57,9 @@ function App() {
   // 			});
   // 		}
   // 		// Get user data
-  // 		let payload = response.data.data.user;
+  // 		let payload = response.data.data?.user;
   // 		// Get token from local storage
-  // 		payload.token = localStorage.token;
+  // 		payload.token = localStorage?.token;
 
   // 		// Send data to useContext
 
@@ -65,7 +68,7 @@ function App() {
   // 			payload,
   // 		});
   // 	} catch (error) {
-  // 		// console.log(error);
+  // 		console.log(error);
   // 	}
   // };
 

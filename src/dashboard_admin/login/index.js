@@ -1,8 +1,69 @@
-import React from 'react'
-import { Card, Col, Container, Row, Form, Button } from 'react-bootstrap'
+import React, { useContext, useState } from 'react'
+import { Card, Col, Container, Row, Form, Button, Alert } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from "../../context/userContext";
+import { API } from "../../configAPI/api";
 import LOGO from "../../assets/img/logo.png"
 
 export default function Login() {
+  const navigate = useNavigate();
+
+	const title = "Login";
+	document.title = "The Journey | " + title;
+
+	const [state, dispatch] = useContext(UserContext);
+	const [message, setMessage] = useState(null);
+
+	const [form, setForm] = useState({
+		email: "",
+		password: "",
+	});
+
+	const { email, password } = form;
+
+	const handleChange = (e) => {
+		setForm({
+			...form,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+
+	const handleLogin = async (e) => {
+		try {
+			e.preventDefault();
+
+			const config = {
+				headers: {
+					"Content-type": "application/json",
+				},
+			};
+
+			const body = JSON.stringify(form);
+
+			const response = await API.post("/login", body, config);
+
+			const alert = <Alert variant="success">{response.data.status}</Alert>;
+			
+			setMessage(alert);
+			if (response?.status === 200) {
+				if (response.data.status === "success") {
+					dispatch({
+						type: "LOGIN_SUCCESS",
+						payload: response.data.data.user,
+					});
+					navigate("/dashboard");
+				}
+			}
+		} catch (error) {
+			console.log(error);
+			const alert = (
+				<Alert variant="danger">Email or Password Not match!</Alert>
+			);
+			setMessage(alert);
+		}
+	};
+
   return (
     <>
       <Container fluid>
@@ -28,7 +89,7 @@ export default function Login() {
                       className=" p-2 mb-4 "
                       type="email"
                       name="email"
-                      // onChange={handleChange}
+                      onChange={handleChange}
                       placeholder="Email"
                     />
                   </Form.Group>
@@ -40,7 +101,7 @@ export default function Login() {
                       className="  p-2 mb-4"
                       type="password"
                       name="password"
-                      // onChange={handleChange}
+                      onChange={handleChange}
                       aria-describedby="passwordHelpBlock"
                       placeholder="Password"
                     />
@@ -48,7 +109,7 @@ export default function Login() {
                   <Button
                     className=" w-100 fw-bold my-3 "
                     variant="primary"
-                    // onClick={handleLogin}
+                    onClick={handleLogin}
                   >
                    Login
                   </Button>
