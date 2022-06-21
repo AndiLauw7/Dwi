@@ -18,10 +18,6 @@ export default () => {
 	const [state, dispatch] = useContext(UserContext);
   const user = state.user.role
 
-  console.log(user);
-
-
-
   useEffect(() => {
     if (user === "admin" || user === "kepalasekolah") {
       console.log(user)

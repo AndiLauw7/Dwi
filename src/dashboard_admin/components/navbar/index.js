@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Container,
   Dropdown,
@@ -16,11 +16,22 @@ import {
   RiUser3Line,
 } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../../../context/userContext";
 
 export default () => {
   const navigate = useNavigate();
+  const [state, dispatch] = useContext(UserContext);
+  const user = state.user.role
 
-  const user = "admin";
+  const handleLogOut = () => {
+   
+        dispatch({
+          type: "LOGOUT",
+        });
+        navigate("/login");
+      }
+
+
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -104,7 +115,7 @@ export default () => {
 
                   <Dropdown.Divider />
                   <Dropdown.Item
-                  // onClick={handleLogOut}
+                  onClick={handleLogOut}
                   >
                     <span>
                       <RiLogoutCircleRLine size={30} />

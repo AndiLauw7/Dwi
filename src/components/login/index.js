@@ -53,7 +53,7 @@ export default function Login() {
 						type: "LOGIN_SUCCESS",
 						payload: response.data.data.user,
 					});
-					navigate("/dashboard");
+					navigate("/dashboard/home");
 				}
 			}
 		} catch (error) {
@@ -66,7 +66,7 @@ export default function Login() {
 	};
 
   useEffect(() => {
-    if (!state.user) {
+    if (localStorage.token === undefined) {
       return navigate("/login")
     } else {
       return navigate("/")
