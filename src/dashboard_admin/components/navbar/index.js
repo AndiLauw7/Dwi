@@ -17,7 +17,7 @@ import {
   RiUser3Line,
 } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
-=======
+
 import React, { useContext } from 'react'
 import { Container, Dropdown, Nav, Navbar, NavDropdown, Stack, } from 'react-bootstrap'
 import avatarDummy from "../../../assets/img/null.png";
@@ -25,16 +25,26 @@ import { RiFolderUserLine, RiHandCoinLine, RiLogoutCircleRLine, RiTeamLine, RiUs
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../context/userContext';
 
->>>>>>> 61f03485c4a193f0f3a8d43f14627b0b7f7e5a6c
+
 
 export default () => {
   const navigate = useNavigate();
 
-<<<<<<< HEAD
   const user = "admin";
-  return (
-    <>
-      <Navbar bg="dark" variant="dark">
+  const navigate = useNavigate()
+  const [state, dispatch] = useContext(UserContext);
+  const user = state.user.role
+
+  const handleLogOut = () => {
+
+      dispatch({
+          type: "LOGOUT",
+      });
+      navigate("/dashboard/login");
+  }
+  // return (
+    // <>
+      {/* <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand>SD Karya Bangsa</Navbar.Brand>
           <Nav className="ms-auto pe-5">
@@ -50,19 +60,9 @@ export default () => {
                 onClick={() => navigate("/dashboard/laporan_data_siswa")}
               >
                 Laporan Peserta Didik
-              </NavDropdown.Item>
-=======
-    const navigate = useNavigate()
-    const [state, dispatch] = useContext(UserContext);
-    const user = state.user.role
+              </NavDropdown.Item> */}
 
-    const handleLogOut = () => {
 
-        dispatch({
-            type: "LOGOUT",
-        });
-        navigate("/dashboard/login");
-    }
 
     return (
         <>
@@ -72,7 +72,7 @@ export default () => {
                         SD Karya Bangsa
                     </Navbar.Brand>
                     <Nav className="ms-auto pe-5" >
->>>>>>> 61f03485c4a193f0f3a8d43f14627b0b7f7e5a6c
+
 
               <NavDropdown.Divider />
               <NavDropdown.Item
@@ -135,7 +135,7 @@ export default () => {
                     <span className="fw-bold ms-3">Profile</span>
                   </Dropdown.Item>
 
-<<<<<<< HEAD
+
                   <Dropdown.Divider />
                   <Dropdown.Item
                   // onClick={handleLogOut}
@@ -154,7 +154,7 @@ export default () => {
     </>
   );
 };
-=======
+
                             <NavDropdown.Item onClick={() => navigate("/dashboard/laporan_data_siswa")}>
                                 Laporan Peserta Didik
                             </NavDropdown.Item>
