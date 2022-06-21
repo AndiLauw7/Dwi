@@ -5,6 +5,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
+  useLocation,
   useNavigate,
 } from "react-router-dom";
 import { UserContext } from "./context/userContext";
@@ -29,6 +30,9 @@ import HomeTitle from "./components/pages/HomeTitle";
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation()
+
+  console.log(location);
   const [state, dispatch] = useContext(UserContext);
 
   // useEffect(() => {
@@ -78,10 +82,11 @@ function App() {
 
   useEffect(() => {
     if(localStorage.token === undefined){
-      console.log("jlan");
       checkUser();
-    } 
-  }, []);
+    } else {
+      navigate(location.pathname)
+    }
+  }, [location.pathname]);
 
   return (
     <Routes>
