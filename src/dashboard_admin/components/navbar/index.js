@@ -1,15 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Container, Dropdown, Nav, Navbar, NavDropdown, Stack, } from 'react-bootstrap'
 import avatarDummy from "../../../assets/img/null.png";
 import { RiFolderUserLine, RiHandCoinLine, RiLogoutCircleRLine, RiTeamLine, RiUser3Line } from 'react-icons/ri'
 import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../../../context/userContext';
 
 
 export default () => {
 
     const navigate = useNavigate()
+    const [state, dispatch] = useContext(UserContext);
+    const user = state.user.role
 
-    const user = "admin"
+    const handleLogOut = () => {
+
+        dispatch({
+            type: "LOGOUT",
+        });
+        navigate("/dashboard/login");
+    }
+
     return (
         <>
             <Navbar bg="dark" variant="dark" >
@@ -48,7 +58,7 @@ export default () => {
                                             Data Pembayaran
                                         </NavDropdown.Item>
                                     </NavDropdown>
-                                    <Nav.Link  className='mx-2' onClick={() => navigate("/dashboard/user")}>Users</Nav.Link>
+                                    <Nav.Link className='mx-2' onClick={() => navigate("/dashboard/user")}>Users</Nav.Link>
                                 </>
 
                             ) : ""
@@ -77,7 +87,7 @@ export default () => {
                                 <Dropdown.Menu className="text-dark shadow">
                                     <Dropdown.Item
                                         className="py-3"
-                                    onClick={() => navigate(`/dashboard/profile`)}
+                                        onClick={() => navigate(`/dashboard/profile`)}
                                     >
                                         <span>
                                             <RiUser3Line size={30} />
@@ -87,7 +97,7 @@ export default () => {
 
                                     <Dropdown.Divider />
                                     <Dropdown.Item
-                                    // onClick={handleLogOut}
+                                        onClick={handleLogOut}
                                     >
                                         <span>
                                             <RiLogoutCircleRLine size={30} />

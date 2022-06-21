@@ -20,11 +20,11 @@ export default () => {
 
 
   useEffect(() => {
-    if (user === "admin" || user === "kepalasekolah") {
+    if (user !== "admin" || user !== "kepalasekolah") {
       console.log(user)
-      return navigate("/dashboard/home")
-    } else {
       return navigate("/dashboard/login")
+    } else {
+      return navigate("/dashboard/home")
     }
   }, [])
 
