@@ -1,100 +1,87 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Button } from 'react-bootstrap'
+import { RiDeleteBin2Line, RiEdit2Line } from 'react-icons/ri'
+import { API } from '../../configAPI/api'
 import MyPage from '../components/myPage'
 import MyTable from '../components/myTable'
 
 
 const columns = [
     {
-        heading: "No"
+        heading: "Tgl Registrasi",
+        selector: "tgl_registrasi"
     },
     {
-        heading: "Name"
-    },
-    {
-        heading: "No HP"
-    },
-    {
-        heading: "Jenis Kelamin"
-    }
-]
-
-const data = [
-    {
-        no: 1,
-        name: "Fikri",
-        no_hp: "0832432423",
-        jenis_kelamin: "Laki-laki",
+        heading: "Nama Lengkap",
+        selector: "nama_lengkap"
 
     },
     {
-        no: 2,
-        name: "Fikri",
-        no_hp: "0832432423",
-        jenis_kelamin: "Laki-laki"
+        heading: "Jenis Kelamin",
+        selector: "jenis_kelamin"
+
     },
     {
-        no: 3,
-        name: "Fikri",
-        no_hp: "0832432423",
-        jenis_kelamin: "Laki-laki"
+        heading: "Tempat Lahir",
+        selector: "tempat_lahir"
+
     },
     {
-        no: 4,
-        name: "Fikri",
-        no_hp: "0832432423",
-        jenis_kelamin: "Laki-laki"
+        heading: "Tanggal Lahir",
+        selector: "tanggal_lahir"
+
     },
     {
-        no: 5,
-        name: "Fikri",
-        no_hp: "0832432423",
-        jenis_kelamin: "Laki-laki"
+        heading: "Agama",
+        selector: "agama"
+
     },
     {
-        no: 6,
-        name: "Fikri",
-        no_hp: "0832432423",
-        jenis_kelamin: "Laki-laki"
+        heading: "Alamat",
+        selector: "alamat"
+
     },
     {
-        no: 7,
-        name: "Fikri",
-        no_hp: "0832432423",
-        jenis_kelamin: "Laki-laki"
-    },
-    {
-        no: 8,
-        name: "Fikri",
-        no_hp: "0832432423",
-        jenis_kelamin: "Laki-laki"
-    },
-    {
-        no: 9,
-        name: "Fikri",
-        no_hp: "0832432423",
-        jenis_kelamin: "Laki-laki"
-    },
-    {
-        no: 10,
-        name: "Fikri",
-        no_hp: "0832432423",
-        jenis_kelamin: "Laki-laki"
-    },
-    {
-        no: 11,
-        name: "Fikri",
-        no_hp: "0832432423",
-        jenis_kelamin: "Laki-laki"
+        heading: "Nomer HP",
+        selector: "nomer_hp"
+
     }
 ]
+
+const ActComp = (data) => {
+    const [selectData, setSelectData] = useState({})
+
+    return (
+        <div style={{ display: "flex", gap: 24 }}>
+                <RiEdit2Line title='edit' className='text-success' style={{ fontSize: 20, cursor:"pointer"}} />
+                <RiDeleteBin2Line title='delete' className='text-danger' style={{ fontSize: 20, cursor:"pointer"}}/>
+        </div>
+    )
+}
 
 export default function MasterDataSiswa() {
+
+    const [data, setData] = useState([])
+    const getRegistrasi = async () => {
+        try {
+            const response = await API.get("/registrasi")
+            setData(response.data.data.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getRegistrasi()
+    }, [])
+
+
     return (
         <MyPage
             title={"Home"}
             url={window.location.pathname}
         >
-            <MyTable columns={columns} data={data}/>
+            <MyTable colAct={ActComp} columns={columns} data={data} />
         </MyPage>
     )
 }
