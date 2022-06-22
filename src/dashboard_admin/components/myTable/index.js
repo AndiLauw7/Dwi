@@ -9,7 +9,13 @@ const TableRow = ({ item, columns, index, colNo, colAct }) => {
         <tr>
             { colNo && <td>{index + 1}</td> }
             { columns.map((colItem, idx) => {
-                return <td key={idx}>{item[`${colItem.selector}`]}</td>
+                if(colItem.selector.includes(".")){
+                    const itemSplit = colItem.selector.split(".")
+                    return <td key={idx}>{colItem.format ? colItem.format(item[itemSplit[0]]) : item[itemSplit[0]]}</td>
+
+                }
+
+                return <td key={idx}>{colItem.format ? colItem.format(item[`${colItem.selector}`]) : item[`${colItem.selector}`]}</td>
             })
             }
             { colAct && (<td>{colAct(item)}</td>) }

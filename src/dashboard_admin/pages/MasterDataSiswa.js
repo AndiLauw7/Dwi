@@ -1,3 +1,4 @@
+import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { RiDeleteBin2Line, RiEdit2Line } from 'react-icons/ri'
@@ -9,7 +10,9 @@ import MyTable from '../components/myTable'
 const columns = [
     {
         heading: "Tgl Registrasi",
-        selector: "tgl_registrasi"
+        selector: "tgl_registrasi",
+        format:({tgl_registrasi})=>moment(tgl_registrasi).format("DD-MMM-YYYY")
+
     },
     {
         heading: "Nama Lengkap",
@@ -28,7 +31,8 @@ const columns = [
     },
     {
         heading: "Tanggal Lahir",
-        selector: "tanggal_lahir"
+        selector: "tanggal_lahir",
+        format:({tanggal_lahir})=>moment(tanggal_lahir).format("DD-MMM-YYYY")
 
     },
     {

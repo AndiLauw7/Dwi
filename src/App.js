@@ -80,6 +80,7 @@ function App() {
     if (user) {
       setAuthToken(localStorage.token);
       checkUser();
+      navigate(location.pathname);
     } else {
       navigate(location.pathname);
     }
