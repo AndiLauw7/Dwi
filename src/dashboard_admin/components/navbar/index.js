@@ -21,16 +21,14 @@ import { UserContext } from "../../../context/userContext";
 export default () => {
   const navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
-  const user = state.user.role
+  const user = state.user.role;
 
   const handleLogOut = () => {
-   
-        dispatch({
-          type: "LOGOUT",
-        });
-        navigate("/login");
-      }
-
+    dispatch({
+      type: "LOGOUT",
+    });
+    navigate("/login");
+  };
 
   return (
     <>
@@ -114,9 +112,7 @@ export default () => {
                   </Dropdown.Item>
 
                   <Dropdown.Divider />
-                  <Dropdown.Item
-                  onClick={handleLogOut}
-                  >
+                  <Dropdown.Item onClick={handleLogOut}>
                     <span>
                       <RiLogoutCircleRLine size={30} />
                     </span>
