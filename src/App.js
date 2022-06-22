@@ -20,13 +20,10 @@ import Login from "./components/login/index";
 //import API
 import { API, setAuthToken } from "./configAPI/api";
 
-if (localStorage.token) {
-  setAuthToken(localStorage.token);
-}
-
 function App() {
   const navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
+  const user = state.user;
 
   // useEffect(() => {
   // 	if (localStorage.token) {
@@ -52,7 +49,9 @@ function App() {
       // Get user data
       let payload = response.data.data.user;
       // Get token from local storage
-      payload.token = localStorage.token;
+      payload.token = localStorage?.token;
+
+      console.log(payload);
 
       // Send data to useContext
 
@@ -60,13 +59,21 @@ function App() {
         type: "USER_SUCCESS",
         payload,
       });
+
+      // Get user data
     } catch (error) {
       // console.log(error);
     }
   };
 
   useEffect(() => {
-    checkUser();
+    if (user) {
+      setAuthToken(localStorage.token);
+      checkUser();
+      navigate(location.pathname);
+    } else {
+      navigate(location.pathname);
+    }
   }, []);
 
   return (

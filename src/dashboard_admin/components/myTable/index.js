@@ -1,22 +1,35 @@
 import React, { useMemo, useState } from 'react'
 import { Button, Form, InputGroup, Pagination, Table } from 'react-bootstrap'
+import PropTypes from 'prop-types';
 
-export default ({ columns, data }) => {
+const TableHeading = ({ item, index }) => <th key={index}>{item.heading}</th>
+
+const TableRow = ({ item, columns, index, colNo, colAct }) => {
+    return (
+        <tr>
+            { colNo && <td>{index + 1}</td> }
+            { columns.map((colItem, idx) => {
+                if(colItem.selector.includes(".")){
+                    const itemSplit = colItem.selector.split(".")
+                    return <td key={idx}>{colItem.format ? colItem.format(item[itemSplit[0]]) : item[itemSplit[0]]}</td>
+
+                }
+
+                return <td key={idx}>{colItem.format ? colItem.format(item[`${colItem.selector}`]) : item[`${colItem.selector}`]}</td>
+            })
+            }
+            { colAct && (<td>{colAct(item)}</td>) }
+        </tr>
+    )
+
+}
+
+const MyTable = ({ columns, data, colNo, colAct }) => {
 
     const [page, setPage] = useState(0)
     const [perPage, setPerPage] = useState(8)
-    const [pagiData,setPagiData] = useState([])
+    const [pagiData, setPagiData] = useState([])
 
-    useMemo (() => {
-        let result = []
-        const totalPage = Math.ceil(data.length/perPage)
-
-        for(let i = 0; i < totalPage; i++){
-
-            result.push(data.slice(i*perPage, perPage*i+perPage))
-        }
-        return setPagiData(result)
-    }, [data])
 
 
     return (
@@ -38,37 +51,55 @@ export default ({ columns, data }) => {
                 </Button>
             </div>
             <Table striped bordered hover>
-                <thead>
-                    <tr style={{ backgroundColor: "#999" }}>
-                        {columns.map((item) => (<th>{item.heading}</th>))}
+                <thead style={{ backgroundColor: "#999" }}>
+                    <tr>
+                        { colNo && <th>No.</th> }
+                        {
+                            columns.map((item, index) => <TableHeading key={index} item={item} index={index} />)
+                        }
+                        { colAct && <th >action</th> }
+
                     </tr>
                 </thead>
                 <tbody>
-                    {pagiData[page]?.map((item, index) => (
-                        <tr>
-                            <td>{index + 1}</td>
-                            <td>{item.name}</td>
-                            <td>{item.no_hp}</td>
-                            <td>{item.jenis_kelamin}</td>
-                        </tr>
-                    ))}
+                    {
+                        data.map((item, index) =>
+                            <TableRow colNo={colNo} colAct={colAct} key={index} item={item} columns={columns} index={index} />
+                        )
+                    }
+
                 </tbody>
             </Table>
 
-            <div className='d-flex justify-content-end'>
+            {/* <div className='d-flex justify-content-end'>
 
-            <Pagination >
-                <Pagination.First />
-                <Pagination.Prev />
-                {
-                    pagiData.map((item, index) =>(
-                        <Pagination.Item onClick={(e) => setPage(index)}  active={index === page}>{index + 1}</Pagination.Item>
-                    ))
-                }
-                <Pagination.Next />
-                <Pagination.Last />
-            </Pagination>
-            </div>
+                <Pagination >
+                    <Pagination.First />
+                    <Pagination.Prev />
+                    {
+                        pagiData.map((item, index) => (
+                            <Pagination.Item key={index} onClick={(e) => setPage(index)} active={index === page}>{index + 1}</Pagination.Item>
+                        ))
+                    }
+                    <Pagination.Next />
+                    <Pagination.Last />
+                </Pagination>
+            </div> */}
         </div>
     )
 }
+
+
+MyTable.prototype = {
+    columns: PropTypes.array,
+    data: PropTypes.array,
+    colNo: PropTypes.bool,
+    colAct: PropTypes.func
+}
+
+MyTable.defaultProps = {
+    colNo: true,
+    // colAct: false
+}
+
+export default MyTable;
