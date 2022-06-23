@@ -2,6 +2,7 @@ import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { RiDeleteBin2Line, RiEdit2Line } from 'react-icons/ri'
+import { useLocation } from 'react-router-dom'
 import { API } from '../../configAPI/api'
 import MyPage from '../components/myPage'
 import MyTable from '../components/myTable'
@@ -65,6 +66,8 @@ const ActComp = (data) => {
 
 export default function MasterDataSiswa() {
 
+    const location = useLocation()
+
     const [data, setData] = useState([])
     const getRegistrasi = async () => {
         try {
@@ -83,7 +86,7 @@ export default function MasterDataSiswa() {
     return (
         <MyPage
             title={"Home"}
-            url={window.location.pathname}
+            url={location.pathname}
         >
             <MyTable colAct={ActComp} columns={columns} data={data} />
         </MyPage>
