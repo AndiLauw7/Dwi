@@ -47,8 +47,9 @@ export const FormRegister = () => {
 
   return (
     <div>
-      <Container fluid>
         <NavbarUser />
+
+      <Container fluid>
       </Container>
 
       <Container className="mt-5">
@@ -82,10 +83,11 @@ export const FormRegister = () => {
                   <Form.Label>Jenis Kelamin</Form.Label>
                   <Form.Select
                     name="jenis_kelamin"
+                    onChange={handleChange}
                   >
                     <option  disabled>Pilih</option>
-                    <option onChange={handleChange} value="laki-laki">Laki-laki</option>
-                    <option onChange={handleChange} value="perempuan">Perempuan</option>
+                    <option  value="laki-laki">Laki-laki</option>
+                    <option  value="perempuan">Perempuan</option>
                   </Form.Select>
                 </Form.Group>
 

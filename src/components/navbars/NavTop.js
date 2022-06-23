@@ -10,11 +10,11 @@ function NavTop(props) {
   const scrollToTop = () => {
     scroll.scrollToTop();
   };
-  const navigate = useNavigate("");
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    return () => {};
-  }, []);
+  // useEffect(() => {
+  //   return () => {};
+  // }, []);
 
   return (
     <div>

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Breadcrumb, Container } from "react-bootstrap";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Profile from "./pages/Profile";
 import Navbar from "./components/navbar";
 import Home from "./pages/Home";
@@ -13,13 +13,13 @@ import { UserContext } from "../context/userContext";
 
 export default () => {
   const navigate = useNavigate();
+  const location = useLocation()
   const [state, dispatch] = useContext(UserContext);
   const user = state.user.role;
-  console.log(user);
 
   useEffect(() => {
-    if (user === "admin" || user === "kepalasekolah") {
-      return navigate("/dashboard");
+    if (localStorage.token) {
+      return navigate(location.pathname);
     } else {
       return navigate("/login");
     }

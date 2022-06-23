@@ -1,10 +1,13 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Button, Form, InputGroup, Pagination, Table } from 'react-bootstrap'
 import PropTypes from 'prop-types';
+import { RiAddLine, RiPulseLine, RiSearch2Line } from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
+import { API } from '../../../configAPI/api';
 
 const TableHeading = ({ item, index }) => <th key={index}>{item.heading}</th>
 
-const TableRow = ({ item, columns, index, colNo, colAct }) => {
+const TableRow = ({ item, columns, index, colNo, colAct,  }) => {
     return (
         <tr>
             { colNo && <td>{index + 1}</td> }
@@ -24,11 +27,40 @@ const TableRow = ({ item, columns, index, colNo, colAct }) => {
 
 }
 
-const MyTable = ({ columns, data, colNo, colAct }) => {
+const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
 
+    const navigate = useNavigate()
+    const [data, setData] = useState([])
+    const [search, setSearch] = useState("")
     const [page, setPage] = useState(1)
     const [perPage, setPerPage] = useState(8)
     const [pagiData, setPagiData] = useState([])
+
+    console.log(data);
+
+
+    const getData = async () => {
+        try {
+            const response = await API.get(`${url}`)
+            setData(response.data.data.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleSearch = async() => {
+        try {
+            const response = await API.get(`${url}?page=${page}&perPage=${perPage}&search=${search}`)
+            setData(response.data.data.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+  
+
+  useEffect(() => {
+    getData();
+  }, []);
 
 
 
@@ -40,14 +72,14 @@ const MyTable = ({ columns, data, colNo, colAct }) => {
                         type="search"
                         placeholder="Find Journey"
                         aria-describedby="search"
-                    // onChange={(e) => setSearch(e.target.value)}
+                        onChange={(e) => setSearch(e.target.value)}
                     />
-                    <Button variant="primary" id="search">
-                        <i class="fa fa-search"></i>
+                    <Button variant="primary" id="search" onClick={handleSearch}>
+                        <RiSearch2Line />
                     </Button>
                 </InputGroup>
-                <Button variant="primary" id="search">
-                    <i class="fa fa-plus-circle" /> Tambah
+                <Button variant="primary" id="search" onClick={() => navigate(pathAdd)}>
+                    <RiAddLine /> Tambah
                 </Button>
             </div>
             <Table striped bordered hover>

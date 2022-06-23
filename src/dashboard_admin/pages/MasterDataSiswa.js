@@ -68,28 +68,14 @@ const ActComp = (data) => {
 export default function MasterDataSiswa() {
 
     const location = useLocation()
-
-    const [data, setData] = useState([])
-    const getRegistrasi = async () => {
-        try {
-            const response = await API.get("/registrasi")
-            setData(response.data.data.data)
-        } catch (error) {
-            console.log(error);
-        }
-    }
-  
-
-  useEffect(() => {
-    getRegistrasi();
-  }, []);
+    
 
     return (
         <MyPage
             title={"Home"}
             url={location.pathname}
         >
-            <MyTable colAct={ActComp} columns={columns} data={data} />
+            <MyTable colAct={ActComp} columns={columns} pathAdd={"/form-ppdb"} url={"/registrasi"} />
         </MyPage>
     )
 }
