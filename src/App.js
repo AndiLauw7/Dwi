@@ -10,14 +10,12 @@ import {
 } from "react-router-dom";
 import { UserContext } from "./context/userContext";
 import Home from "./components/pages/Home";
-import DetailJourney from "./components/pages/DetailJourney";
-import Bookmark from "./components/pages/Bookmark";
 import Profile from "./components/pages/Profile";
-import AddJourney from "./components/pages/AddJourney";
-import UpdateJourney from "./components/pages/UpdateJourney";
 import Dashboard from "./dashboard_admin";
-import Login from "./components/login/index";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
 import { FormRegister } from "./components/pages/FormRegister";
+import { DetailTentangSekolah } from "./components/pages/DetailTentangSekolah";
 
 //import API
 import { API, setAuthToken } from "./configAPI/api";
@@ -70,25 +68,19 @@ function App() {
   return (
     <Routes>
       <Route exact path="/" element={<Home />} />
-      <Route exact path="/detail-journey/:id" element={<DetailJourney />} />
+
       <Route exact path="/profile/:id" element={<Profile />} />
-      <Route exact path="/new-journey" element={<AddJourney />} />
-      <Route exact path="/bookmark/:id" element={<Bookmark />} />
-      <Route exact path="/update-journey/:id" element={<UpdateJourney />} />
       <Route exact path="/form-ppdb" element={<FormRegister />} />
 
       <Route exact path="/dashboard/*" element={<Dashboard />} />
       <Route exact path="/login" element={<Login />} />
+      <Route exact path="/registrasi/*" element={<Register />} />
+      <Route exact path="/registrasi/*" element={<Register />} />
 
       <Route
         exact
-        path="/profile/:idUser/detail-journey/:id"
-        element={<DetailJourney />}
-      />
-      <Route
-        exact
-        path="/bookmark/:idUser/detail-journey/:id"
-        element={<DetailJourney />}
+        path="/tentang-sd-karya-bangsa"
+        element={<DetailTentangSekolah />}
       />
     </Routes>
   );

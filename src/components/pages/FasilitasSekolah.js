@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 
-import { posts } from "../../DataFasilitas";
+import { posts } from "../../dummyData/DataFasilitas";
 import { motion } from "framer-motion";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import {

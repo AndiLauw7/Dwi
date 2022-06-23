@@ -3,12 +3,13 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Footer } from "../navbars/Footer";
 import NavTop from "../navbars/NavTop";
 import logo from "../../assets/img/PPDB.jpeg";
+import NavbarUser from "../navbars/NavbarUser";
 
 export const FormRegister = () => {
   return (
     <div>
       <Container fluid>
-        <NavTop />
+        <NavbarUser />
       </Container>
 
       <Container className="mt-5">
@@ -26,33 +27,6 @@ export const FormRegister = () => {
                   required
                 >
                   <Form.Label>Nama Lengkap</Form.Label>
-                  <Form.Control type="text" placeholder="" />
-                </Form.Group>
-
-                <Form.Group
-                  className="mb-2"
-                  controlId="exampleForm.ControlInput1"
-                  required
-                >
-                  <Form.Label>email</Form.Label>
-                  <Form.Control type="email" placeholder="" />
-                </Form.Group>
-
-                <Form.Group
-                  className="mb-2"
-                  controlId="exampleForm.ControlInput1"
-                  required
-                >
-                  <Form.Label>Username</Form.Label>
-                  <Form.Control type="text" placeholder="" />
-                </Form.Group>
-
-                <Form.Group
-                  className="mb-2"
-                  controlId="exampleForm.ControlInput1"
-                  required
-                >
-                  <Form.Label>Password</Form.Label>
                   <Form.Control type="text" placeholder="" />
                 </Form.Group>
 

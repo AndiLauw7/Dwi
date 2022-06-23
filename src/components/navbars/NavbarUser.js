@@ -92,7 +92,7 @@ function NavbarUser() {
 
                 <Dropdown.Item
                   className="py-3"
-                  onClick={() => navigate("/new-journey")}
+                  onClick={() => navigate("/form-ppdb")}
                 >
                   <span>
                     <img
