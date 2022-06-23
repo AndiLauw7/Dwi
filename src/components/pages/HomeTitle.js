@@ -48,7 +48,7 @@ function HomeTitle() {
       <Container>
         <TentangSekolah />
       </Container>
-      <Container className="mt-5" id="fasilitas">
+      <Container className="mt-5">
         <FasilitasSekolah />
       </Container>
       <Container fluid className="mt-5" id="ppdb">

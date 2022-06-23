@@ -22,7 +22,7 @@ export default () => {
     } else {
       return navigate("/login");
     }
-  }, []);
+  }, [user]);
 
   return (
     <>
