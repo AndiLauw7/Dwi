@@ -10,15 +10,10 @@ function NavTop(props) {
   const scrollToTop = () => {
     scroll.scrollToTop();
   };
-  const navigate = useNavigate();
-  const [modalRegis, setModalRegis] = useState(false);
-  const [modalLogin, setModalLogin] = useState(false);
+  const navigate = useNavigate("");
 
   useEffect(() => {
-    return () => {
-      setModalLogin(false);
-      setModalRegis(false);
-    };
+    return () => {};
   }, []);
 
   return (
@@ -48,13 +43,7 @@ function NavTop(props) {
 
           <Nav>
             <Nav.Link onClick={() => navigate("/")}>Beranda</Nav.Link>
-            <Nav.Link
-              href="#tentang-sekolah"
-              offset={-100}
-              duration={500}
-              spy={true}
-              smooth={true}
-            >
+            <Nav.Link onClick={() => navigate("/tentang-sd-karya-bangsa")}>
               Tentang Sekolah
             </Nav.Link>
             <Nav.Link href="#fasilitas">Fasilitas Sekolah</Nav.Link>
@@ -68,36 +57,12 @@ function NavTop(props) {
             <Button
               variant="primary"
               className="px-5 mx-3"
-              onClick={() => navigate("/profile/:id")}
+              onClick={() => navigate("/login")}
             >
               Login
             </Button>
-            {/* <Button
-            variant="primary"
-            className="px-5"
-            onClick={() => setModalRegis(!modalRegis)}
-          >
-            Register
-          </Button> */}
           </div>
         </Container>
-        {modalRegis ? (
-          <ModalRegis
-            show={modalRegis}
-            onHide={() => setModalRegis(!modalRegis)}
-          />
-        ) : (
-          ""
-        )}
-        {modalLogin ? (
-          <ModalLogin
-            show={modalLogin}
-            onHide={() => setModalLogin(!modalLogin)}
-            handleModalRegis={(value) => setModalRegis(value)}
-          />
-        ) : (
-          ""
-        )}
       </Navbar>
     </div>
   );

@@ -1,14 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Footer } from "../navbars/Footer";
 import NavTop from "../navbars/NavTop";
 import logo from "../../assets/img/PPDB.jpeg";
+import NavbarUser from "../navbars/NavbarUser";
+import { useNavigate } from "react-router-dom";
+import { API } from "../../configAPI/api";
+
+
+const defValue = {
+  nama_lengkap: "",
+  jenis_kelamin: "",
+  tempat_lahir: "",
+  tanggal_lahir: "",
+  agama: "",
+  alamat: "",
+  nomer_hp: "",
+}
 
 export const FormRegister = () => {
+  const navigate = useNavigate()
+
+  const [data, setData] = useState({ ...defValue })
+
+  const handleChange = (e) => {
+    console.log(e.target.name);
+    setData({
+      ...data,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault()
+      const config = { headers: { "Content-type": "application/json" } }
+      const body = JSON.stringify(data)
+      const response = await API.post("/registrasi/add", body, config)
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+
   return (
     <div>
       <Container fluid>
-        <NavTop />
+        <NavbarUser />
       </Container>
 
       <Container className="mt-5">
@@ -27,34 +67,11 @@ export const FormRegister = () => {
                   required
                 >
                   <Form.Label>Nama Lengkap</Form.Label>
-                  <Form.Control type="text" placeholder="" />
-                </Form.Group>
-
-                <Form.Group
-                  className="mb-2"
-                  controlId="exampleForm.ControlInput1"
-                  required
-                >
-                  <Form.Label>email</Form.Label>
-                  <Form.Control type="email" placeholder="" />
-                </Form.Group>
-
-                <Form.Group
-                  className="mb-2"
-                  controlId="exampleForm.ControlInput1"
-                  required
-                >
-                  <Form.Label>Username</Form.Label>
-                  <Form.Control type="text" placeholder="" />
-                </Form.Group>
-
-                <Form.Group
-                  className="mb-2"
-                  controlId="exampleForm.ControlInput1"
-                  required
-                >
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control type="text" placeholder="" />
+                  <Form.Control
+                    type="text"
+                    placeholder=""
+                    name="nama_lengkap"
+                    onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group
@@ -63,7 +80,13 @@ export const FormRegister = () => {
                   required
                 >
                   <Form.Label>Jenis Kelamin</Form.Label>
-                  <Form.Control type="text" placeholder="" />
+                  <Form.Select
+                    name="jenis_kelamin"
+                  >
+                    <option  disabled>Pilih</option>
+                    <option onChange={handleChange} value="laki-laki">Laki-laki</option>
+                    <option onChange={handleChange} value="perempuan">Perempuan</option>
+                  </Form.Select>
                 </Form.Group>
 
                 <Form.Group
@@ -72,7 +95,11 @@ export const FormRegister = () => {
                   required
                 >
                   <Form.Label>Tempat Lahir</Form.Label>
-                  <Form.Control type="text" placeholder="" />
+                  <Form.Control
+                    type="text"
+                    placeholder=""
+                    name="tempat_lahir"
+                    onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group
@@ -81,7 +108,11 @@ export const FormRegister = () => {
                   required
                 >
                   <Form.Label>Tanggal Lahir</Form.Label>
-                  <Form.Control type="date" placeholder="" />
+                  <Form.Control
+                    type="date"
+                    placeholder=""
+                    name="tanggal_lahir"
+                    onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group
@@ -90,7 +121,11 @@ export const FormRegister = () => {
                   required
                 >
                   <Form.Label>Agama</Form.Label>
-                  <Form.Control type="text" placeholder="" />
+                  <Form.Control
+                    type="text"
+                    placeholder=""
+                    name="agama"
+                    onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group
@@ -99,12 +134,18 @@ export const FormRegister = () => {
                   required
                 >
                   <Form.Label>No Handphone</Form.Label>
-                  <Form.Control type="number" placeholder="" />
+                  <Form.Control
+                    type="number"
+                    placeholder=""
+                    name="nomer_hp"
+                    onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Label className="mb-2">Alamat</Form.Label>
                 <Form.Control
                   className="mb-3"
+                  name="alamat"
+                  onChange={handleChange}
                   as="textarea"
                   rows={3}
                   required
@@ -113,7 +154,7 @@ export const FormRegister = () => {
                 <Button
                   variant="primary"
                   className="w-100 px-5 "
-                  // onClick={() => navigate("/profile/:id")}
+                  onClick={handleSubmit}
                 >
                   Daftar
                 </Button>

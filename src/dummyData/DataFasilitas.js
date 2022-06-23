@@ -1,7 +1,7 @@
-import images1 from "./assets/img/lapangan.png";
-import images2 from "./assets/img/MUSHOLA.png";
-import images3 from "./assets/img/pepustakaan.jpg";
-import images4 from "./assets/img/panggung-pentas.png";
+import images1 from "../assets/img/lapangan.png";
+import images2 from "../assets/img/MUSHOLA.png";
+import images3 from "../assets/img/pepustakaan.jpg";
+import images4 from "../assets/img/panggung-pentas.png";
 
 export const posts = [
   {

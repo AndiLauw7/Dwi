@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row, Container } from "react-bootstrap";
 import guru from "../../assets/img/guru.jpg";
-import { dataPost } from "../../DataTentangSekolah";
+import { dataPost } from "../../dummyData/DataTentangSekolah";
 
 import { Footer } from "../navbars/Footer";
 import NavTop from "../navbars/NavTop";

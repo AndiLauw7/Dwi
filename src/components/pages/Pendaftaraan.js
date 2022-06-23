@@ -49,7 +49,7 @@ export const Pendaftaraan = ({ id }) => {
             </Card.Body>
           </Card>
           <Button
-            onClick={() => navigate("/form-ppdb")}
+            onClick={() => navigate("/registrasi/*")}
             variant="primary"
             className="mt-1 "
           >
