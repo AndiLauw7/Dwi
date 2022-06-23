@@ -1,10 +1,12 @@
-import moment from "moment";
-import React, { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
-import { RiDeleteBin2Line, RiEdit2Line } from "react-icons/ri";
-import { API } from "../../configAPI/api";
-import MyPage from "../components/myPage";
-import MyTable from "../components/myTable";
+import moment from 'moment'
+import React, { useEffect, useState } from 'react'
+import { Button } from 'react-bootstrap'
+import { RiDeleteBin2Line, RiEdit2Line } from 'react-icons/ri'
+import { useLocation } from 'react-router-dom'
+import { API } from '../../configAPI/api'
+import MyPage from '../components/myPage'
+import MyTable from '../components/myTable'
+
 
 const columns = [
   {
@@ -64,23 +66,16 @@ const ActComp = (data) => {
 };
 
 export default function MasterDataSiswa() {
-  const [data, setData] = useState([]);
-  const getRegistrasi = async () => {
-    try {
-      const response = await API.get("/registrasi");
-      setData(response.data.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
-  useEffect(() => {
-    getRegistrasi();
-  }, []);
+    const location = useLocation()
+    
 
-  return (
-    <MyPage title={"Home"} url={window.location.pathname}>
-      <MyTable colAct={ActComp} columns={columns} data={data} />
-    </MyPage>
-  );
+    return (
+        <MyPage
+            title={"Home"}
+            url={location.pathname}
+        >
+            <MyTable colAct={ActComp} columns={columns} pathAdd={"/form-ppdb"} url={"/registrasi"} />
+        </MyPage>
+    )
 }

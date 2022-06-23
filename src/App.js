@@ -21,17 +21,21 @@ import { DetailTentangSekolah } from "./components/pages/DetailTentangSekolah";
 import { API, setAuthToken } from "./configAPI/api";
 import { DetailFasilitasSekolah } from "./components/pages/DetailFasilitasSekolah";
 
+
+
 function App() {
   const navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
   const user = state.user;
+  console.log(user);
 
   const location = useLocation();
+  
 
   const checkUser = async () => {
     try {
       const response = await API.get("/check-auth");
-      if (response?.status === 404) {
+      if (response?.status === 401) {
         return dispatch({
           type: "AUTH_ERROR",
         });
@@ -39,7 +43,7 @@ function App() {
       // Get user data
       let payload = response.data.data.user;
       // Get token from local storage
-      payload.token = localStorage?.token;
+      payload.token = localStorage.token;
 
       console.log(payload);
 
@@ -52,17 +56,17 @@ function App() {
 
       // Get user data
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
 
   useEffect(() => {
-    if (user) {
+    if (localStorage.token) {
       setAuthToken(localStorage.token);
       checkUser();
       navigate(location.pathname);
     } else {
-      navigate(location.pathname);
+      navigate("/");
     }
   }, []);
 

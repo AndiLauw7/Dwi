@@ -8,11 +8,19 @@ function NavTop(props) {
   const scrollToTop = () => {
     scroll.scrollToTop();
   };
+<<<<<<< HEAD
   let navigate = useNavigate();
 
   const handleLog = () => {
     navigate("/login/*");
   };
+=======
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   return () => {};
+  // }, []);
+>>>>>>> bb1df9824ae0eb271802f7496486e222786adc6d
 
   return (
     <div>

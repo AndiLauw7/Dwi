@@ -3,9 +3,7 @@ import { Breadcrumb, Button, Container, Form, InputGroup } from 'react-bootstrap
 import Navbar from '../navbar';
 
 export default ({ title, url, children }) => {
-    console.log(url);
     const parseUrl = url?.split("/")
-    console.log(parseUrl);
 
     return (
         <>

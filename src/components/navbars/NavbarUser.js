@@ -52,7 +52,7 @@ function NavbarUser() {
 
   return (
     <Navbar bg="light" sticky="top" className="shadow">
-      <Container className="justify-content-between align-items-center">
+      <Container className="justify-content-between align-items-center" >
         <Navbar.Brand>
           <Link to="/">
             <img src={logo} alt="logo" width="60" />
