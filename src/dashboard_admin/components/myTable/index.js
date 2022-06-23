@@ -26,7 +26,7 @@ const TableRow = ({ item, columns, index, colNo, colAct }) => {
 
 const MyTable = ({ columns, data, colNo, colAct }) => {
 
-    const [page, setPage] = useState(0)
+    const [page, setPage] = useState(1)
     const [perPage, setPerPage] = useState(8)
     const [pagiData, setPagiData] = useState([])
 
