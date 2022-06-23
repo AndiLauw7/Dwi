@@ -19,6 +19,7 @@ import { DetailTentangSekolah } from "./components/pages/DetailTentangSekolah";
 
 //import API
 import { API, setAuthToken } from "./configAPI/api";
+import { DetailFasilitasSekolah } from "./components/pages/DetailFasilitasSekolah";
 
 
 
@@ -77,14 +78,18 @@ function App() {
       <Route exact path="/form-ppdb" element={<FormRegister />} />
 
       <Route exact path="/dashboard/*" element={<Dashboard />} />
-      <Route exact path="/login" element={<Login />} />
-      <Route exact path="/registrasi/*" element={<Register />} />
+      <Route exact path="/login/*" element={<Login />} />
       <Route exact path="/registrasi/*" element={<Register />} />
 
       <Route
         exact
         path="/tentang-sd-karya-bangsa"
         element={<DetailTentangSekolah />}
+      />
+      <Route
+        exact
+        path="/fasilitas-sekolah"
+        element={<DetailFasilitasSekolah />}
       />
     </Routes>
   );
