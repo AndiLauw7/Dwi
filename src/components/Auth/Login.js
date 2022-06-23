@@ -25,7 +25,7 @@ export default function Login() {
   const [message, setMessage] = useState(null);
 
   const [form, setForm] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -121,8 +121,8 @@ return (
                   </Form.Label>
                   <Form.Control
                     className=" p-2 mb-4 "
-                    type="email"
-                    name="email"
+                    type="text"
+                    name="username"
                     onChange={handleChange}
                     placeholder="Email"
                   />
