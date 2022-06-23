@@ -64,9 +64,10 @@ export default function Login() {
           });
           if (response?.data.data.user.role === "admin" || response?.data.data.user.role === "kepalasekolah") {
             return navigate("/dashboard");
-          } else {
+          } else if(response?.data.data.user.role === "siswa"){
             return navigate("/form-ppdb");
-
+          } else {
+            return navigate("/")
           }
         }
 
