@@ -5,22 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { animateScroll as scroll } from "react-scroll";
 
 function NavTop(props) {
-  const scrollToTop = () => {
-    scroll.scrollToTop();
-  };
-<<<<<<< HEAD
-  let navigate = useNavigate();
-
-  const handleLog = () => {
-    navigate("/login/*");
-  };
-=======
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   return () => {};
-  // }, []);
->>>>>>> bb1df9824ae0eb271802f7496486e222786adc6d
 
   return (
     <div>
@@ -60,11 +46,11 @@ function NavTop(props) {
                 Pendaftaran
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link onClick={handleLog}>Kontak</Nav.Link>
+            <Nav.Link >Kontak</Nav.Link>
           </Nav>
 
           <div>
-            <Button variant="primary" className="px-5 mx-3">
+            <Button onClick={() => navigate("/login")} variant="primary" className="px-5 mx-3">
               Login
             </Button>
           </div>
