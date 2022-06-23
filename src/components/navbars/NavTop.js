@@ -47,11 +47,7 @@ function NavTop(props) {
                 Pendaftaran
               </NavDropdown.Item>
             </NavDropdown>
-<<<<<<< HEAD
             <Nav.Link>Kontak</Nav.Link>
-=======
-            <Nav.Link >Kontak</Nav.Link>
->>>>>>> 44327d7fe3d92d36bb268cf93cd6f44d3c3bcb50
           </Nav>
 
           <div>
