@@ -95,7 +95,7 @@ export const FasilitasSekolah = ({ id }) => {
 
                     {/* <p className="start-first ">
                       <img src={star} alt="" />
-                      <span className="rating1">{post.rating}</span>
+                      <span className="rating1">{post.id}</span>
                     </p> */}
                   </motion.div>
                 );
