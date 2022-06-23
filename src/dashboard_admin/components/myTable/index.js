@@ -36,7 +36,7 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
     const [perPage, setPerPage] = useState(8)
     const [pagiData, setPagiData] = useState([])
 
-    console.log(data);
+    console.log(search);
 
 
     const getData = async () => {
@@ -60,7 +60,7 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [search]);
 
 
 
@@ -69,8 +69,8 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
             <div className="d-flex justify-content-end my-3 mb-5 gap-3">
                 <InputGroup style={{ width: "300px" }}>
                     <Form.Control
-                        type="search"
-                        placeholder="Find Journey"
+                        type="text"
+                        placeholder="Cari Nama"
                         aria-describedby="search"
                         onChange={(e) => setSearch(e.target.value)}
                     />
