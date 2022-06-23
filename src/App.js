@@ -5,6 +5,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
+  useLocation,
   useNavigate,
 } from "react-router-dom";
 import { UserContext } from "./context/userContext";
@@ -16,6 +17,7 @@ import AddJourney from "./components/pages/AddJourney";
 import UpdateJourney from "./components/pages/UpdateJourney";
 import Dashboard from "./dashboard_admin";
 import Login from "./components/login/index";
+import { FormRegister } from "./components/pages/FormRegister";
 
 //import API
 import { API, setAuthToken } from "./configAPI/api";
@@ -25,19 +27,8 @@ function App() {
   const [state, dispatch] = useContext(UserContext);
   const user = state.user;
 
-  // useEffect(() => {
-  // 	if (localStorage.token) {
-  // 		setAuthToken(localStorage.token);
-  // 	}
+  const location = useLocation();
 
-  // 	if (!state.isLogin) {
-  // 		return navigate("/");
-  // 	} else {
-  // 		return navigate("/");
-  // 	}
-  // }, [state]);
-
-  //always check auth
   const checkUser = async () => {
     try {
       const response = await API.get("/check-auth");
@@ -84,8 +75,9 @@ function App() {
       <Route exact path="/new-journey" element={<AddJourney />} />
       <Route exact path="/bookmark/:id" element={<Bookmark />} />
       <Route exact path="/update-journey/:id" element={<UpdateJourney />} />
+      <Route exact path="/form-ppdb" element={<FormRegister />} />
 
-      <Route exact path="/dashboard" element={<Dashboard />} />
+      <Route exact path="/dashboard/*" element={<Dashboard />} />
       <Route exact path="/login" element={<Login />} />
 
       <Route

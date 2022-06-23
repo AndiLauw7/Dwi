@@ -125,7 +125,7 @@ function Profile() {
         <Row>
           {/* <Stack direction="horizontal"  gap={5}> */}
           <>
-            <h2 className="my-3 fw-bold">Journey Post</h2>
+            <h2 className="my-3 fw-bold">Pembayaran</h2>
             <hr
               style={{
                 height: "2px",

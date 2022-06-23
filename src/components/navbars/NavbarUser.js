@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/userContext";
 import { Navbar, Container, Stack, Nav, Dropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import logoBlack from "../../assets/img/logoBlack.png";
+import logo from "../../assets/img/logo.png";
 import avatarDummy from "../../assets/img/anakSd.jpg";
 import Swal from "sweetalert2";
 import { API } from "../../configAPI/api";
@@ -55,7 +55,7 @@ function NavbarUser() {
       <Container className="justify-content-between align-items-center">
         <Navbar.Brand>
           <Link to="/">
-            <img src={logoBlack} alt="logo" width="130" height="46" />
+            <img src={logo} alt="logo" width="60" />
           </Link>
         </Navbar.Brand>
         <Nav>
@@ -103,24 +103,9 @@ function NavbarUser() {
                       className="me-3"
                     />
                   </span>
-                  <span className="fw-bold">New Journey</span>
+                  <span className="fw-bold">Pendaftaran</span>
                 </Dropdown.Item>
 
-                <Dropdown.Item
-                  className="py-3"
-                  onClick={() => navigate(`/bookmark/${id}`)}
-                >
-                  <span>
-                    <img
-                      src="../assets/bookmark.svg"
-                      alt="bookmark"
-                      width={30}
-                      height={30}
-                      className="me-3"
-                    />
-                  </span>
-                  <span className="fw-bold">Bookmark</span>
-                </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={handleLogOut}>
                   <span>
