@@ -7,7 +7,6 @@ import NavbarUser from "../navbars/NavbarUser";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../configAPI/api";
 
-
 const defValue = {
   nama_lengkap: "",
   jenis_kelamin: "",
@@ -16,41 +15,38 @@ const defValue = {
   agama: "",
   alamat: "",
   nomer_hp: "",
-}
+};
 
 export const FormRegister = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [data, setData] = useState({ ...defValue })
+  const [data, setData] = useState({ ...defValue });
 
   const handleChange = (e) => {
     console.log(e.target.name);
     setData({
       ...data,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     try {
-      e.preventDefault()
-      const config = { headers: { "Content-type": "application/json" } }
-      const body = JSON.stringify(data)
-      const response = await API.post("/registrasi/add", body, config)
+      e.preventDefault();
+      const config = { headers: { "Content-type": "application/json" } };
+      const body = JSON.stringify(data);
+      const response = await API.post("/registrasi/add", body, config);
       console.log(response);
     } catch (error) {
       console.log(error);
     }
-
-  }
-
+  };
 
   return (
     <div>
-        <NavbarUser />
+      <NavbarUser />
 
-      <Container fluid>
-      </Container>
+      <Container fluid></Container>
 
       <Container className="mt-5">
         <div
@@ -72,7 +68,8 @@ export const FormRegister = () => {
                     type="text"
                     placeholder=""
                     name="nama_lengkap"
-                    onChange={handleChange} />
+                    onChange={handleChange}
+                  />
                 </Form.Group>
 
                 <Form.Group
@@ -81,13 +78,10 @@ export const FormRegister = () => {
                   required
                 >
                   <Form.Label>Jenis Kelamin</Form.Label>
-                  <Form.Select
-                    name="jenis_kelamin"
-                    onChange={handleChange}
-                  >
-                    <option  disabled>Pilih</option>
-                    <option  value="laki-laki">Laki-laki</option>
-                    <option  value="perempuan">Perempuan</option>
+                  <Form.Select name="jenis_kelamin" onChange={handleChange}>
+                    <option disabled>Pilih</option>
+                    <option value="laki-laki">Laki-laki</option>
+                    <option value="perempuan">Perempuan</option>
                   </Form.Select>
                 </Form.Group>
 
@@ -101,7 +95,8 @@ export const FormRegister = () => {
                     type="text"
                     placeholder=""
                     name="tempat_lahir"
-                    onChange={handleChange} />
+                    onChange={handleChange}
+                  />
                 </Form.Group>
 
                 <Form.Group
@@ -114,7 +109,8 @@ export const FormRegister = () => {
                     type="date"
                     placeholder=""
                     name="tanggal_lahir"
-                    onChange={handleChange} />
+                    onChange={handleChange}
+                  />
                 </Form.Group>
 
                 <Form.Group
@@ -127,7 +123,8 @@ export const FormRegister = () => {
                     type="text"
                     placeholder=""
                     name="agama"
-                    onChange={handleChange} />
+                    onChange={handleChange}
+                  />
                 </Form.Group>
 
                 <Form.Group
@@ -140,7 +137,8 @@ export const FormRegister = () => {
                     type="number"
                     placeholder=""
                     name="nomer_hp"
-                    onChange={handleChange} />
+                    onChange={handleChange}
+                  />
                 </Form.Group>
 
                 <Form.Label className="mb-2">Alamat</Form.Label>
@@ -168,7 +166,6 @@ export const FormRegister = () => {
                 alt=""
                 style={{
                   width: "475px",
-                  marginTop: "70px",
                 }}
               />
             </Col>

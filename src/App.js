@@ -16,12 +16,11 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import { FormRegister } from "./components/pages/FormRegister";
 import { DetailTentangSekolah } from "./components/pages/DetailTentangSekolah";
+import { FormPembayaran } from "./components/pages/FormPembayaran";
 
 //import API
 import { API, setAuthToken } from "./configAPI/api";
 import { DetailFasilitasSekolah } from "./components/pages/DetailFasilitasSekolah";
-
-
 
 function App() {
   const navigate = useNavigate();
@@ -30,7 +29,6 @@ function App() {
   console.log(user);
 
   const location = useLocation();
-  
 
   const checkUser = async () => {
     try {
@@ -76,6 +74,7 @@ function App() {
 
       <Route exact path="/profile/:id" element={<Profile />} />
       <Route exact path="/form-ppdb" element={<FormRegister />} />
+      <Route exact path="/form-pembayaran" element={<FormPembayaran />} />
 
       <Route exact path="/dashboard/*" element={<Dashboard />} />
       <Route exact path="/login/*" element={<Login />} />

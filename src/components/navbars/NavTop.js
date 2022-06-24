@@ -2,17 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Navbar, Container, Button, Nav, NavDropdown } from "react-bootstrap";
 import logo from "../../assets/img/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import { animateScroll as scroll } from "react-scroll";
 
 function NavTop(props) {
   const navigate = useNavigate();
-
-<<<<<<< HEAD
-  // useEffect(() => {
-  //   return () => {};
-  // }, []);
-=======
->>>>>>> 44327d7fe3d92d36bb268cf93cd6f44d3c3bcb50
 
   return (
     <div>
@@ -52,15 +44,15 @@ function NavTop(props) {
                 Pendaftaran
               </NavDropdown.Item>
             </NavDropdown>
-<<<<<<< HEAD
             <Nav.Link>Kontak</Nav.Link>
-=======
-            <Nav.Link >Kontak</Nav.Link>
->>>>>>> 44327d7fe3d92d36bb268cf93cd6f44d3c3bcb50
           </Nav>
 
           <div>
-            <Button onClick={() => navigate("/login")} variant="primary" className="px-5 mx-3">
+            <Button
+              onClick={() => navigate("/login")}
+              variant="primary"
+              className="px-5 mx-3"
+            >
               Login
             </Button>
           </div>
