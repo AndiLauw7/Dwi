@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Navbar, Container, Button, Nav, NavDropdown } from "react-bootstrap";
 import logo from "../../assets/img/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import { animateScroll as scroll } from "react-scroll";
 
 function NavTop(props) {
   
   const navigate = useNavigate();
-
 
   return (
     <div>
@@ -51,7 +49,11 @@ function NavTop(props) {
           </Nav>
 
           <div>
-            <Button onClick={() => navigate("/login")} variant="primary" className="px-5 mx-3">
+            <Button
+              onClick={() => navigate("/login")}
+              variant="primary"
+              className="px-5 mx-3"
+            >
               Login
             </Button>
           </div>

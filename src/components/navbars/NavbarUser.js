@@ -48,11 +48,11 @@ function NavbarUser() {
     if (state.isLogin) {
       getUser();
     }
-  });
+  },[]);
 
   return (
     <Navbar bg="light" sticky="top" className="shadow">
-      <Container className="justify-content-between align-items-center" >
+      <Container className="justify-content-between align-items-center">
         <Navbar.Brand>
           <Link to="/">
             <img src={logo} alt="logo" width="60" />
@@ -104,6 +104,22 @@ function NavbarUser() {
                     />
                   </span>
                   <span className="fw-bold">Pendaftaran</span>
+                </Dropdown.Item>
+
+                <Dropdown.Item
+                  className="py-3"
+                  onClick={() => navigate("/form-pembayaran")}
+                >
+                  <span>
+                    <img
+                      src="../assets/write1.svg"
+                      alt="write1"
+                      width={30}
+                      height={30}
+                      className="me-3"
+                    />
+                  </span>
+                  <span className="fw-bold">Pembayaran</span>
                 </Dropdown.Item>
 
                 <Dropdown.Divider />

@@ -16,12 +16,11 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import { FormRegister } from "./components/pages/FormRegister";
 import { DetailTentangSekolah } from "./components/pages/DetailTentangSekolah";
+import { FormPembayaran } from "./components/pages/FormPembayaran";
 
 //import API
 import { API, setAuthToken } from "./configAPI/api";
 import { DetailFasilitasSekolah } from "./components/pages/DetailFasilitasSekolah";
-
-
 
 function App() {
   const navigate = useNavigate();
@@ -30,16 +29,16 @@ function App() {
   console.log(user);
 
   const location = useLocation();
-  
 
   const checkUser = async () => {
     try {
       const response = await API.get("/check-auth");
-      if (response?.status === 401) {
+      console.log(response.status);
+      if (response?.status === 401 ) {
         return dispatch({
           type: "AUTH_ERROR",
         });
-      }
+      } 
       // Get user data
       let payload = response.data.data.user;
       // Get token from local storage
@@ -56,7 +55,10 @@ function App() {
 
       // Get user data
     } catch (error) {
-      console.log(error);
+      return dispatch({
+        type: "AUTH_ERROR",
+      });
+      console.log(error.message);
     }
   };
 
@@ -76,6 +78,7 @@ function App() {
 
       <Route exact path="/profile/:id" element={<Profile />} />
       <Route exact path="/form-ppdb" element={<FormRegister />} />
+      <Route exact path="/form-pembayaran" element={<FormPembayaran />} />
 
       <Route exact path="/dashboard/*" element={<Dashboard />} />
       <Route exact path="/login/*" element={<Login />} />
