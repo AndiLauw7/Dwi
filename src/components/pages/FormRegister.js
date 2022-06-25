@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Footer } from "../navbars/Footer";
 import NavTop from "../navbars/NavTop";
@@ -6,6 +6,7 @@ import logo from "../../assets/img/PPDB.jpeg";
 import NavbarUser from "../navbars/NavbarUser";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../configAPI/api";
+import { UserContext } from "../../context/userContext";
 
 const defValue = {
   nama_lengkap: "",
@@ -15,10 +16,14 @@ const defValue = {
   agama: "",
   alamat: "",
   nomer_hp: "",
+  createBy: ""
 };
 
 export const FormRegister = () => {
   const navigate = useNavigate();
+
+  const [state, dispatch] = useContext(UserContext)
+
 
   const [data, setData] = useState({ ...defValue });
 
@@ -27,6 +32,7 @@ export const FormRegister = () => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
+      createBy: state.user.id
     });
   };
 
@@ -79,7 +85,7 @@ export const FormRegister = () => {
                 >
                   <Form.Label>Jenis Kelamin</Form.Label>
                   <Form.Select name="jenis_kelamin" onChange={handleChange}>
-                    <option disabled>Pilih</option>
+                    <option selected>Pilih</option>
                     <option value="laki-laki">Laki-laki</option>
                     <option value="perempuan">Perempuan</option>
                   </Form.Select>

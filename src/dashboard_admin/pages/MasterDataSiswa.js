@@ -66,13 +66,10 @@ const ActComp = (data) => {
 };
 
 export default function MasterDataSiswa() {
-
     const location = useLocation()
-    
-
     return (
         <MyPage
-            title={"Home"}
+            title={"Master Data Siswa"}
             url={location.pathname}
         >
             <MyTable colAct={ActComp} columns={columns} pathAdd={"/form-ppdb"} url={"/registrasi"} />

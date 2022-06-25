@@ -8,13 +8,14 @@ import { API } from '../../../configAPI/api';
 const TableHeading = ({ item, index }) => <th key={index}>{item.heading}</th>
 
 const TableRow = ({ item, columns, index, colNo, colAct,  }) => {
+    
     return (
         <tr>
             { colNo && <td>{index + 1}</td> }
             { columns.map((colItem, idx) => {
                 if(colItem.selector.includes(".")){
                     const itemSplit = colItem.selector.split(".")
-                    return <td key={idx}>{colItem.format ? colItem.format(item[itemSplit[0]]) : item[itemSplit[0]]}</td>
+                    return <td key={idx}>{colItem.format ? colItem.format(item[itemSplit[0]][itemSplit[1]]) : item[itemSplit[0]][itemSplit[1]]}</td>
 
                 }
 

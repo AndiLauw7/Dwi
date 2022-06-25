@@ -20,7 +20,7 @@ export default () => {
   useEffect(() => {
     if (localStorage.token) {
       if (user === "admin" || user === "kepalasekolah") {
-        return navigate("/dashboard");
+        return navigate(location.pathname);
       } else if(user === "siswa") {
         return navigate("/")
       } 
