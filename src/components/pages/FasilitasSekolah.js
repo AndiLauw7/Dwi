@@ -10,7 +10,9 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import NavTop from "../navbars/NavTop";
+import NavbarUser from "../navbars/NavbarUser";
 
 export const FasilitasSekolah = ({ id }) => {
   const [width, setWidth] = useState(0);
@@ -20,6 +22,8 @@ export const FasilitasSekolah = ({ id }) => {
     console.log(carousel.current.scrollWidth, carousel.current.offsetWidth);
     setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
   }, []);
+  const [state, dispatch] = useState();
+
   return (
     <div
       id={id}
@@ -30,6 +34,8 @@ export const FasilitasSekolah = ({ id }) => {
         scrollMarginTop: "200px",
       }}
     >
+      {state.isLogin ? <NavbarUser /> : <NavTop />}
+
       <Row>
         <Col md={6}>
           <div

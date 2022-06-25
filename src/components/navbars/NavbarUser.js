@@ -23,8 +23,8 @@ function NavbarUser() {
 
   // console.log("jalan");
   // const { id } = useParams();
-  const user = state.user
-  const {id} = state.user
+  const user = state.user;
+  const { id } = state.user;
   console.log(user);
 
   const handleLogOut = () => {
@@ -89,7 +89,7 @@ function NavbarUser() {
             <Dropdown align="end">
               <Dropdown.Toggle as={Nav.Link} className="Dropdown-Toggle">
                 <img
-                  src={path + user.avatar}
+                  src={path + avatar}
                   alt="avatar"
                   className="rounded-circle border border-3 border-primary "
                   style={{
