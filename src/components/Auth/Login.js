@@ -71,7 +71,7 @@ export default function Login() {
           } else if (response?.data.data.user.role === "siswa") {
             return navigate("/form-ppdb");
           } else {
-            return navigate("/login/*");
+            return navigate("/");
           }
         }
       }
@@ -116,7 +116,7 @@ export default function Login() {
             <Card style={{ width: "25rem" }}>
               <Card.Body className="p-5">
                 <h2 className="mb-5 text-center fw-bold text-primary">Login</h2>
-                {/* {message && message} */}
+                {message && message}
 
                 <Form>
                   <Form.Group controlId="inputUsername">

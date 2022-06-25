@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import NavTop from "../navbars/NavTop";
 import { Col, Container } from "react-bootstrap";
 import hero from "../../assets/img/sd.jpeg";
@@ -11,61 +11,59 @@ import { UserContext } from "../../context/userContext";
 import NavbarUser from "../navbars/NavbarUser";
 
 function HomeTitle() {
-  document.title = "| SD KARYA BANGSA";
-
   const [state, dispatch] = useContext(UserContext);
-
-  const [alert, setAlert] = useState(null);
+  console.log(state.isLogin);
   return (
-    <div>
-      {state.isLogin ? <NavbarUser /> : <NavTop />}
-      <div
-        className="title-landing align-items-center text-white w-100 "
-        style={{
-          height: "450px",
+    <>
+      <Container fluid style={{ padding: "0px 0px" }}>
+        {state.isLogin ? <NavbarUser /> : <NavTop />}
 
-          backgroundImage: `url(${hero})`,
-          backgroundPosition: "top",
-          objectFit: "cover",
-          filter: "brightness(0.7)",
-          position: "absolute",
-          zIndex: -1,
-        }}
-      ></div>
-
-      <Container>
         <div
-          className="h1 mb-3 mt-5 fw-bold text-white"
+          className="title-landing align-items-center text-white w-100 "
           style={{
-            fontSize: "30px",
-            paddingTop: "300px",
+            height: "450px",
+            backgroundImage: `url(${hero})`,
+            backgroundPosition: "top",
+            objectFit: "cover",
+            filter: "brightness(0.7)",
+            position: "absolute",
+            zIndex: -1,
           }}
-        >
-          <p>Selamat Datang DiWebsite SD Karya Bangsa </p>
-          <p
+        ></div>
+        <Container>
+          <div
+            className="h1 mb-3 mt-5 fw-bold text-white"
             style={{
-              fontSize: "20px",
-              marginBottom: "100px",
-              color: "white",
+              fontSize: "30px",
+              paddingTop: "300px",
             }}
           >
-            Generasi Mandiri Untuk Membangun Negeri
-          </p>
-        </div>
+            <p>Selamat Datang DiWebsite SD Karya Bangsa </p>
+            <p
+              style={{
+                fontSize: "20px",
+                marginBottom: "100px",
+                color: "white",
+              }}
+            >
+              Generasi Mandiri Untuk Membangun Negeri
+            </p>
+          </div>
+        </Container>
+        <Container>
+          <TentangSekolah />
+        </Container>
+        <Container className="mt-5">
+          <FasilitasSekolah />
+        </Container>
+        <Container fluid className="mt-5" id="ppdb">
+          <Pendaftaraan />
+        </Container>
+        <Container fluid className="mb-0" id="kontak">
+          <Footer />
+        </Container>
       </Container>
-      <Container>
-        <TentangSekolah />
-      </Container>
-      <Container className="mt-5">
-        <FasilitasSekolah />
-      </Container>
-      <Container fluid className="mt-5" id="ppdb">
-        <Pendaftaraan />
-      </Container>
-      <Container fluid className="mb-0" id="kontak">
-        <Footer />
-      </Container>
-    </div>
+    </>
   );
 }
 // jfgasjkgas

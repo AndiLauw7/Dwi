@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form, InputGroup, Pagination, Table } from 'react-bootstrap'
 import PropTypes from 'prop-types';
 import { RiAddLine, RiPulseLine, RiSearch2Line } from 'react-icons/ri';
@@ -7,21 +7,22 @@ import { API } from '../../../configAPI/api';
 
 const TableHeading = ({ item, index }) => <th key={index}>{item.heading}</th>
 
-const TableRow = ({ item, columns, index, colNo, colAct,  }) => {
+const TableRow = ({ item, columns, index, colNo, colAct, setDataId  }) => {
+    
     return (
         <tr>
             { colNo && <td>{index + 1}</td> }
             { columns.map((colItem, idx) => {
                 if(colItem.selector.includes(".")){
                     const itemSplit = colItem.selector.split(".")
-                    return <td key={idx}>{colItem.format ? colItem.format(item[itemSplit[0]]) : item[itemSplit[0]]}</td>
+                    return <td key={idx}>{colItem.format ? colItem.format(item[itemSplit[0]][itemSplit[1]]) : item[itemSplit[0]][itemSplit[1]]}</td>
 
                 }
 
                 return <td key={idx}>{colItem.format ? colItem.format(item[`${colItem.selector}`]) : item[`${colItem.selector}`]}</td>
             })
             }
-            { colAct && (<td>{colAct(item)}</td>) }
+            { colAct && (<td>{colAct(item, setDataId)}</td>) }
         </tr>
     )
 
@@ -32,16 +33,15 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
     const navigate = useNavigate()
     const [data, setData] = useState([])
     const [search, setSearch] = useState("")
+    const [dataId, setDataId] = useState("")
     const [page, setPage] = useState(1)
     const [perPage, setPerPage] = useState(8)
-    const [pagiData, setPagiData] = useState([])
-
-    console.log(search);
 
 
     const getData = async () => {
         try {
             const response = await API.get(`${url}`)
+            console.log(response);
             setData(response.data.data.data)
         } catch (error) {
             console.log(error);
@@ -59,8 +59,8 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
   
 
   useEffect(() => {
-    getData();
-  }, [search]);
+    getData()
+  }, [search, dataId]);
 
 
 
@@ -96,7 +96,7 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
                 <tbody>
                     {
                         data.map((item, index) =>
-                            <TableRow colNo={colNo} colAct={colAct} key={index} item={item} columns={columns} index={index} />
+                            <TableRow colNo={colNo} colAct={colAct} key={index} item={item} columns={columns} index={index} setDataId={setDataId} />
                         )
                     }
 

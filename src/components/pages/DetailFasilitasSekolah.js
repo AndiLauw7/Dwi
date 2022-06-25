@@ -21,7 +21,7 @@ export const DetailFasilitasSekolah = () => {
   }, []);
   return (
     <div>
-      <NavTop />
+      {/* <NavTop /> */}
       <Container fluid>
         <div
           className="fasilitasSekolah"
