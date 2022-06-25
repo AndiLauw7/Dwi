@@ -118,7 +118,7 @@ function NavbarUser() {
 
                 <Dropdown.Item
                   className="py-3"
-                  onClick={() => navigate("/form-pembayaran")}
+                  onClick={() => navigate(`/form-pembayaran/edit/${id}`)}
                 >
                   <span>
                     <img
