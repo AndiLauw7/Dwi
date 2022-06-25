@@ -68,13 +68,10 @@ export default function Login() {
             response?.data.data.user.role === "kepalasekolah"
           ) {
             return navigate("/dashboard");
-          } else if(response?.data.data.user.role === "siswa"){
+          } else if (response?.data.data.user.role === "siswa") {
             return navigate("/form-ppdb");
-<<<<<<< HEAD
-=======
           } else {
-            return navigate("/")
->>>>>>> 4341142510f2ca111d35f8c883d15cf2e86a3fb8
+            return navigate("/");
           }
         }
       }
@@ -120,9 +117,9 @@ export default function Login() {
                 {/* {message && message} */}
 
                 <Form>
-                  <Form.Group controlId="inputEmail">
+                  <Form.Group controlId="inputUsername">
                     <Form.Label className="fw-bold text-primary">
-                      Email
+                      Username
                     </Form.Label>
                     <Form.Control
                       className=" p-2 mb-4 "
@@ -133,27 +130,10 @@ export default function Login() {
                     />
                   </Form.Group>
 
-<<<<<<< HEAD
                   <Form.Group controlId="inputPassword">
                     <Form.Label className="fw-bold text-primary">
                       Password
                     </Form.Label>
-=======
-              <Form>
-                <Form.Group controlId="inputEmail">
-                  <Form.Label className="fw-bold text-primary">
-                    Email
-                  </Form.Label>
-                  <Form.Control
-                    className=" p-2 mb-4 "
-                    type="text"
-                    name="username"
-                    onChange={handleChange}
-                    placeholder="Email"
-                  />
-                </Form.Group>
->>>>>>> 4341142510f2ca111d35f8c883d15cf2e86a3fb8
-
                     <Form.Control
                       className="  p-2 mb-4"
                       type="password"

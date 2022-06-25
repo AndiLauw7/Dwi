@@ -7,10 +7,6 @@ function NavTop(props) {
   
   const navigate = useNavigate();
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 4341142510f2ca111d35f8c883d15cf2e86a3fb8
   return (
     <div>
       <Navbar className={props.shadow} bg="light" expand="lg" fixed="top">

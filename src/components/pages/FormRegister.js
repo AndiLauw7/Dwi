@@ -79,7 +79,7 @@ export const FormRegister = () => {
                 >
                   <Form.Label>Jenis Kelamin</Form.Label>
                   <Form.Select name="jenis_kelamin" onChange={handleChange}>
-                    <option disabled>Pilih</option>
+                    <option selected>Pilih jenis kelamin</option>
                     <option value="laki-laki">Laki-laki</option>
                     <option value="perempuan">Perempuan</option>
                   </Form.Select>

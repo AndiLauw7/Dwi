@@ -39,19 +39,6 @@ export const FormPembayaran = () => {
                   controlId="exampleForm.ControlInput1"
                   required
                 >
-                  <Form.Label>Tempat Lahir</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder=""
-                    name="tempat_lahir"
-                  />
-                </Form.Group>
-
-                <Form.Group
-                  className="mb-2"
-                  controlId="exampleForm.ControlInput1"
-                  required
-                >
                   <Form.Label>Tanggal Pembayaran</Form.Label>
                   <Form.Control
                     type="date"
