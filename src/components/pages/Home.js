@@ -17,6 +17,7 @@ import CardPost from "../elements/CardPost";
 import { TentangSekolah } from "./TentangSekolah";
 import { UserContext } from "../../context/userContext";
 import Swal from "sweetalert2";
+import NavTop from "../navbars/NavTop";
 
 function Home() {
   document.title = "| SD KARYA BANGSA";

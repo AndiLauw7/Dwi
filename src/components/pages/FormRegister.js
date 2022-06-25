@@ -16,14 +16,10 @@ const defValue = {
   agama: "",
   alamat: "",
   nomer_hp: "",
-  createBy: ""
 };
 
 export const FormRegister = () => {
   const navigate = useNavigate();
-
-  const [state, dispatch] = useContext(UserContext)
-
 
   const [data, setData] = useState({ ...defValue });
 
@@ -32,7 +28,6 @@ export const FormRegister = () => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
-      createBy: state.user.id
     });
   };
 
@@ -53,11 +48,10 @@ export const FormRegister = () => {
     }
   };
 
+  const [state, dispatch] = useContext(UserContext);
   return (
     <div>
-      <NavbarUser />
-
-      <Container fluid></Container>
+      <Container fluid>{state.islogin ? <NavTop /> : <NavbarUser />}</Container>
 
       <Container className="mt-5">
         <div

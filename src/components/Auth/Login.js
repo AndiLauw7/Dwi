@@ -17,7 +17,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const title = "Login";
-  document.title = "The Journey | " + title;
+  document.title = "Sd Karya Bangsa | " + title;
 
   const [state, dispatch] = useContext(UserContext);
   const user = state.user.role;
@@ -87,10 +87,10 @@ export default function Login() {
   useEffect(() => {
     if (user === "admin" || user === "kepalasekolah") {
       return navigate("/dashboard");
-    } else if(user === "siswa") {
+    } else if (user === "siswa") {
       return navigate("/form-ppdb");
     } else {
-      return navigate("/login")
+      return navigate("/login");
     }
   }, [user]);
 
