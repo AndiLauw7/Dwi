@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { dataPost } from "../../dummyData/DataTentangSekolah";
 import { DataTentang } from "../../dummyData/DetailTentangSekolah";
@@ -10,8 +10,11 @@ import { Footer } from "../navbars/Footer";
 import { posts } from "../../dummyData/DataFasilitas";
 import { motion } from "framer-motion";
 import { Kegiatan } from "../../dummyData/Kegiatan";
+import { UserContext } from "../../context/userContext";
+import NavbarUser from "../navbars/NavbarUser";
 
 export const DetailFasilitasSekolah = () => {
+  const [state, dispatch] = useContext(UserContext)
   const [width, setWidth] = useState(0);
   const carousel = useRef();
 
@@ -23,6 +26,7 @@ export const DetailFasilitasSekolah = () => {
     <div>
       {/* <NavTop /> */}
       <Container fluid>
+      {state.isLogin ? <NavbarUser /> : <NavTop />}
         <div
           className="fasilitasSekolah"
           style={{
