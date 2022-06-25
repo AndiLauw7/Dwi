@@ -33,11 +33,12 @@ function App() {
   const checkUser = async () => {
     try {
       const response = await API.get("/check-auth");
-      if (response?.status === 401) {
+      console.log(response.status);
+      if (response?.status === 401 ) {
         return dispatch({
           type: "AUTH_ERROR",
         });
-      }
+      } 
       // Get user data
       let payload = response.data.data.user;
       // Get token from local storage
@@ -54,7 +55,10 @@ function App() {
 
       // Get user data
     } catch (error) {
-      console.log(error);
+      return dispatch({
+        type: "AUTH_ERROR",
+      });
+      console.log(error.message);
     }
   };
 

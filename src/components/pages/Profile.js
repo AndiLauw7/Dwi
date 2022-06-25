@@ -26,54 +26,20 @@ function Profile() {
   const { id } = useParams();
   const idUser = state.user.id;
 
-  const getUser = async () => {
-    const response = await API.get(`/user/${id}`);
-    setAvatar(response.data.data.dataUser.image);
-    setUser(response.data.data.dataUser);
-  };
+  // const getUser = async () => {
+  //   const response = await API.get(`/user/${id}`);
+  //   console.log(response);
+  //   setAvatar(response.data.data.dataUser.image);
+  //   setUser(response.data.data.dataUser);
+  // };
 
-  useEffect(() => {
-    getUser();
-    getJourney();
-    return () => {
-      setMyJourney([]);
-    };
-  }, [id]);
+  // useEffect(() => {
+  //   getUser();
+   
+  // }, []);
 
-  const getJourney = async () => {
-    const response = await API.get(`/profile/${id}/journey`);
-    setMyJourney(response.data.data.dataJourney);
-  };
+  
 
-  useEffect(() => {
-    if (modalEdit === false) {
-      getUser();
-    }
-  }, [modalEdit]);
-
-  const handleBookmark = async (idJourney) => {
-    const config = {
-      headers: {
-        "Content-type": "application/json",
-      },
-    };
-
-    let data = {
-      idUser,
-      idJourney: idJourney,
-    };
-
-    data = JSON.parse(JSON.stringify(data));
-
-    const response = await API.post("/bookmark", data, config);
-    if (response.status === 200) {
-      Swal.fire({
-        title: "success",
-        text: "Bookmark!",
-        icon: "success",
-      });
-    }
-  };
 
   return (
     <>
@@ -118,7 +84,7 @@ function Profile() {
           </div>
 
           <h4>
-            <dt>{user.fullname}</dt>
+            <dt>{state.user.username}</dt>
           </h4>
           <p>{user.email}</p>
         </Stack>
@@ -134,15 +100,7 @@ function Profile() {
                 marginBottom: "50px",
               }}
             />
-            {myJourney.map((item, index) => (
-              <Col lg={3} key={index}>
-                <CardPost
-                  item={item}
-                  bookmark={bookmark}
-                  handleBookmark={(id) => handleBookmark(id)}
-                />
-              </Col>
-            ))}
+           
           </>
         </Row>
         <ModalEditProfile

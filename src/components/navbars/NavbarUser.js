@@ -48,7 +48,7 @@ function NavbarUser() {
     if (state.isLogin) {
       getUser();
     }
-  });
+  },[]);
 
   return (
     <Navbar bg="light" sticky="top" className="shadow">
