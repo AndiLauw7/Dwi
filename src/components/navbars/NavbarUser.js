@@ -1,12 +1,20 @@
 import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/userContext";
-import { Navbar, Container, Stack, Nav, Dropdown } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  Navbar,
+  Container,
+  Stack,
+  Nav,
+  Dropdown,
+  Row,
+  NavDropdown,
+} from "react-bootstrap";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
 import avatarDummy from "../../assets/img/anakSd.jpg";
 import Swal from "sweetalert2";
 import { API } from "../../configAPI/api";
-export const path = "http://localhost:4000/uploads/";
+export const path = "http://localhost:5000/uploads/";
 
 function NavbarUser() {
   const navigate = useNavigate();
@@ -14,8 +22,9 @@ function NavbarUser() {
   const [avatar, setAvatar] = useState(null);
 
   // console.log("jalan");
-
-  const id = state.user.id;
+  const { id } = useParams();
+  const user = state.user;
+  console.log(user);
 
   const handleLogOut = () => {
     Swal.fire({
@@ -37,18 +46,19 @@ function NavbarUser() {
   };
 
   const getUser = async () => {
-    // console.log("getUser");
     const response = await API.get(`/user/${id}`);
-    setAvatar(response.data.data.dataUser.image);
-    // console.log(response.data.data.dataUser.image);
+
+    setAvatar(response.data.data.datauser.image);
+
+    console.log(response.data.data.datauser.image);
+    console.log(response);
   };
 
   useEffect(() => {
-    // console.log("useEffect");
     if (state.isLogin) {
       getUser();
     }
-  },[]);
+  }, [state]);
 
   return (
     <Navbar bg="light" sticky="top" className="shadow">
@@ -59,11 +69,26 @@ function NavbarUser() {
           </Link>
         </Navbar.Brand>
         <Nav>
+          <Nav>
+            <Nav.Link onClick={() => navigate("/")}>Beranda</Nav.Link>
+            <Nav.Link onClick={() => navigate("/tentang-sd-karya-bangsa")}>
+              Tentang Sekolah
+            </Nav.Link>
+            <Nav.Link onClick={() => navigate("/fasilitas-sekolah")}>
+              Fasilitas Sekolah
+            </Nav.Link>
+            <NavDropdown title="Informasi" id="basic-nav-dropdown">
+              <NavDropdown.Item onClick={() => navigate("/form-ppdb")}>
+                Pendaftarans
+              </NavDropdown.Item>
+            </NavDropdown>
+            <Nav.Link>Kontak</Nav.Link>
+          </Nav>
           <Stack>
             <Dropdown align="end">
               <Dropdown.Toggle as={Nav.Link} className="Dropdown-Toggle">
                 <img
-                  src={avatar === null ? avatarDummy : path + avatar}
+                  src={path + user.avatar}
                   alt="avatar"
                   className="rounded-circle border border-3 border-primary "
                   style={{
@@ -73,10 +98,11 @@ function NavbarUser() {
                   }}
                 />
               </Dropdown.Toggle>
+
               <Dropdown.Menu className="text-dark shadow">
                 <Dropdown.Item
                   className="py-3"
-                  onClick={() => navigate(`/profile/${id}`)}
+                  onClick={() => navigate(`/Profile/${id}`)}
                 >
                   <span>
                     <img
@@ -88,22 +114,6 @@ function NavbarUser() {
                     />
                   </span>
                   <span className="fw-bold">Profile</span>
-                </Dropdown.Item>
-
-                <Dropdown.Item
-                  className="py-3"
-                  onClick={() => navigate("/form-ppdb")}
-                >
-                  <span>
-                    <img
-                      src="../assets/write1.svg"
-                      alt="write1"
-                      width={30}
-                      height={30}
-                      className="me-3"
-                    />
-                  </span>
-                  <span className="fw-bold">Pendaftaran</span>
                 </Dropdown.Item>
 
                 <Dropdown.Item

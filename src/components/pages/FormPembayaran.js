@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { UserContext } from "../../context/userContext";
 import { Footer } from "../navbars/Footer";
 
 import NavbarUser from "../navbars/NavbarUser";
+import NavTop from "../navbars/NavTop";
 
 export const FormPembayaran = () => {
+  const [state, dispatch] = useContext(UserContext);
   return (
     <div>
-      <NavbarUser />
-
+      {state.islogin ? <NavTop /> : <NavbarUser />}
       <Container fluid></Container>
-
       <Container className="mt-5">
         <div
           style={{
@@ -73,7 +74,6 @@ export const FormPembayaran = () => {
           </Row>
         </div>
       </Container>
-
       <Footer />
     </div>
   );

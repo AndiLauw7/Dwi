@@ -17,16 +17,20 @@ import Register from "./components/Auth/Register";
 import { FormRegister } from "./components/pages/FormRegister";
 import { DetailTentangSekolah } from "./components/pages/DetailTentangSekolah";
 import { FormPembayaran } from "./components/pages/FormPembayaran";
+import HomeTitle from "./components/pages/HomeTitle";
+// import { Audio } from "react-loader-spinner";
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 //import API
 import { API, setAuthToken } from "./configAPI/api";
 import { DetailFasilitasSekolah } from "./components/pages/DetailFasilitasSekolah";
+import { MdOutlineLocationSearching } from "react-icons/md";
 
 function App() {
   const navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
-  const user = state.user;
-  console.log(user);
+  const datauser = state.user;
+  console.log(datauser);
 
   const location = useLocation();
 
@@ -34,17 +38,19 @@ function App() {
     try {
       const response = await API.get("/check-auth");
       console.log(response.status);
-      if (response?.status === 401 ) {
+      if (response?.status === 401) {
         return dispatch({
           type: "AUTH_ERROR",
         });
-      } 
+      }
       // Get user data
       let payload = response.data.data.user;
+      console.log(response.data.data.user);
       // Get token from local storage
       payload.token = localStorage.token;
 
       console.log(payload);
+      console.log(response.data.data.user);
 
       // Send data to useContext
 
@@ -74,16 +80,15 @@ function App() {
 
   return (
     <Routes>
+      {/* <Audio height="100" width="100" color="grey" ariaLabel="loading" />; */}
       <Route exact path="/" element={<Home />} />
-
+      {/* <Route exact path="/home-title" element={<HomeTitle />} /> */}
       <Route exact path="/profile/:id" element={<Profile />} />
       <Route exact path="/form-ppdb" element={<FormRegister />} />
       <Route exact path="/form-pembayaran" element={<FormPembayaran />} />
-
       <Route exact path="/dashboard/*" element={<Dashboard />} />
-      <Route exact path="/login/*" element={<Login />} />
+      <Route exact path="/login" element={<Login />} />
       <Route exact path="/registrasi/*" element={<Register />} />
-
       <Route
         exact
         path="/tentang-sd-karya-bangsa"

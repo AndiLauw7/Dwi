@@ -4,7 +4,6 @@ import logo from "../../assets/img/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 
 function NavTop(props) {
-  
   const navigate = useNavigate();
 
   return (

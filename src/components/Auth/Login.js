@@ -17,7 +17,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const title = "Login";
-  document.title = "The Journey | " + title;
+  document.title = "Sd Karya Bangsa | " + title;
 
   const [state, dispatch] = useContext(UserContext);
   const user = state.user.role;
@@ -71,11 +71,7 @@ export default function Login() {
           } else if (response?.data.data.user.role === "siswa") {
             return navigate("/form-ppdb");
           } else {
-<<<<<<< HEAD
-            return navigate("/");
-=======
-            return navigate("/")
->>>>>>> 4531ff75c95efc81e003fe1e797e07c2902e58a6
+            return navigate("/login/*");
           }
         }
       }
@@ -91,10 +87,10 @@ export default function Login() {
   useEffect(() => {
     if (user === "admin" || user === "kepalasekolah") {
       return navigate("/dashboard");
-    } else if(user === "siswa") {
+    } else if (user === "siswa") {
       return navigate("/form-ppdb");
     } else {
-      return navigate("/login")
+      return navigate("/login");
     }
   }, [user]);
 
@@ -140,10 +136,6 @@ export default function Login() {
                     <Form.Label className="fw-bold text-primary">
                       Password
                     </Form.Label>
-<<<<<<< HEAD
-=======
-
->>>>>>> 4531ff75c95efc81e003fe1e797e07c2902e58a6
                     <Form.Control
                       className="  p-2 mb-4"
                       type="password"

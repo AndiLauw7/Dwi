@@ -11,7 +11,7 @@ const path = "http://localhost:4000/uploads/";
 
 function ModalEditProfile(props) {
   const title = "Edit Profile";
-  document.title = "The Journey | " + title;
+  document.title = "Sd Karya Bangsa | " + title;
 
   const navigate = useNavigate();
   const { id } = useParams();

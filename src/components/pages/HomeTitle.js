@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import NavTop from "../navbars/NavTop";
 import { Col, Container } from "react-bootstrap";
 import hero from "../../assets/img/sd.jpeg";
@@ -7,10 +7,18 @@ import { FasilitasSekolah } from "./FasilitasSekolah";
 import { Pendaftaraan } from "./Pendaftaraan";
 import "../../assets/css/Style.css";
 import { Footer } from "../navbars/Footer";
+import { UserContext } from "../../context/userContext";
+import NavbarUser from "../navbars/NavbarUser";
 
 function HomeTitle() {
+  document.title = "| SD KARYA BANGSA";
+
+  const [state, dispatch] = useContext(UserContext);
+
+  const [alert, setAlert] = useState(null);
   return (
     <div>
+      {state.isLogin ? <NavbarUser /> : <NavTop />}
       <div
         className="title-landing align-items-center text-white w-100 "
         style={{
@@ -24,7 +32,7 @@ function HomeTitle() {
           zIndex: -1,
         }}
       ></div>
-      <NavTop />
+
       <Container>
         <div
           className="h1 mb-3 mt-5 fw-bold text-white"
