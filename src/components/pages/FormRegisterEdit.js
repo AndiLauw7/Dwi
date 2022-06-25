@@ -1,12 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Footer } from "../navbars/Footer";
 import NavTop from "../navbars/NavTop";
 import logo from "../../assets/img/PPDB.jpeg";
 import NavbarUser from "../navbars/NavbarUser";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../../configAPI/api";
 import { UserContext } from "../../context/userContext";
+import moment from "moment";
 
 const defValue = {
   nama_lengkap: "",
@@ -19,13 +20,13 @@ const defValue = {
   createBy: ""
 };
 
-export const FormRegister = () => {
+export const FormRegisterEdit = () => {
   const navigate = useNavigate();
-
+  const { id } = useParams()
   const [state, dispatch] = useContext(UserContext)
-
-
   const [data, setData] = useState({ ...defValue });
+ console.log(data);
+ console.log(id);
 
   const handleChange = (e) => {
     console.log(e.target.name);
@@ -41,12 +42,30 @@ export const FormRegister = () => {
       e.preventDefault();
       const config = { headers: { "Content-type": "application/json" } };
       const body = JSON.stringify(data);
-      const response = await API.post("/registrasi/add", body, config);
+      const response = await API.patch(`/registrasi/${id}`, body, config);
       console.log(response);
+      if(response.status === 201){
+        navigate("/dashboard/master_data_siswa")
+      }
     } catch (error) {
       console.log(error);
     }
   };
+
+  const getData = async () =>{
+    try {
+    const response = await API.get(`/registrasi/${id}`)
+    setData(response.data.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  },[])
+
+  
 
   return (
     <div>
@@ -74,6 +93,7 @@ export const FormRegister = () => {
                     type="text"
                     placeholder=""
                     name="nama_lengkap"
+                    value={data.nama_lengkap}
                     onChange={handleChange}
                   />
                 </Form.Group>
@@ -84,7 +104,7 @@ export const FormRegister = () => {
                   required
                 >
                   <Form.Label>Jenis Kelamin</Form.Label>
-                  <Form.Select name="jenis_kelamin" onChange={handleChange}>
+                  <Form.Select name="jenis_kelamin" onChange={handleChange} value={data.jenis_kelamin}>
                     <option selected>Pilih jenis kelamin</option>
                     <option value="laki-laki">Laki-laki</option>
                     <option value="perempuan">Perempuan</option>
@@ -101,6 +121,7 @@ export const FormRegister = () => {
                     type="text"
                     placeholder=""
                     name="tempat_lahir"
+                    value={data.tempat_lahir}
                     onChange={handleChange}
                   />
                 </Form.Group>
@@ -115,6 +136,7 @@ export const FormRegister = () => {
                     type="date"
                     placeholder=""
                     name="tanggal_lahir"
+                    value={data.tanggal_lahir}
                     onChange={handleChange}
                   />
                 </Form.Group>
@@ -129,6 +151,7 @@ export const FormRegister = () => {
                     type="text"
                     placeholder=""
                     name="agama"
+                    value={data.agama}
                     onChange={handleChange}
                   />
                 </Form.Group>
@@ -143,6 +166,7 @@ export const FormRegister = () => {
                     type="number"
                     placeholder=""
                     name="nomer_hp"
+                    value={data.nomer_hp}
                     onChange={handleChange}
                   />
                 </Form.Group>
@@ -151,6 +175,7 @@ export const FormRegister = () => {
                 <Form.Control
                   className="mb-3"
                   name="alamat"
+                  value={data.alamat}
                   onChange={handleChange}
                   as="textarea"
                   rows={3}
@@ -162,7 +187,7 @@ export const FormRegister = () => {
                   className="w-100 px-5 "
                   onClick={handleSubmit}
                 >
-                  Daftar
+                  Simpan
                 </Button>
               </Form>
             </Col>

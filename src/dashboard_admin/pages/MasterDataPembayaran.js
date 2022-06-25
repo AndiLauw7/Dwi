@@ -78,6 +78,6 @@ const ActComp = (data) => {
 export default function MasterDataPembayaran() {
   const location = useLocation()
   return <MyPage title={"Master Data Pembayaran"} url={location.pathname}>
-    <MyTable colAct={ActComp} columns={columns} url={"/pembayaran"} />
+    <MyTable colAct={ActComp} columns={columns} url={"/pembayaran"} pathAdd={"/form-pembayaran"} />
   </MyPage>;
 }

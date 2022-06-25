@@ -9,7 +9,7 @@ function NavTop(props) {
 
   return (
     <div>
-      <Navbar className={props.shadow} bg="light" expand="lg" fixed="top">
+      <Navbar  bg="light" expand="lg" fixed="top">
         <Container fluid>
           <Navbar.Brand className="ps-3">
             <Link to={"/"} style={{ textDecoration: "none" }}>

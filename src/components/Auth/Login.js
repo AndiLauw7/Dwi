@@ -68,10 +68,10 @@ export default function Login() {
             response?.data.data.user.role === "kepalasekolah"
           ) {
             return navigate("/dashboard");
-          } else if(response?.data.data.user.role === "siswa"){
+          } else if (response?.data.data.user.role === "siswa") {
             return navigate("/form-ppdb");
           } else {
-            return navigate("/")
+            return navigate("/");
           }
         }
       }
@@ -116,10 +116,10 @@ export default function Login() {
             <Card style={{ width: "25rem" }}>
               <Card.Body className="p-5">
                 <h2 className="mb-5 text-center fw-bold text-primary">Login</h2>
-                {/* {message && message} */}
+                {message && message}
 
                 <Form>
-                  <Form.Group controlId="inputEmail">
+                  <Form.Group controlId="inputUsername">
                     <Form.Label className="fw-bold text-primary">
                       Username
                     </Form.Label>
@@ -136,7 +136,6 @@ export default function Login() {
                     <Form.Label className="fw-bold text-primary">
                       Password
                     </Form.Label>
-
                     <Form.Control
                       className="  p-2 mb-4"
                       type="password"

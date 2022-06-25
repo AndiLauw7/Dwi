@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import NavTop from "../navbars/NavTop";
 import { Col, Container } from "react-bootstrap";
 import hero from "../../assets/img/sd.jpeg";
@@ -7,15 +7,23 @@ import { FasilitasSekolah } from "./FasilitasSekolah";
 import { Pendaftaraan } from "./Pendaftaraan";
 import "../../assets/css/Style.css";
 import { Footer } from "../navbars/Footer";
+import { UserContext } from "../../context/userContext";
+import NavbarUser from "../navbars/NavbarUser";
 
 function HomeTitle() {
+
+  const [state, dispatch] = useContext(UserContext)
+  console.log(state.isLogin);
   return (
-    <div>
+    <>
+    <Container fluid style={{padding: "0px 0px"}}>
+      {state.isLogin ? <NavbarUser /> : <NavTop />}
+
+
       <div
         className="title-landing align-items-center text-white w-100 "
         style={{
           height: "450px",
-
           backgroundImage: `url(${hero})`,
           backgroundPosition: "top",
           objectFit: "cover",
@@ -24,8 +32,7 @@ function HomeTitle() {
           zIndex: -1,
         }}
       ></div>
-      <NavTop />
-      <Container>
+      <Container >
         <div
           className="h1 mb-3 mt-5 fw-bold text-white"
           style={{
@@ -57,7 +64,8 @@ function HomeTitle() {
       <Container fluid className="mb-0" id="kontak">
         <Footer />
       </Container>
-    </div>
+    </Container>
+    </>
   );
 }
 // jfgasjkgas

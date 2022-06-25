@@ -28,7 +28,7 @@ function Home() {
   return (
     <div>
       <Container fluid style={{ padding: 0 }}>
-        {state.isLogin ? <NavbarUser /> : <HomeTitle />}
+        {/* {state.isLogin ? <NavbarUser /> : <HomeTitle />} */}
         {/* {alert && alert} */}
       </Container>
     </div>

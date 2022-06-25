@@ -2,7 +2,8 @@ import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { RiDeleteBin2Line, RiEdit2Line } from 'react-icons/ri'
-import { useLocation } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import { API } from '../../configAPI/api'
 import MyPage from '../components/myPage'
 import MyTable from '../components/myTable'
@@ -46,8 +47,33 @@ const columns = [
   },
 ];
 
-const ActComp = (data) => {
-  const [selectData, setSelectData] = useState({});
+const ActComp = (data, setDataId) => {
+  const [selectData, setSelectData] = useState("");
+  const navigate = useNavigate()
+  const location= useLocation()
+
+  const {id} = data
+
+  const handleDelete = async () => {
+    Swal.fire({
+			title: "Are you sure Delete..",
+			text: data.nama_lengkap,
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Delete",
+		}).then(async(result) => {
+			if (result.isConfirmed) {
+				const response = await API.delete(`registrasi/${id}`);
+        setDataId(id)
+				navigate(location.pathname)
+			}
+		});
+  }
+
+  
+
 
   return (
     <div style={{ display: "flex", gap: 24 }}>
@@ -55,11 +81,13 @@ const ActComp = (data) => {
         title="edit"
         className="text-success"
         style={{ fontSize: 20, cursor: "pointer" }}
+        onClick={() => navigate(`/form-ppdb/edit/${id}`)}
       />
       <RiDeleteBin2Line
         title="delete"
         className="text-danger"
         style={{ fontSize: 20, cursor: "pointer" }}
+        onClick={handleDelete}
       />
     </div>
   );

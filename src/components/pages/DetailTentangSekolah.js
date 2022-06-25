@@ -11,7 +11,7 @@ import { Footer } from "../navbars/Footer";
 export const DetailTentangSekolah = () => {
   return (
     <div>
-      <NavTop />
+      {/* <NavTop /> */}
       <Container fluid>
         <div
           className="tentangSekolah"

@@ -9,7 +9,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { UserContext } from "./context/userContext";
-import Home from "./components/pages/Home";
+import Home from "./components/pages/HomeTitle";
 import Profile from "./components/pages/Profile";
 import Dashboard from "./dashboard_admin";
 import Login from "./components/Auth/Login";
@@ -21,6 +21,7 @@ import { FormPembayaran } from "./components/pages/FormPembayaran";
 //import API
 import { API, setAuthToken } from "./configAPI/api";
 import { DetailFasilitasSekolah } from "./components/pages/DetailFasilitasSekolah";
+import { FormRegisterEdit } from "./components/pages/FormRegisterEdit";
 
 function App() {
   const navigate = useNavigate();
@@ -78,11 +79,12 @@ function App() {
 
       <Route exact path="/profile/:id" element={<Profile />} />
       <Route exact path="/form-ppdb" element={<FormRegister />} />
+      <Route exact path="/form-ppdb/edit/:id" element={<FormRegisterEdit />} />
       <Route exact path="/form-pembayaran" element={<FormPembayaran />} />
 
       <Route exact path="/dashboard/*" element={<Dashboard />} />
-      <Route exact path="/login/*" element={<Login />} />
-      <Route exact path="/registrasi/*" element={<Register />} />
+      <Route exact path="/login" element={<Login />} />
+      <Route exact path="/registrasi" element={<Register />} />
 
       <Route
         exact

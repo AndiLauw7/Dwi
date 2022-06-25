@@ -9,7 +9,7 @@ import NavTop from "../navbars/NavTop";
 export const TentangSekolah = () => {
   return (
     <div>
-      <NavTop />
+      {/* <NavTop /> */}
       <div
         className="tentang-sekolah "
         style={{
