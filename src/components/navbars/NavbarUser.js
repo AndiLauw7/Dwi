@@ -22,8 +22,9 @@ function NavbarUser() {
   const [avatar, setAvatar] = useState(null);
 
   // console.log("jalan");
-  const { id } = useParams();
-  const user = state.user;
+  // const { id } = useParams();
+  const user = state.user
+  const {id} = state.user
   console.log(user);
 
   const handleLogOut = () => {
