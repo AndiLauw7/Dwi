@@ -7,13 +7,13 @@ import { API } from '../../../configAPI/api';
 
 const TableHeading = ({ item, index }) => <th key={index}>{item.heading}</th>
 
-const TableRow = ({ item, columns, index, colNo, colAct, setDataId  }) => {
-    
+const TableRow = ({ item, columns, index, colNo, colAct, setDataId }) => {
+
     return (
         <tr>
-            { colNo && <td>{index + 1}</td> }
-            { columns.map((colItem, idx) => {
-                if(colItem.selector.includes(".")){
+            {colNo && <td>{index + 1}</td>}
+            {columns.map((colItem, idx) => {
+                if (colItem.selector.includes(".")) {
                     const itemSplit = colItem.selector.split(".")
                     return <td key={idx}>{colItem.format ? colItem.format(item[itemSplit[0]][itemSplit[1]]) : item[itemSplit[0]][itemSplit[1]]}</td>
 
@@ -22,7 +22,7 @@ const TableRow = ({ item, columns, index, colNo, colAct, setDataId  }) => {
                 return <td key={idx}>{colItem.format ? colItem.format(item[`${colItem.selector}`]) : item[`${colItem.selector}`]}</td>
             })
             }
-            { colAct && (<td>{colAct(item, setDataId)}</td>) }
+            {colAct && (<td>{colAct(item, setDataId)}</td>)}
         </tr>
     )
 
@@ -48,7 +48,7 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
         }
     }
 
-    const handleSearch = async() => {
+    const handleSearch = async () => {
         try {
             const response = await API.get(`${url}?page=${page}&perPage=${perPage}&search=${search}`)
             setData(response.data.data.data)
@@ -56,11 +56,11 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
             console.log(error);
         }
     }
-  
 
-  useEffect(() => {
-    getData()
-  }, [search, dataId]);
+
+    useEffect(() => {
+        getData()
+    }, [search, dataId]);
 
 
 
@@ -78,18 +78,20 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
                         <RiSearch2Line />
                     </Button>
                 </InputGroup>
-                <Button variant="primary" id="search" onClick={() => navigate(pathAdd)}>
-                    <RiAddLine /> Tambah
-                </Button>
+                {pathAdd && (
+                    <Button variant="primary" id="search" onClick={() => navigate(pathAdd)}>
+                        <RiAddLine /> Tambah
+                    </Button>
+                )}
             </div>
             <Table striped bordered hover>
                 <thead style={{ backgroundColor: "#999" }}>
                     <tr>
-                        { colNo && <th>No.</th> }
+                        {colNo && <th>No.</th>}
                         {
                             columns.map((item, index) => <TableHeading key={index} item={item} index={index} />)
                         }
-                        { colAct && <th >action</th> }
+                        {colAct && <th >action</th>}
 
                     </tr>
                 </thead>

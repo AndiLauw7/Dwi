@@ -43,6 +43,11 @@ export const FormRegister = () => {
       const body = JSON.stringify(data);
       const response = await API.post("/registrasi/add", body, config);
       console.log(response);
+      if(state.user.role === "admin" ){
+        navigate("/dashboard")
+      } else {
+        navigate("/form-pembayaran")
+      }
     } catch (error) {
       console.log(error);
     }

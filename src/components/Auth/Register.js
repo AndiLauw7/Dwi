@@ -62,12 +62,12 @@ export default function Login() {
             Success
           </Alert>
         );
-        setMessage(alert);
-        setForm({
-          username: "",
-          email: "",
-          password: "",
+        dispatch({
+          type: "USER_SUCCESS",
+          payload: response.data.data.user,
         });
+        setMessage(alert);
+       navigate("/form-ppdb")
       } else {
         const alert = (
           <Alert variant="danger" className="py-1">

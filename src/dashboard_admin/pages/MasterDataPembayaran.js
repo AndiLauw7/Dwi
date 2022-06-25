@@ -1,7 +1,9 @@
 import moment from "moment";
 import React, { useState } from "react";
-import { RiEdit2Line } from "react-icons/ri";
-import { useLocation } from "react-router-dom";
+import { RiCheckboxCircleLine, RiDeleteBin2Line, RiEdit2Line } from "react-icons/ri";
+import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { API } from "../../configAPI/api";
 import MyPage from "../components/myPage";
 import MyTable from "../components/myTable";
 
@@ -58,19 +60,75 @@ const columns = [
   },
 ];
 
-const ActComp = (data) => {
-  console.log(data);
-  const [selectData, setSelectData] = useState({});
+const ActComp = (data, setDataId) => {
+  const [selectData, setSelectData] = useState("");
+  const navigate = useNavigate()
+  const location= useLocation()
+
+  const {id} = data
+
+  const handleDelete = async () => {
+    Swal.fire({
+			title: "Are you sure Delete..",
+			text: data.nama_lengkap,
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Delete",
+		}).then(async(result) => {
+			if (result.isConfirmed) {
+				const response = await API.delete(`/pembayaran/${id}`);
+        setDataId(id)
+				navigate(location.pathname)
+			}
+		});
+  }
+
+  const handleAcc = async () => {
+    Swal.fire({
+			title: "Are you sure Accept",
+			text: data.nama_lengkap,
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Save",
+		}).then(async(result) => {
+			if (result.isConfirmed) {
+				const response = await API.patch(`/pembayaran/accept/${id}`);
+        setDataId(id)
+				navigate(location.pathname)
+			}
+		});
+  }
+
+  
+
+
 
   return (
-    <>
     <div style={{ display: "flex", gap: 24 }}>
-      {data.status_pembayaran ? (
-        <p>sudah terbayar</p>
-     ) : data.bukti_pembayaran !== "http://localhost:5000/uploads/null" ? <p>pending</p> :  <p>belum bayar</p>}
-     </div>
-    </>
-
+      <RiCheckboxCircleLine
+        title="Accept"
+        className="text-primary"
+        style={{ fontSize: 20, cursor: "pointer" }}
+        onClick={handleAcc}
+      />
+      <RiEdit2Line
+        title="edit"
+        className="text-success"
+        style={{ fontSize: 20, cursor: "pointer" }}
+        onClick={() => navigate(`/form-pembayaran/edit/${id}`)}
+      />
+      <RiDeleteBin2Line
+        title="delete"
+        className="text-danger"
+        style={{ fontSize: 20, cursor: "pointer" }}
+        onClick={handleDelete}
+      />
+      
+    </div>
   );
 };
 
@@ -78,6 +136,6 @@ const ActComp = (data) => {
 export default function MasterDataPembayaran() {
   const location = useLocation()
   return <MyPage title={"Master Data Pembayaran"} url={location.pathname}>
-    <MyTable colAct={ActComp} columns={columns} url={"/pembayaran"} pathAdd={"/form-pembayaran"} />
+    <MyTable colAct={ActComp} columns={columns} url={"/pembayaran"}  />
   </MyPage>;
 }

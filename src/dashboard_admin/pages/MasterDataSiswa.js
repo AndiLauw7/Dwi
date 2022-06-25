@@ -72,9 +72,6 @@ const ActComp = (data, setDataId) => {
 		});
   }
 
-  
-
-
   return (
     <div style={{ display: "flex", gap: 24 }}>
       <RiEdit2Line
