@@ -23,6 +23,8 @@ export const FormRegister = () => {
   const navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext)
 
+  const {id} = state.user
+
   const [data, setData] = useState({ ...defValue });
 
   const handleChange = (e) => {
@@ -44,7 +46,7 @@ export const FormRegister = () => {
       if(state.user.role === "admin" ){
         navigate("/dashboard")
       } else {
-        navigate("/form-pembayaran")
+        navigate(`/form-pembayaran/edit/${id}`)
       }
     } catch (error) {
       console.log(error);

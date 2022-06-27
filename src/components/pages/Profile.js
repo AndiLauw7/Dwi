@@ -25,6 +25,13 @@ function Profile() {
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
   const [preview, setPreview] = useState(null);
+  const [state, dispatch] = useContext(UserContext);
+  const [avatar, setAvatar] = useState(null);
+  const [user, setUser] = useState({});
+  const [id, setId] = useState(state.user.id)
+
+  // const { id } = useParams();
+  // const {id} = state.user;
   const [form, setForm] = useState({
     fullname: "",
     email: "",
@@ -49,13 +56,11 @@ function Profile() {
       formData.set("email", form.email);
 
       const response = await API.patch(
-        "/edit-user/" + user.id,
+        "/edit-user/" + id,
         formData,
         config
       );
-      console.log(user.id);
-      console.log(response);
-
+      
       setEdit(false);
     } catch (error) {
       console.log(error);
@@ -74,29 +79,31 @@ function Profile() {
     }
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = () => {
     setEdit(!edit);
-    navigate("/Profile/" + user.id);
+    navigate("/Profile/" + id);
   };
 
-  const [state, dispatch] = useContext(UserContext);
-  const [avatar, setAvatar] = useState(null);
-  const [user, setUser] = useState({});
-
-  const { id } = useParams();
-  const datauser = state.user.id;
+  
 
   const getUser = async () => {
     const response = await API.get(`/user/${id}`);
     console.log(response);
     setAvatar(response.data.data.datauser.image);
     setUser(response.data.data.datauser);
-    console.log(response.data.data.datauser.image);
+    dispatch({
+      type: "USER_SUCCESS",
+      payload: state,
+    });
+
+
   };
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [edit]);
+
+ 
 
   return (
     <>
@@ -125,7 +132,7 @@ function Profile() {
             <Form onSubmit={handleSubmit}>
               <div className="text-center mt-3 mb-2">
                 <img
-                  src={preview ? preview : path + avatar}
+                  src={preview ? preview : avatar}
                   style={{
                     width: "150px",
                     height: "150px",
@@ -167,7 +174,7 @@ function Profile() {
           ) : (
             <>
               <img
-                src={preview ? preview : path + avatar}
+                src={preview ? preview : avatar}
                 alt="avatar"
                 className="rounded-circle border border-1 border-primary mb-3"
                 style={{

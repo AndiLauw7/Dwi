@@ -37,11 +37,12 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
     const [page, setPage] = useState(1)
     const [perPage, setPerPage] = useState(8)
 
+    console.log(data);
+
 
     const getData = async () => {
         try {
             const response = await API.get(`${url}`)
-            console.log(response);
             setData(response.data.data.data)
         } catch (error) {
             console.log(error);
@@ -51,6 +52,7 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
     const handleSearch = async () => {
         try {
             const response = await API.get(`${url}?page=${page}&perPage=${perPage}&search=${search}`)
+            console.log();
             setData(response.data.data.data)
         } catch (error) {
             console.log(error);

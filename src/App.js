@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import {
@@ -26,21 +26,41 @@ import { API, setAuthToken } from "./configAPI/api";
 import { DetailFasilitasSekolah } from "./components/pages/DetailFasilitasSekolah";
 import { FormRegisterEdit } from "./components/pages/FormRegisterEdit";
 import { FormPembayaranEdit } from "./components/pages/FormPembayaranEdit";
+import FormUserEdit from "./components/pages/FormUserEdit";
+import FormUserAdd from "./components/pages/FormUser";
 
 function App() {
   const navigate = useNavigate();
-  const [state, dispatch] = useContext(UserContext);
-  const datauser = state.user;
-  console.log(datauser);
-
   const location = useLocation();
+
+  const [state, dispatch] = useContext(UserContext);
+ 
+  useEffect(() => {
+    // Redirect Auth
+    if (!localStorage.token) {
+      navigate("/login");
+    } else {
+      if (state.user.role == "admin") {
+        navigate("/dashboard");
+        // navigate("/complain-admin");
+      } else if (state.user.role == "siswa") {
+        navigate("/");
+      }
+    }
+  }, [state]);
+
 
   const checkUser = async () => {
     try {
-      const response = await API.get("/check-auth");
-      console.log(response.status);
+      const config = {
+        headers: {
+          Authorization: "Baerer " + localStorage.token,
+        },
+      };
+      const response = await API.get("/check-auth", config);
+      console.log(response);
       if (response?.status === 401) {
-        return dispatch({
+         dispatch({
           type: "AUTH_ERROR",
         });
       }
@@ -50,9 +70,7 @@ function App() {
       // Get token from local storage
       payload.token = localStorage.token;
 
-      console.log(payload);
-      console.log(response.data.data.user);
-
+      // console.log(payload);
       // Send data to useContext
 
       dispatch({
@@ -62,22 +80,18 @@ function App() {
 
       // Get user data
     } catch (error) {
-      return dispatch({
-        type: "AUTH_ERROR",
-      });
       console.log(error.message);
     }
   };
 
+  
+
+
   useEffect(() => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-      checkUser();
-      navigate(location.pathname);
-    } else {
-      navigate("/");
-    }
-  }, []);
+    checkUser()
+  },[])
+
+
 
   return (
     <Routes>
@@ -87,8 +101,10 @@ function App() {
       <Route exact path="/profile/:id" element={<Profile />} />
       <Route exact path="/form-ppdb" element={<FormRegister />} />
       <Route exact path="/form-ppdb/edit/:id" element={<FormRegisterEdit />} />
-      <Route exact path="/form-pembayaran" element={<FormPembayaran />} />
+      {/* <Route exact path="/form-pembayaran" element={<FormPembayaran />} /> */}
       <Route exact path="/form-pembayaran/edit/:id" element={<FormPembayaranEdit />} />
+      <Route exact path="/user/edit" element={<FormUserEdit />} />
+      <Route exact path="/user/add" element={<FormUserAdd />} />
 
       <Route exact path="/dashboard/*" element={<Dashboard />} />
       <Route exact path="/login" element={<Login />} />

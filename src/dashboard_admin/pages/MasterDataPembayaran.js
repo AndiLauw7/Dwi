@@ -53,7 +53,7 @@ const columns = [
       console.log(status_pembayaran);
       return (
         <>
-          {status_pembayaran ? <p>Sudah Lunas</p> : <p>Belum Bayar</p>}
+          {status_pembayaran ? <p className="text-success fw-bold">Sudah Lunas</p> : <p className="text-danger fw-bold">Belum Bayar</p>}
         </>
       )
     }

@@ -25,8 +25,8 @@ export const FormRegisterEdit = () => {
   const { id } = useParams()
   const [state, dispatch] = useContext(UserContext)
   const [data, setData] = useState({ ...defValue });
- console.log(data);
- console.log(id);
+  console.log(data);
+  console.log(id);
 
   const handleChange = (e) => {
     console.log(e.target.name);
@@ -44,7 +44,7 @@ export const FormRegisterEdit = () => {
       const body = JSON.stringify(data);
       const response = await API.patch(`/registrasi/${id}`, body, config);
       console.log(response);
-      if(response.status === 201){
+      if (response.status === 201) {
         navigate("/dashboard/master_data_siswa")
       }
     } catch (error) {
@@ -52,10 +52,11 @@ export const FormRegisterEdit = () => {
     }
   };
 
-  const getData = async () =>{
+  const getData = async () => {
     try {
-    const response = await API.get(`/registrasi/${id}`)
-    setData(response.data.data)
+      const response = await API.get(`/registrasi/${id}`)
+      setData(response.data.data)
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -63,9 +64,9 @@ export const FormRegisterEdit = () => {
 
   useEffect(() => {
     getData()
-  },[])
+  }, [])
 
-  
+
 
   return (
     <div>

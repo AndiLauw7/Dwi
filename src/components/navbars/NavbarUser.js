@@ -20,11 +20,12 @@ function NavbarUser() {
   const navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
   const [avatar, setAvatar] = useState(null);
+  
 
   // console.log("jalan");
   // const { id } = useParams();
   const user = state.user
-  const {id} = state.user
+  // const {id} = state.user
   console.log(user);
 
   const handleLogOut = () => {
@@ -56,10 +57,8 @@ function NavbarUser() {
   };
 
   useEffect(() => {
-    if (state.isLogin) {
       getUser();
-    }
-  }, [state]);
+  },[id]);
 
   return (
     <Navbar bg="light" sticky="top" className="shadow">
@@ -89,7 +88,7 @@ function NavbarUser() {
             <Dropdown align="end">
               <Dropdown.Toggle as={Nav.Link} className="Dropdown-Toggle">
                 <img
-                  src={path + user.avatar}
+                  src={avatar}
                   alt="avatar"
                   className="rounded-circle border border-3 border-primary "
                   style={{

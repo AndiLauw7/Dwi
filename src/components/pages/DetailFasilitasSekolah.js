@@ -25,8 +25,8 @@ export const DetailFasilitasSekolah = () => {
   return (
     <div>
       {/* <NavTop /> */}
-      <Container fluid>
       {state.isLogin ? <NavbarUser /> : <NavTop />}
+      <Container fluid>
         <div
           className="fasilitasSekolah"
           style={{

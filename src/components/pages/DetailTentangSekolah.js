@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { dataPost } from "../../dummyData/DataTentangSekolah";
 import { DataTentang } from "../../dummyData/DetailTentangSekolah";
@@ -7,11 +7,16 @@ import logo from "../../assets/img/sd.jpeg";
 import logo1 from "../../assets/img/guru.jpg";
 import { Berita } from "../../dummyData/Berita";
 import { Footer } from "../navbars/Footer";
+import { UserContext } from "../../context/userContext";
+import NavbarUser from "../navbars/NavbarUser";
 
 export const DetailTentangSekolah = () => {
+  const [state, dispatch] = useContext(UserContext)
+
   return (
     <div>
       {/* <NavTop /> */}
+      {state.isLogin ? <NavbarUser /> : <NavTop />}
       <Container fluid>
         <div
           className="tentangSekolah"
