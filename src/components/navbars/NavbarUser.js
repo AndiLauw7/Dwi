@@ -20,13 +20,11 @@ function NavbarUser() {
   const navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
   const [avatar, setAvatar] = useState(null);
-  
 
   // console.log("jalan");
   // const { id } = useParams();
   const user = state.user
-  // const {id} = state.user
-  console.log(user);
+  const id = state.user.id
 
   const handleLogOut = () => {
     Swal.fire({
@@ -58,7 +56,7 @@ function NavbarUser() {
 
   useEffect(() => {
       getUser();
-  },[id]);
+  });
 
   return (
     <Navbar bg="light" sticky="top" className="shadow">
@@ -68,7 +66,7 @@ function NavbarUser() {
             <img src={logo} alt="logo" width="60" />
           </Link>
         </Navbar.Brand>
-        <Nav>
+        <Nav className="align-items-center">
           <Nav>
             <Nav.Link onClick={() => navigate("/")}>Beranda</Nav.Link>
             <Nav.Link onClick={() => navigate("/tentang-sd-karya-bangsa")}>

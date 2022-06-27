@@ -25,13 +25,6 @@ function Profile() {
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
   const [preview, setPreview] = useState(null);
-  const [state, dispatch] = useContext(UserContext);
-  const [avatar, setAvatar] = useState(null);
-  const [user, setUser] = useState({});
-  const [id, setId] = useState(state.user.id)
-
-  // const { id } = useParams();
-  // const {id} = state.user;
   const [form, setForm] = useState({
     fullname: "",
     email: "",
@@ -56,11 +49,13 @@ function Profile() {
       formData.set("email", form.email);
 
       const response = await API.patch(
-        "/edit-user/" + id,
+        "/edit-user/" + user.id,
         formData,
         config
       );
-      
+      console.log(user.id);
+      console.log(response);
+
       setEdit(false);
     } catch (error) {
       console.log(error);
@@ -81,29 +76,27 @@ function Profile() {
 
   const handleEdit = () => {
     setEdit(!edit);
-    navigate("/Profile/" + id);
+    navigate("/Profile/" + user.id);
   };
 
-  
+  const [state, dispatch] = useContext(UserContext);
+  const [avatar, setAvatar] = useState(null);
+  const [user, setUser] = useState({});
+
+  const { id } = useParams();
+  const datauser = state.user.id;
 
   const getUser = async () => {
     const response = await API.get(`/user/${id}`);
     console.log(response);
     setAvatar(response.data.data.datauser.image);
     setUser(response.data.data.datauser);
-    dispatch({
-      type: "USER_SUCCESS",
-      payload: state,
-    });
-
-
+    console.log(response.data.data.datauser.image);
   };
 
   useEffect(() => {
     getUser();
-  }, [edit]);
-
- 
+  }, []);
 
   return (
     <>
@@ -195,9 +188,9 @@ function Profile() {
             </>
           )}
         </Stack>
-        <Row>
+        {/* <Row> */}
           {/* <Stack direction="horizontal"  gap={5}> */}
-          <>
+          {/* <>
             <h2 className="my-3 fw-bold">Journey Post</h2>
             <hr
               style={{
@@ -208,7 +201,7 @@ function Profile() {
               }}
             />
           </>
-        </Row>
+        </Row> */}
       </Container>
     </>
   );

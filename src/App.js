@@ -47,7 +47,7 @@ function App() {
         navigate("/");
       }
     }
-  }, [state]);
+  }, [localStorage.token]);
 
 
   const checkUser = async () => {
