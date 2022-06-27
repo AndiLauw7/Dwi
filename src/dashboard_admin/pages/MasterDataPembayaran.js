@@ -16,9 +16,9 @@ const columns = [
     heading: "Nama Lengkap",
     selector: "nama_lengkap",
     format: (nama_lengkap) => {
-      return(
+      return (
         <>
-        {nama_lengkap === null ?   "-" : nama_lengkap}
+          {nama_lengkap === null ? "-" : nama_lengkap}
         </>
       )
     },
@@ -27,9 +27,9 @@ const columns = [
     heading: "Tanggal Pembayaran",
     selector: "tanggal_pembayaran",
     format: (tanggal_pembayaran) => {
-      return(
+      return (
         <>
-        {tanggal_pembayaran === null ?   "-" : moment(tanggal_pembayaran).format("DD-MMM-YYYY")}
+          {tanggal_pembayaran === null ? "-" : moment(tanggal_pembayaran).format("DD-MMM-YYYY")}
         </>
       )
     },
@@ -41,7 +41,7 @@ const columns = [
       console.log(bukti_pembayaran);
       return (
         <>
-        {bukti_pembayaran === "http://localhost:5000/uploads/null" ? <p>-</p> :  <img src={bukti_pembayaran} alt="img" width={100} />}
+          {bukti_pembayaran === "http://localhost:5000/uploads/null" ? <p>-</p> : <img src={bukti_pembayaran} alt="img" width={100} />}
         </>
       )
     }
@@ -63,71 +63,77 @@ const columns = [
 const ActComp = (data, setDataId) => {
   const [selectData, setSelectData] = useState("");
   const navigate = useNavigate()
-  const location= useLocation()
+  const location = useLocation()
 
-  const {id} = data
+  const { id } = data
 
   const handleDelete = async () => {
     Swal.fire({
-			title: "Are you sure Delete..",
-			text: data.nama_lengkap,
-			icon: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#3085d6",
-			cancelButtonColor: "#d33",
-			confirmButtonText: "Delete",
-		}).then(async(result) => {
-			if (result.isConfirmed) {
-				const response = await API.delete(`/pembayaran/${id}`);
+      title: "Are you sure Delete..",
+      text: data.nama_lengkap,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await API.delete(`/pembayaran/${id}`);
         setDataId(id)
-				navigate(location.pathname)
-			}
-		});
+        navigate(location.pathname)
+      }
+    });
   }
 
   const handleAcc = async () => {
     Swal.fire({
-			title: "Are you sure Accept",
-			text: data.nama_lengkap,
-			icon: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#3085d6",
-			cancelButtonColor: "#d33",
-			confirmButtonText: "Save",
-		}).then(async(result) => {
-			if (result.isConfirmed) {
-				const response = await API.patch(`/pembayaran/accept/${id}`);
+      title: "Are you sure Accept",
+      text: data.nama_lengkap,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Save",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await API.patch(`/pembayaran/accept/${id}`);
         setDataId(id)
-				navigate(location.pathname)
-			}
-		});
+        navigate(location.pathname)
+      }
+    });
   }
 
-  
+
 
 
 
   return (
     <div style={{ display: "flex", gap: 24 }}>
-      <RiCheckboxCircleLine
-        title="Accept"
-        className="text-primary"
-        style={{ fontSize: 20, cursor: "pointer" }}
-        onClick={handleAcc}
-      />
-      <RiEdit2Line
-        title="edit"
-        className="text-success"
-        style={{ fontSize: 20, cursor: "pointer" }}
-        onClick={() => navigate(`/form-pembayaran/edit/${id}`)}
-      />
+      {data.status_pembayaran === false ? (
+        <>
+          <RiCheckboxCircleLine
+            title="Accept"
+            className="text-primary"
+            style={{ fontSize: 20, cursor: "pointer" }}
+            onClick={handleAcc}
+          />
+          <RiEdit2Line
+            title="edit"
+            className="text-success"
+            style={{ fontSize: 20, cursor: "pointer" }}
+            onClick={() => navigate(`/form-pembayaran/edit/${id}`)}
+          />
+        </>
+      ) : ""}
+
+
       <RiDeleteBin2Line
         title="delete"
         className="text-danger"
         style={{ fontSize: 20, cursor: "pointer" }}
         onClick={handleDelete}
       />
-      
+
     </div>
   );
 };
@@ -136,6 +142,6 @@ const ActComp = (data, setDataId) => {
 export default function MasterDataPembayaran() {
   const location = useLocation()
   return <MyPage title={"Master Data Pembayaran"} url={location.pathname}>
-    <MyTable colAct={ActComp} columns={columns} url={"/pembayaran"}  />
+    <MyTable colAct={ActComp} columns={columns} url={"/pembayaran"} />
   </MyPage>;
 }
