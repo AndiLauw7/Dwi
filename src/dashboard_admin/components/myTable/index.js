@@ -36,14 +36,21 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
     const [dataId, setDataId] = useState("")
     const [page, setPage] = useState(1)
     const [perPage, setPerPage] = useState(8)
+    const [total, setTotal] = useState(1)
 
-    console.log(data);
+    const totalPage = Math.ceil(total / perPage)
+
+    console.log(totalPage, total, perPage);
+
+    console.log(page);
 
 
     const getData = async () => {
         try {
             const response = await API.get(`${url}`)
             setData(response.data.data.data)
+            setTotal(response.data.data.total);
+
         } catch (error) {
             console.log(error);
         }
@@ -52,7 +59,6 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
     const handleSearch = async () => {
         try {
             const response = await API.get(`${url}?page=${page}&perPage=${perPage}&search=${search}`)
-            console.log();
             setData(response.data.data.data)
         } catch (error) {
             console.log(error);
@@ -62,7 +68,8 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
 
     useEffect(() => {
         getData()
-    }, [search, dataId]);
+        handleSearch()
+    }, [search, dataId, page]);
 
 
 
@@ -107,20 +114,17 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
                 </tbody>
             </Table>
 
-            {/* <div className='d-flex justify-content-end'>
+            <div className='d-flex justify-content-end align-items-center'>
 
                 <Pagination >
-                    <Pagination.First />
-                    <Pagination.Prev />
-                    {
-                        pagiData.map((item, index) => (
-                            <Pagination.Item key={index} onClick={(e) => setPage(index)} active={index === page}>{index + 1}</Pagination.Item>
-                        ))
-                    }
-                    <Pagination.Next />
-                    <Pagination.Last />
+                   
+                    <Pagination.First disabled={page <= 1} onClick={() => setPage(1)}/>
+                    <Pagination.Prev disabled={page <= 1} onClick={() => setPage(current => current - 1)}/>
+                        <div className='d-flex justify-content-center align-items-center px-3'>{page}/{totalPage}</div>
+                    <Pagination.Next disabled={page >= totalPage}  onClick={() => setPage(current => current + 1)}/>
+                    <Pagination.Last disabled={page >= totalPage} onClick={() => setPage(totalPage)}/>
                 </Pagination>
-            </div> */}
+            </div>
         </div>
     )
 }
