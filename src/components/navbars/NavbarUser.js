@@ -11,7 +11,6 @@ import {
 } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
-import avatarDummy from "../../assets/img/anakSd.jpg";
 import Swal from "sweetalert2";
 import { API } from "../../configAPI/api";
 export const path = "http://localhost:5000/uploads/";
@@ -51,12 +50,11 @@ function NavbarUser() {
     setAvatar(response.data.data.datauser.image);
 
     console.log(response.data.data.datauser.image);
-    console.log(response);
   };
 
   useEffect(() => {
       getUser();
-  });
+  })
 
   return (
     <Navbar bg="light" sticky="top" className="shadow">

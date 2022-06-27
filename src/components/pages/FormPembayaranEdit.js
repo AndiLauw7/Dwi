@@ -17,7 +17,6 @@ export const FormPembayaranEdit = () => {
   const navigate = useNavigate()
   const [form, setForm] = useState({...defValue})
   
-  console.log(form.nama_lengkap);
 
   const handleChange = (e) => {
 		setForm({

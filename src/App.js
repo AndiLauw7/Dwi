@@ -26,8 +26,7 @@ import { API, setAuthToken } from "./configAPI/api";
 import { DetailFasilitasSekolah } from "./components/pages/DetailFasilitasSekolah";
 import { FormRegisterEdit } from "./components/pages/FormRegisterEdit";
 import { FormPembayaranEdit } from "./components/pages/FormPembayaranEdit";
-import FormUserEdit from "./components/pages/FormUserEdit";
-import FormUserAdd from "./components/pages/FormUser";
+import FormUserAdd from "./components/pages/FormUserAdd";
 
 function App() {
   const navigate = useNavigate();
@@ -103,7 +102,6 @@ function App() {
       <Route exact path="/form-ppdb/edit/:id" element={<FormRegisterEdit />} />
       {/* <Route exact path="/form-pembayaran" element={<FormPembayaran />} /> */}
       <Route exact path="/form-pembayaran/edit/:id" element={<FormPembayaranEdit />} />
-      <Route exact path="/user/edit" element={<FormUserEdit />} />
       <Route exact path="/user/add" element={<FormUserAdd />} />
 
       <Route exact path="/dashboard/*" element={<Dashboard />} />

@@ -56,7 +56,6 @@ export const FormRegisterEdit = () => {
     try {
       const response = await API.get(`/registrasi/${id}`)
       setData(response.data.data)
-      console.log(response);
     } catch (error) {
       console.log(error);
     }

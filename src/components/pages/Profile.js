@@ -25,8 +25,14 @@ function Profile() {
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
   const [preview, setPreview] = useState(null);
+  const [state, dispatch] = useContext(UserContext);
+  const [avatar, setAvatar] = useState(null);
+  const [user, setUser] = useState({});
+
+  const { id } = useParams();
+  const datauser = state.user.id;
   const [form, setForm] = useState({
-    fullname: "",
+    username: "",
     email: "",
     image: "",
   });
@@ -42,10 +48,10 @@ function Profile() {
       };
 
       const formData = new FormData();
-      if (form.image) {
-        formData.set("image", form?.image[0], form?.image[0]?.name);
+      if (user.image) {
+        formData.set("image", user?.image[0], user?.image[0]?.name);
       }
-      formData.set("username", form.username);
+      formData.set("username", user.username);
       formData.set("email", form.email);
 
       const response = await API.patch(
@@ -53,9 +59,6 @@ function Profile() {
         formData,
         config
       );
-      console.log(user.id);
-      console.log(response);
-
       setEdit(false);
     } catch (error) {
       console.log(error);
@@ -63,8 +66,8 @@ function Profile() {
   };
 
   const handleChange = (e) => {
-    setForm({
-      ...form,
+    setUser({
+      ...user,
       [e.target.name]:
         e.target.type === "file" ? e.target.files : e.target.value,
     });
@@ -79,19 +82,12 @@ function Profile() {
     navigate("/Profile/" + user.id);
   };
 
-  const [state, dispatch] = useContext(UserContext);
-  const [avatar, setAvatar] = useState(null);
-  const [user, setUser] = useState({});
-
-  const { id } = useParams();
-  const datauser = state.user.id;
+ 
 
   const getUser = async () => {
     const response = await API.get(`/user/${id}`);
-    console.log(response);
     setAvatar(response.data.data.datauser.image);
     setUser(response.data.data.datauser);
-    console.log(response.data.data.datauser.image);
   };
 
   useEffect(() => {
@@ -137,8 +133,9 @@ function Profile() {
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control
                   type="text"
-                  placeholder="Fullname"
+                  placeholder="User Name"
                   name="username"
+                  value={user.username}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -147,6 +144,7 @@ function Profile() {
                 <Form.Control
                   type="email"
                   placeholder="Email"
+                  value={user.email}
                   name="email"
                   onChange={handleChange}
                 />
@@ -158,6 +156,7 @@ function Profile() {
                   type="file"
                   name="image"
                   onChange={handleChange}
+                  required
                 />
               </div>
               <Button variant="primary" type="submit">
