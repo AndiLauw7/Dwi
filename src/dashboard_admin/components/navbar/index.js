@@ -36,10 +36,7 @@ export default () => {
         <Container>
           <Navbar.Brand>SD Karya Bangsa</Navbar.Brand>
           <Nav className="ms-auto pe-5">
-            <Nav.Link
-              className="mx-2"
-              onClick={() => navigate("/dashboard")}
-            >
+            <Nav.Link className="mx-2" onClick={() => navigate("/dashboard")}>
               Home
             </Nav.Link>
 

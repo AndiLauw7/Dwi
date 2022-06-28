@@ -137,7 +137,7 @@ function Profile() {
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control
                   type="text"
-                  placeholder="Fullname"
+                  placeholder="username"
                   name="username"
                   onChange={handleChange}
                 />
@@ -177,7 +177,7 @@ function Profile() {
               />
               <h4>
                 {/* <p>{user.id}</p> */}
-                <dt>Fullname : {user.username}</dt>
+                <dt>Username : {user.username}</dt>
               </h4>
               <p>Email : {user.email}</p>
               {/* <p>Phone : {user.phone}</p>
@@ -191,7 +191,7 @@ function Profile() {
         <Row>
           {/* <Stack direction="horizontal"  gap={5}> */}
           <>
-            <h2 className="my-3 fw-bold">Journey Post</h2>
+            <h2 className="my-3 fw-bold">Pembayaran</h2>
             <hr
               style={{
                 height: "2px",

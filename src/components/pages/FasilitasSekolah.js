@@ -27,20 +27,20 @@ export const FasilitasSekolah = ({ id }) => {
   return (
     <div
       id={id}
-      className="tentang-sekolah"
+      // className="fasilitas-sekolah"
       style={{
         backgroundColor: "#212529",
         borderRadius: "5px",
         scrollMarginTop: "200px",
       }}
     >
-      {state.isLogin ? <NavbarUser /> : <NavTop />}
+      {/* {state.isLogin ? <NavbarUser /> : <NavTop />} */}
 
-      <Row>
+      <Row className="fasilitas-sekolah">
         <Col md={6}>
           <div
             style={{
-              backgroundColor: "  #5b41db",
+              backgroundColor: " #1F71CF",
               borderRadius: "20px",
               justifyContent: "center",
               color: "white",
@@ -52,6 +52,8 @@ export const FasilitasSekolah = ({ id }) => {
               style={{
                 textAlign: "center",
                 fontWeight: "bold",
+                paddingTop: "35px",
+                // marginBottom: "25px",
               }}
             >
               FASILITAS
@@ -63,6 +65,7 @@ export const FasilitasSekolah = ({ id }) => {
                 textAlign: "center",
                 fontSize: "20px",
                 fontWeight: "bold",
+                paddingBottom: "45px",
               }}
             >
               Fasilitas yang diberikan oleh <br /> SD Karya Bangsa untuk
@@ -73,12 +76,10 @@ export const FasilitasSekolah = ({ id }) => {
         </Col>
         <Col md={6}>
           <p
-            className="title text-start text-white mb-3 "
+            className="title text-start text-white mb-5 "
             style={{
               fontWeight: "bolder",
               fontSize: "21px",
-              padding: "0",
-              margin: "0",
             }}
           ></p>
           <motion.div ref={carousel} className="carousel">

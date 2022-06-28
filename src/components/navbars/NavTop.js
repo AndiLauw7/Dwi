@@ -8,7 +8,7 @@ function NavTop(props) {
 
   return (
     <div>
-      <Navbar  bg="light" expand="lg" fixed="top">
+      <Navbar bg="light" expand="lg" fixed="top">
         <Container fluid>
           <Navbar.Brand className="ps-3">
             <Link to={"/"} style={{ textDecoration: "none" }}>
@@ -32,17 +32,15 @@ function NavTop(props) {
           </Navbar.Brand>
 
           <Nav>
-            <Nav.Link onClick={() => navigate("/")}>Beranda</Nav.Link>
+            <Nav.Link onClick={() => navigate("/")}>Menu Utama</Nav.Link>
             <Nav.Link onClick={() => navigate("/tentang-sd-karya-bangsa")}>
               Tentang Sekolah
             </Nav.Link>
             <Nav.Link onClick={() => navigate("/fasilitas-sekolah")}>
               Fasilitas Sekolah
             </Nav.Link>
-            <NavDropdown title="Informasi" id="basic-nav-dropdown">
-              <NavDropdown.Item onClick={() => navigate("/form-ppdb")}>
-                Pendaftarans
-              </NavDropdown.Item>
+            <NavDropdown title="Pendaftaran" id="basic-nav-dropdown">
+              <NavDropdown.Item id="ppdb">info PPDB</NavDropdown.Item>
             </NavDropdown>
             <Nav.Link>Kontak</Nav.Link>
           </Nav>

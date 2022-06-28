@@ -14,7 +14,7 @@ import { UserContext } from "../../context/userContext";
 import NavbarUser from "../navbars/NavbarUser";
 
 export const DetailFasilitasSekolah = () => {
-  const [state, dispatch] = useContext(UserContext)
+  const [state, dispatch] = useContext(UserContext);
   const [width, setWidth] = useState(0);
   const carousel = useRef();
 
@@ -25,8 +25,8 @@ export const DetailFasilitasSekolah = () => {
   return (
     <div>
       {/* <NavTop /> */}
-      <Container fluid>
       {state.isLogin ? <NavbarUser /> : <NavTop />}
+      <Container fluid>
         <div
           className="fasilitasSekolah"
           style={{

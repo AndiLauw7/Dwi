@@ -33,13 +33,13 @@ export const Footer = () => {
         <p
           style={{ paddingBottom: "5px", marginBottom: "0", fontSize: "15px" }}
         >
-          Jalan Ki Hajar Dewantara, Krian,
+          Jl. H. Moh. Radi, Ranca Gede,
           <br />
-          Katerungan, Katrungan, Sidoarjo, Kabupaten Sidoarjo,
+          Desa Munjul, Kecamatan Solear, Kabupaten Tangerang.
           <br />
-          Jawa Timur 61262 <br />
-          Telp: (031) 8977007 / (031) 8984657 <br />
-          Email: sdmuhammadiyah1krian@yahoo.co.id
+          Kode Pos : 15731 <br />
+          Telp: 081316703200 <br />
+          Email: Nurwa2n@gmail.com
         </p>
         <p
           style={{

@@ -16,12 +16,12 @@ const defValue = {
   agama: "",
   alamat: "",
   nomer_hp: "",
-  createBy: ""
+  createBy: "",
 };
 
 export const FormRegister = () => {
   const navigate = useNavigate();
-  const [state, dispatch] = useContext(UserContext)
+  const [state, dispatch] = useContext(UserContext);
 
   const [data, setData] = useState({ ...defValue });
 
@@ -30,7 +30,7 @@ export const FormRegister = () => {
     setData({
       ...data,
       [e.target.name]: e.target.value,
-      createBy: state.user.id
+      createBy: state.user.id,
     });
   };
 
@@ -41,10 +41,10 @@ export const FormRegister = () => {
       const body = JSON.stringify(data);
       const response = await API.post("/registrasi/add", body, config);
       console.log(response);
-      if(state.user.role === "admin" ){
-        navigate("/dashboard")
+      if (state.user.role === "admin") {
+        navigate("/dashboard");
       } else {
-        navigate("/form-pembayaran")
+        navigate("/form-pembayaran");
       }
     } catch (error) {
       console.log(error);
@@ -53,7 +53,7 @@ export const FormRegister = () => {
 
   return (
     <div>
-      <Container fluid>{state.islogin ? <NavTop /> : <NavbarUser />}</Container>
+      {state.islogin ? <NavTop /> : <NavbarUser />}
 
       <Container className="mt-5">
         <div
@@ -61,7 +61,7 @@ export const FormRegister = () => {
             marginTop: "100px",
           }}
         >
-          <h3 className="mb-5">Form Registrasi Calon Peserta Didik</h3>
+          <h3 className="mb-5">Form Pendaftaran Calon Peserta Didik</h3>
           <Row>
             <Col md={6}>
               <Form>
@@ -162,6 +162,7 @@ export const FormRegister = () => {
                   variant="primary"
                   className="w-100 px-5 "
                   onClick={handleSubmit}
+                  // onClick={handleSubmit() => navigate("/registrasi")}
                 >
                   Daftar
                 </Button>
