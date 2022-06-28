@@ -10,7 +10,9 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import NavTop from "../navbars/NavTop";
+import NavbarUser from "../navbars/NavbarUser";
 
 export const FasilitasSekolah = ({ id }) => {
   const [width, setWidth] = useState(0);
@@ -20,21 +22,25 @@ export const FasilitasSekolah = ({ id }) => {
     console.log(carousel.current.scrollWidth, carousel.current.offsetWidth);
     setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
   }, []);
+  const [state, dispatch] = useState();
+
   return (
     <div
       id={id}
-      className="tentang-sekolah"
+      // className="fasilitas-sekolah"
       style={{
         backgroundColor: "#212529",
         borderRadius: "5px",
         scrollMarginTop: "200px",
       }}
     >
-      <Row>
+      {/* {state.isLogin ? <NavbarUser /> : <NavTop />} */}
+
+      <Row className="fasilitas-sekolah">
         <Col md={6}>
           <div
             style={{
-              backgroundColor: "  #5b41db",
+              backgroundColor: " #1F71CF",
               borderRadius: "20px",
               justifyContent: "center",
               color: "white",
@@ -46,6 +52,8 @@ export const FasilitasSekolah = ({ id }) => {
               style={{
                 textAlign: "center",
                 fontWeight: "bold",
+                paddingTop: "35px",
+                // marginBottom: "25px",
               }}
             >
               FASILITAS
@@ -57,6 +65,7 @@ export const FasilitasSekolah = ({ id }) => {
                 textAlign: "center",
                 fontSize: "20px",
                 fontWeight: "bold",
+                paddingBottom: "45px",
               }}
             >
               Fasilitas yang diberikan oleh <br /> SD Karya Bangsa untuk
@@ -67,12 +76,10 @@ export const FasilitasSekolah = ({ id }) => {
         </Col>
         <Col md={6}>
           <p
-            className="title text-start text-white mb-3 "
+            className="title text-start text-white mb-5 "
             style={{
               fontWeight: "bolder",
               fontSize: "21px",
-              padding: "0",
-              margin: "0",
             }}
           ></p>
           <motion.div ref={carousel} className="carousel">

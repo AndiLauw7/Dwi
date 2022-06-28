@@ -16,9 +16,7 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import { FormRegister } from "./components/pages/FormRegister";
 import { DetailTentangSekolah } from "./components/pages/DetailTentangSekolah";
-import { FormPembayaran } from "./components/pages/FormPembayaran";
-import HomeTitle from "./components/pages/HomeTitle";
-// import { Audio } from "react-loader-spinner";
+
 // import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 //import API
@@ -27,13 +25,14 @@ import { DetailFasilitasSekolah } from "./components/pages/DetailFasilitasSekola
 import { FormRegisterEdit } from "./components/pages/FormRegisterEdit";
 import { FormPembayaranEdit } from "./components/pages/FormPembayaranEdit";
 import FormUserAdd from "./components/pages/FormUserAdd";
+import { TambahLaporanDataSiswa } from "./components/pages/TambahLaporanDataSiswa";
 
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const [state, dispatch] = useContext(UserContext);
- 
+
   useEffect(() => {
     // Redirect Auth
     if (!localStorage.token) {
@@ -48,7 +47,6 @@ function App() {
     }
   }, [localStorage.token]);
 
-
   const checkUser = async () => {
     try {
       const config = {
@@ -59,7 +57,7 @@ function App() {
       const response = await API.get("/check-auth", config);
       console.log(response);
       if (response?.status === 401) {
-         dispatch({
+        dispatch({
           type: "AUTH_ERROR",
         });
       }
@@ -83,25 +81,22 @@ function App() {
     }
   };
 
-  
-
-
   useEffect(() => {
-    checkUser()
-  },[])
-
-
+    checkUser();
+  }, []);
 
   return (
     <Routes>
-      {/* <Audio height="100" width="100" color="grey" ariaLabel="loading" />; */}
       <Route exact path="/" element={<Home />} />
-      {/* <Route exact path="/home-title" element={<HomeTitle />} /> */}
       <Route exact path="/profile/:id" element={<Profile />} />
       <Route exact path="/form-ppdb" element={<FormRegister />} />
       <Route exact path="/form-ppdb/edit/:id" element={<FormRegisterEdit />} />
-      {/* <Route exact path="/form-pembayaran" element={<FormPembayaran />} /> */}
-      <Route exact path="/form-pembayaran/edit/:id" element={<FormPembayaranEdit />} />
+
+      <Route
+        exact
+        path="/form-pembayaran/edit/:id"
+        element={<FormPembayaranEdit />}
+      />
       <Route exact path="/user/add" element={<FormUserAdd />} />
 
       <Route exact path="/dashboard/*" element={<Dashboard />} />
@@ -117,6 +112,12 @@ function App() {
         exact
         path="/fasilitas-sekolah"
         element={<DetailFasilitasSekolah />}
+      />
+
+      <Route
+        exact
+        path="/tambah-data-siswa/"
+        element={TambahLaporanDataSiswa}
       />
     </Routes>
   );

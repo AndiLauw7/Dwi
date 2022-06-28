@@ -5,28 +5,30 @@ import { API } from "../../configAPI/api";
 import { UserContext } from "../../context/userContext";
 import { Footer } from "../navbars/Footer";
 import NavbarUser from "../navbars/NavbarUser";
-
+export const path = "http://localhost:5000/uploads/";
 
 const defValue = {
-  nama_lengkap : "",
-  bukti_pembayaran: ""
-}
+  nama_lengkap: "",
+  bukti_pembayaran: "",
+};
 
 export const FormPembayaran = () => {
   const [state, dispatch] = useContext(UserContext);
-  const {id} = useParams()
-  const navigate = useNavigate()
-  const [form, setForm] = useState({...defValue})
-  
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [preview, setPreview] = useState({});
+  const [form, setForm] = useState({ ...defValue });
+
   console.log(form.nama_lengkap);
+  console.log(preview);
 
   const handleChange = (e) => {
-		setForm({
+    setForm({
       ...form,
-			[e.target.name]:
-				e.target.type === "file" ? e.target.files : e.target.value,
-		});
-  }
+      [e.target.name]:
+        e.target.type === "file" ? e.target.files : e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     try {
@@ -82,21 +84,9 @@ export const FormPembayaran = () => {
                     type="text"
                     placeholder=""
                     name="nama_lengkap"
+                    onChange={handleChange}
                   />
                 </Form.Group>
-
-                {/* <Form.Group
-                  className="mb-2"
-                  controlId="exampleForm.ControlInput1"
-                  required
-                >
-                  <Form.Label>Tanggal Pembayaran</Form.Label>
-                  <Form.Control
-                    type="date"
-                    placeholder=""
-                    name="tanggal_lahir"
-                  />
-                </Form.Group> */}
 
                 <Form.Group
                   className="mb-2"
@@ -104,22 +94,34 @@ export const FormPembayaran = () => {
                   required
                 >
                   <Form.Label>Bukti Pembayaran</Form.Label>
-                  <Form.Control type="file" placeholder="" name="nomer_hp" />
+                  <Form.Control
+                    onChange={handleChange}
+                    type="file"
+                    placeholder=""
+                    name=""
+                  />
                 </Form.Group>
 
-                <Button variant="primary" className="w-100 px-5 mt-3 ">
+                <Button
+                  onClick={handleSubmit}
+                  variant="primary"
+                  className="w-100 px-5 mt-3 "
+                >
                   Submit
                 </Button>
               </Form>
             </Col>
             <Col md={6} className="text-center">
-              {/* <img
-                src={logo}
+              <img
+                src={preview}
                 alt=""
                 style={{
-                  width: "475px",
+                  width: "436px",
+                  height: "555px",
+                  objectFit: "cover",
+                  borderRadius: "32px",
                 }}
-              /> */}
+              />
             </Col>
           </Row>
         </div>

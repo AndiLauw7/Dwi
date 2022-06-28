@@ -22,8 +22,8 @@ function NavbarUser() {
 
   // console.log("jalan");
   // const { id } = useParams();
-  const user = state.user
-  const id = state.user.id
+  const user = state.user;
+  const id = state.user.id;
 
   const handleLogOut = () => {
     Swal.fire({
@@ -53,8 +53,8 @@ function NavbarUser() {
   };
 
   useEffect(() => {
-      getUser();
-  })
+    getUser();
+  });
 
   return (
     <Navbar bg="light" sticky="top" className="shadow">
@@ -66,16 +66,16 @@ function NavbarUser() {
         </Navbar.Brand>
         <Nav className="align-items-center">
           <Nav>
-            <Nav.Link onClick={() => navigate("/")}>Beranda</Nav.Link>
+            <Nav.Link onClick={() => navigate("/")}>Menu Utama</Nav.Link>
             <Nav.Link onClick={() => navigate("/tentang-sd-karya-bangsa")}>
               Tentang Sekolah
             </Nav.Link>
             <Nav.Link onClick={() => navigate("/fasilitas-sekolah")}>
               Fasilitas Sekolah
             </Nav.Link>
-            <NavDropdown title="Informasi" id="basic-nav-dropdown">
+            <NavDropdown title="Pendaftaran" id="basic-nav-dropdown">
               <NavDropdown.Item onClick={() => navigate("/form-ppdb")}>
-                Pendaftarans
+                Informasi PPDB
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link>Kontak</Nav.Link>

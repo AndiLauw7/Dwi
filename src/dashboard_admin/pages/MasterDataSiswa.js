@@ -1,13 +1,12 @@
-import moment from 'moment'
-import React, { useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap'
-import { RiDeleteBin2Line, RiEdit2Line } from 'react-icons/ri'
-import { Navigate, useLocation, useNavigate } from 'react-router-dom'
-import Swal from 'sweetalert2'
-import { API } from '../../configAPI/api'
-import MyPage from '../components/myPage'
-import MyTable from '../components/myTable'
-
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
+import { RiDeleteBin2Line, RiEdit2Line } from "react-icons/ri";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { API } from "../../configAPI/api";
+import MyPage from "../components/myPage";
+import MyTable from "../components/myTable";
 
 const columns = [
   {
@@ -49,28 +48,28 @@ const columns = [
 
 const ActComp = (data, setDataId) => {
   const [selectData, setSelectData] = useState("");
-  const navigate = useNavigate()
-  const location= useLocation()
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const {id} = data
+  const { id } = data;
 
   const handleDelete = async () => {
     Swal.fire({
-			title: "Are you sure Delete..",
-			text: data.nama_lengkap,
-			icon: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#3085d6",
-			cancelButtonColor: "#d33",
-			confirmButtonText: "Delete",
-		}).then(async(result) => {
-			if (result.isConfirmed) {
-				const response = await API.delete(`registrasi/${id}`);
-        setDataId(id)
-				navigate(location.pathname)
-			}
-		});
-  }
+      title: "Are you sure Delete..",
+      text: data.nama_lengkap,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await API.delete(`registrasi/${id}`);
+        setDataId(id);
+        navigate(location.pathname);
+      }
+    });
+  };
 
   return (
     <div style={{ display: "flex", gap: 24 }}>
@@ -91,13 +90,17 @@ const ActComp = (data, setDataId) => {
 };
 
 export default function MasterDataSiswa() {
-    const location = useLocation()
-    return (
-        <MyPage
-            title={"Master Data Siswa"}
-            url={location.pathname}
-        >
-            <MyTable colAct={ActComp} columns={columns} pathAdd={"/form-ppdb"} url={"/registrasi"} />
-        </MyPage>
-    )
+  const location = useLocation();
+  return (
+    // url={location.pathname}
+
+    <MyPage title={"Master Data Siswa"}>
+      <MyTable
+        colAct={ActComp}
+        columns={columns}
+        pathAdd={"/form-ppdb"}
+        url={"/registrasi"}
+      />
+    </MyPage>
+  );
 }

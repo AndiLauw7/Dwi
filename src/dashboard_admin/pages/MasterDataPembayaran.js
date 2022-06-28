@@ -1,6 +1,10 @@
 import moment from "moment";
 import React, { useState } from "react";
-import { RiCheckboxCircleLine, RiDeleteBin2Line, RiEdit2Line } from "react-icons/ri";
+import {
+  RiCheckboxCircleLine,
+  RiDeleteBin2Line,
+  RiEdit2Line,
+} from "react-icons/ri";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { API } from "../../configAPI/api";
@@ -16,11 +20,7 @@ const columns = [
     heading: "Nama Lengkap",
     selector: "nama_lengkap",
     format: (nama_lengkap) => {
-      return (
-        <>
-          {nama_lengkap === null ? "-" : nama_lengkap}
-        </>
-      )
+      return <>{nama_lengkap === null ? "-" : nama_lengkap}</>;
     },
   },
   {
@@ -29,9 +29,11 @@ const columns = [
     format: (tanggal_pembayaran) => {
       return (
         <>
-          {tanggal_pembayaran === null ? "-" : moment(tanggal_pembayaran).format("DD-MMM-YYYY")}
+          {tanggal_pembayaran === null
+            ? "-"
+            : moment(tanggal_pembayaran).format("DD-MMM-YYYY")}
         </>
-      )
+      );
     },
   },
   {
@@ -41,10 +43,16 @@ const columns = [
       console.log(bukti_pembayaran);
       return (
         <>
-          {bukti_pembayaran === "http://localhost:5000/uploads/null" ? <p>-</p> : <img src={bukti_pembayaran} alt="img" width={100} />}
+          {bukti_pembayaran === "http://localhost:5000/uploads/null" ? (
+            <p>-</p>
+          ) : (
+            <div className="text-center">
+              <img src={bukti_pembayaran} alt="img" width={100} />
+            </div>
+          )}
         </>
-      )
-    }
+      );
+    },
   },
   {
     heading: "Status",
@@ -53,19 +61,23 @@ const columns = [
       console.log(status_pembayaran);
       return (
         <>
-          {status_pembayaran ? <p className="text-success fw-bold">Sudah Lunas</p> : <p className="text-danger fw-bold">Belum Bayar</p>}
+          {status_pembayaran ? (
+            <p className="text-success fw-bold">Sudah Lunas</p>
+          ) : (
+            <p className="text-danger fw-bold">Belum Bayar</p>
+          )}
         </>
-      )
-    }
+      );
+    },
   },
 ];
 
 const ActComp = (data, setDataId) => {
   const [selectData, setSelectData] = useState("");
-  const navigate = useNavigate()
-  const location = useLocation()
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const { id } = data
+  const { id } = data;
 
   const handleDelete = async () => {
     Swal.fire({
@@ -79,11 +91,11 @@ const ActComp = (data, setDataId) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const response = await API.delete(`/pembayaran/${id}`);
-        setDataId(id)
-        navigate(location.pathname)
+        setDataId(id);
+        navigate(location.pathname);
       }
     });
-  }
+  };
 
   const handleAcc = async () => {
     Swal.fire({
@@ -97,15 +109,11 @@ const ActComp = (data, setDataId) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const response = await API.patch(`/pembayaran/accept/${id}`);
-        setDataId(id)
-        navigate(location.pathname)
+        setDataId(id);
+        navigate(location.pathname);
       }
     });
-  }
-
-
-
-
+  };
 
   return (
     <div style={{ display: "flex", gap: 24 }}>
@@ -124,8 +132,9 @@ const ActComp = (data, setDataId) => {
             onClick={() => navigate(`/form-pembayaran/edit/${id}`)}
           />
         </>
-      ) : ""}
-
+      ) : (
+        ""
+      )}
 
       <RiDeleteBin2Line
         title="delete"
@@ -133,15 +142,15 @@ const ActComp = (data, setDataId) => {
         style={{ fontSize: 20, cursor: "pointer" }}
         onClick={handleDelete}
       />
-
     </div>
   );
 };
 
-
 export default function MasterDataPembayaran() {
-  const location = useLocation()
-  return <MyPage title={"Master Data Pembayaran"} url={location.pathname}>
-    <MyTable colAct={ActComp} columns={columns} url={"/pembayaran"} />
-  </MyPage>;
+  const location = useLocation();
+  return (
+    <MyPage title={"Master Data Pembayaran"} url={location.pathname}>
+      <MyTable colAct={ActComp} columns={columns} url={"/pembayaran"} />
+    </MyPage>
+  );
 }

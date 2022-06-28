@@ -11,7 +11,7 @@ import { UserContext } from "../../context/userContext";
 import NavbarUser from "../navbars/NavbarUser";
 
 export const DetailTentangSekolah = () => {
-  const [state, dispatch] = useContext(UserContext)
+  const [state, dispatch] = useContext(UserContext);
 
   return (
     <div>

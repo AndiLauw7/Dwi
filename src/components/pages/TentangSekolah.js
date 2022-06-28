@@ -13,7 +13,7 @@ export const TentangSekolah = () => {
       <div
         className="tentang-sekolah "
         style={{
-          backgroundColor: "#007aff",
+          backgroundColor: "#53A2F6",
           borderRadius: "5px",
           marginTop: "150px",
         }}
@@ -24,11 +24,17 @@ export const TentangSekolah = () => {
               {dataPost.map((dataPost) => {
                 return (
                   <div style={{ textAlign: "left", color: "white" }}>
-                    <h1>Visi dan Misi</h1>
-                    <h3>Visi Sd Karya Bangsa</h3>
-                    <p>{dataPost.visi}</p>
-                    <h3>Misi Sd Karya Bangsa</h3>
-                    <ol>
+                    <h1 style={{ paddingLeft: "10px", paddingTop: "20px" }}>
+                      Visi dan Misi
+                    </h1>
+                    <h3 style={{ paddingLeft: "10px", paddingTop: "10px" }}>
+                      Visi Sd Karya Bangsa
+                    </h3>
+                    <p style={{ paddingLeft: "20px" }}>{dataPost.visi}</p>
+                    <h3 style={{ paddingLeft: "10px", paddingTop: "10px" }}>
+                      Misi Sd Karya Bangsa
+                    </h3>
+                    <ol style={{ marginBottom: "35px" }}>
                       <li>{dataPost.misi1}</li>
                       <li>{dataPost.misi2}</li>
                       <li>{dataPost.misi3}</li>

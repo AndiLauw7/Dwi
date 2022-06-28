@@ -82,8 +82,6 @@ function Profile() {
     navigate("/Profile/" + user.id);
   };
 
- 
-
   const getUser = async () => {
     const response = await API.get(`/user/${id}`);
     setAvatar(response.data.data.datauser.image);
@@ -133,7 +131,7 @@ function Profile() {
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control
                   type="text"
-                  placeholder="User Name"
+                  placeholder="UserName"
                   name="username"
                   value={user.username}
                   onChange={handleChange}
@@ -176,7 +174,7 @@ function Profile() {
               />
               <h4>
                 {/* <p>{user.id}</p> */}
-                <dt>Fullname : {user.username}</dt>
+                <dt>Username : {user.username}</dt>
               </h4>
               <p>Email : {user.email}</p>
               {/* <p>Phone : {user.phone}</p>
@@ -188,8 +186,8 @@ function Profile() {
           )}
         </Stack>
         {/* <Row> */}
-          {/* <Stack direction="horizontal"  gap={5}> */}
-          {/* <>
+        {/* <Stack direction="horizontal"  gap={5}> */}
+        {/* <>
             <h2 className="my-3 fw-bold">Journey Post</h2>
             <hr
               style={{

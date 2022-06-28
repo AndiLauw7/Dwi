@@ -5,28 +5,36 @@ import { RiAddLine, RiCloseLine, RiPulseLine, RiSearch2Line } from 'react-icons/
 import { useNavigate } from 'react-router-dom';
 import { API } from '../../../configAPI/api';
 
-const TableHeading = ({ item, index }) => <th key={index}>{item.heading}</th>
+const TableHeading = ({ item, index }) => <th key={index}>{item.heading}</th>;
 
 const TableRow = ({ item, columns, index, colNo, colAct, setDataId }) => {
+  return (
+    <tr>
+      {colNo && <td>{index + 1}</td>}
+      {columns.map((colItem, idx) => {
+        if (colItem.selector.includes(".")) {
+          const itemSplit = colItem.selector.split(".");
+          return (
+            <td key={idx}>
+              {colItem.format
+                ? colItem.format(item[itemSplit[0]][itemSplit[1]])
+                : item[itemSplit[0]][itemSplit[1]]}
+            </td>
+          );
+        }
 
-    return (
-        <tr>
-            {colNo && <td>{index + 1}</td>}
-            {columns.map((colItem, idx) => {
-                if (colItem.selector.includes(".")) {
-                    const itemSplit = colItem.selector.split(".")
-                    return <td key={idx}>{colItem.format ? colItem.format(item[itemSplit[0]][itemSplit[1]]) : item[itemSplit[0]][itemSplit[1]]}</td>
-
-                }
-
-                return <td key={idx}>{colItem.format ? colItem.format(item[`${colItem.selector}`]) : item[`${colItem.selector}`]}</td>
-            })
-            }
-            {colAct && (<td>{colAct(item, setDataId)}</td>)}
-        </tr>
-    )
-
-}
+        return (
+          <td key={idx}>
+            {colItem.format
+              ? colItem.format(item[`${colItem.selector}`])
+              : item[`${colItem.selector}`]}
+          </td>
+        );
+      })}
+      {colAct && <td>{colAct(item, setDataId)}</td>}
+    </tr>
+  );
+};
 
 const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
 
@@ -134,22 +142,21 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
                     <Pagination.Next disabled={page >= totalPage} onClick={() => setPage(current => current + 1)} />
                     <Pagination.Last disabled={page >= totalPage} onClick={() => setPage(totalPage)} />
                 </Pagination>
-            </div>
-        </div>
-    )
-}
-
+            </div> 
+    </div>
+  );
+};
 
 MyTable.prototype = {
-    columns: PropTypes.array,
-    data: PropTypes.array,
-    colNo: PropTypes.bool,
-    colAct: PropTypes.func
-}
+  columns: PropTypes.array,
+  data: PropTypes.array,
+  colNo: PropTypes.bool,
+  colAct: PropTypes.func,
+};
 
 MyTable.defaultProps = {
-    colNo: true,
-    // colAct: false
-}
+  colNo: true,
+  // colAct: false
+};
 
 export default MyTable;
