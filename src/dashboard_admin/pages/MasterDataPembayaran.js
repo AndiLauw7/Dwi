@@ -57,7 +57,15 @@ const columns = [
     selector: "status_pembayaran",
     format: (status_pembayaran) => {
       console.log(status_pembayaran);
-      return <>{status_pembayaran ? <p>Sudah Lunas</p> : <p>Belum Bayar</p>}</>;
+      return (
+        <>
+          {status_pembayaran ? (
+            <p className="text-success fw-bold">Sudah Lunas</p>
+          ) : (
+            <p className="text-danger fw-bold">Belum Bayar</p>
+          )}
+        </>
+      );
     },
   },
 ];
@@ -107,18 +115,25 @@ const ActComp = (data, setDataId) => {
 
   return (
     <div style={{ display: "flex", gap: 24 }}>
-      <RiCheckboxCircleLine
-        title="Accept"
-        className="text-primary"
-        style={{ fontSize: 20, cursor: "pointer" }}
-        onClick={handleAcc}
-      />
-      <RiEdit2Line
-        title="edit"
-        className="text-success"
-        style={{ fontSize: 20, cursor: "pointer" }}
-        onClick={() => navigate(`/form-pembayaran/edit/${id}`)}
-      />
+      {data.status_pembayaran === false ? (
+        <>
+          <RiCheckboxCircleLine
+            title="Accept"
+            className="text-primary"
+            style={{ fontSize: 20, cursor: "pointer" }}
+            onClick={handleAcc}
+          />
+          <RiEdit2Line
+            title="edit"
+            className="text-success"
+            style={{ fontSize: 20, cursor: "pointer" }}
+            onClick={() => navigate(`/form-pembayaran/edit/${id}`)}
+          />
+        </>
+      ) : (
+        ""
+      )}
+
       <RiDeleteBin2Line
         title="delete"
         className="text-danger"
@@ -132,8 +147,7 @@ const ActComp = (data, setDataId) => {
 export default function MasterDataPembayaran() {
   const location = useLocation();
   return (
-    // url={location.pathname}
-    <MyPage title={"Master Data Pembayaran"}>
+    <MyPage title={"Master Data Pembayaran"} url={location.pathname}>
       <MyTable colAct={ActComp} columns={columns} url={"/pembayaran"} />
     </MyPage>
   );

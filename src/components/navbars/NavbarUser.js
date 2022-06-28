@@ -11,7 +11,6 @@ import {
 } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
-import avatarDummy from "../../assets/img/anakSd.jpg";
 import Swal from "sweetalert2";
 import { API } from "../../configAPI/api";
 export const path = "http://localhost:5000/uploads/";
@@ -24,8 +23,7 @@ function NavbarUser() {
   // console.log("jalan");
   // const { id } = useParams();
   const user = state.user;
-  const { id } = state.user;
-  console.log(user);
+  const id = state.user.id;
 
   const handleLogOut = () => {
     Swal.fire({
@@ -52,14 +50,11 @@ function NavbarUser() {
     setAvatar(response.data.data.datauser.image);
 
     console.log(response.data.data.datauser.image);
-    console.log(response);
   };
 
   useEffect(() => {
-    if (state.isLogin) {
-      getUser();
-    }
-  }, [state]);
+    getUser();
+  });
 
   return (
     <Navbar bg="light" sticky="top" className="shadow">
@@ -69,7 +64,7 @@ function NavbarUser() {
             <img src={logo} alt="logo" width="60" />
           </Link>
         </Navbar.Brand>
-        <Nav>
+        <Nav className="align-items-center">
           <Nav>
             <Nav.Link onClick={() => navigate("/")}>Menu Utama</Nav.Link>
             <Nav.Link onClick={() => navigate("/tentang-sd-karya-bangsa")}>
@@ -89,7 +84,7 @@ function NavbarUser() {
             <Dropdown align="end">
               <Dropdown.Toggle as={Nav.Link} className="Dropdown-Toggle">
                 <img
-                  src={path + avatar}
+                  src={avatar}
                   alt="avatar"
                   className="rounded-circle border border-3 border-primary "
                   style={{

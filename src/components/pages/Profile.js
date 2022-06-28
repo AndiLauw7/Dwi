@@ -25,8 +25,14 @@ function Profile() {
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
   const [preview, setPreview] = useState(null);
+  const [state, dispatch] = useContext(UserContext);
+  const [avatar, setAvatar] = useState(null);
+  const [user, setUser] = useState({});
+
+  const { id } = useParams();
+  const datauser = state.user.id;
   const [form, setForm] = useState({
-    fullname: "",
+    username: "",
     email: "",
     image: "",
   });
@@ -42,10 +48,10 @@ function Profile() {
       };
 
       const formData = new FormData();
-      if (form.image) {
-        formData.set("image", form?.image[0], form?.image[0]?.name);
+      if (user.image) {
+        formData.set("image", user?.image[0], user?.image[0]?.name);
       }
-      formData.set("username", form.username);
+      formData.set("username", user.username);
       formData.set("email", form.email);
 
       const response = await API.patch(
@@ -53,9 +59,6 @@ function Profile() {
         formData,
         config
       );
-      console.log(user.id);
-      console.log(response);
-
       setEdit(false);
     } catch (error) {
       console.log(error);
@@ -63,8 +66,8 @@ function Profile() {
   };
 
   const handleChange = (e) => {
-    setForm({
-      ...form,
+    setUser({
+      ...user,
       [e.target.name]:
         e.target.type === "file" ? e.target.files : e.target.value,
     });
@@ -74,24 +77,17 @@ function Profile() {
     }
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = () => {
     setEdit(!edit);
     navigate("/Profile/" + user.id);
   };
 
-  const [state, dispatch] = useContext(UserContext);
-  const [avatar, setAvatar] = useState(null);
-  const [user, setUser] = useState({});
-
-  const { id } = useParams();
-  const datauser = state.user.id;
+ 
 
   const getUser = async () => {
     const response = await API.get(`/user/${id}`);
-    console.log(response);
     setAvatar(response.data.data.datauser.image);
     setUser(response.data.data.datauser);
-    console.log(response.data.data.datauser.image);
   };
 
   useEffect(() => {
@@ -125,7 +121,7 @@ function Profile() {
             <Form onSubmit={handleSubmit}>
               <div className="text-center mt-3 mb-2">
                 <img
-                  src={preview ? preview : path + avatar}
+                  src={preview ? preview : avatar}
                   style={{
                     width: "150px",
                     height: "150px",
@@ -137,8 +133,13 @@ function Profile() {
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Control
                   type="text"
+<<<<<<< HEAD
                   placeholder="username"
+=======
+                  placeholder="User Name"
+>>>>>>> b300fd2b81aa51bf0e927e9ef7b097376d293f5c
                   name="username"
+                  value={user.username}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -147,6 +148,7 @@ function Profile() {
                 <Form.Control
                   type="email"
                   placeholder="Email"
+                  value={user.email}
                   name="email"
                   onChange={handleChange}
                 />
@@ -158,6 +160,7 @@ function Profile() {
                   type="file"
                   name="image"
                   onChange={handleChange}
+                  required
                 />
               </div>
               <Button variant="primary" type="submit">
@@ -167,7 +170,7 @@ function Profile() {
           ) : (
             <>
               <img
-                src={preview ? preview : path + avatar}
+                src={preview ? preview : avatar}
                 alt="avatar"
                 className="rounded-circle border border-1 border-primary mb-3"
                 style={{
@@ -188,10 +191,15 @@ function Profile() {
             </>
           )}
         </Stack>
-        <Row>
+        {/* <Row> */}
           {/* <Stack direction="horizontal"  gap={5}> */}
+<<<<<<< HEAD
           <>
             <h2 className="my-3 fw-bold">Pembayaran</h2>
+=======
+          {/* <>
+            <h2 className="my-3 fw-bold">Journey Post</h2>
+>>>>>>> b300fd2b81aa51bf0e927e9ef7b097376d293f5c
             <hr
               style={{
                 height: "2px",
@@ -201,7 +209,7 @@ function Profile() {
               }}
             />
           </>
-        </Row>
+        </Row> */}
       </Container>
     </>
   );
