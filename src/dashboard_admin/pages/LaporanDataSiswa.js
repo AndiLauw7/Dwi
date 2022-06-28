@@ -46,48 +46,48 @@ const columns = [
   },
 ];
 
-// const ActComp = (data, setDataId) => {
-//   const [selectData, setSelectData] = useState("");
-//   const navigate = useNavigate();
-//   const location = useLocation();
+const ActComp = (data, setDataId) => {
+  const [selectData, setSelectData] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
 
-//   const { id } = data;
+  const { id } = data;
 
-//   const handleDelete = async () => {
-//     Swal.fire({
-//       title: "Are you sure Delete..",
-//       text: data.nama_lengkap,
-//       icon: "warning",
-//       showCancelButton: true,
-//       confirmButtonColor: "#3085d6",
-//       cancelButtonColor: "#d33",
-//       confirmButtonText: "Delete",
-//     }).then(async (result) => {
-//       if (result.isConfirmed) {
-//         const response = await API.delete(`registrasi/${id}`);
-//         setDataId(id);
-//         navigate(location.pathname);
-//       }
-//     });
-//   };
+  const handleDelete = async () => {
+    Swal.fire({
+      title: "Are you sure Delete..",
+      text: data.nama_lengkap,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Delete",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const response = await API.delete(`registrasi/${id}`);
+        setDataId(id);
+        navigate(location.pathname);
+      }
+    });
+  };
 
-//   return (
-//     <div style={{ display: "flex", gap: 24 }}>
-//       <RiEdit2Line
-//         title="edit"
-//         className="text-success"
-//         style={{ fontSize: 20, cursor: "pointer" }}
-//         onClick={() => navigate(`/form-ppdb/edit/${id}`)}
-//       />
-//       <RiDeleteBin2Line
-//         title="delete"
-//         className="text-danger"
-//         style={{ fontSize: 20, cursor: "pointer" }}
-//         onClick={handleDelete}
-//       />
-//     </div>
-//   );
-// };
+  return (
+    <div style={{ display: "flex", gap: 24 }}>
+      <RiEdit2Line
+        title="edit"
+        className="text-success"
+        style={{ fontSize: 20, cursor: "pointer" }}
+        onClick={() => navigate(`/form-ppdb/edit/${id}`)}
+      />
+      <RiDeleteBin2Line
+        title="delete"
+        className="text-danger"
+        style={{ fontSize: 20, cursor: "pointer" }}
+        onClick={handleDelete}
+      />
+    </div>
+  );
+};
 
 export default function MasterDataSiswa() {
   const location = useLocation();
@@ -95,9 +95,9 @@ export default function MasterDataSiswa() {
     // url={location.pathname}
     <MyPage title={"Master Data Siswa"}>
       <MyTable
-        // colAct={ActComp}
+        colAct={ActComp}
         columns={columns}
-        pathAdd={"/form-ppdb"}
+        pathAdd={"/tambah-data-siswa"}
         url={"/registrasi"}
       />
     </MyPage>

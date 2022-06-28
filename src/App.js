@@ -16,9 +16,7 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import { FormRegister } from "./components/pages/FormRegister";
 import { DetailTentangSekolah } from "./components/pages/DetailTentangSekolah";
-import { FormPembayaran } from "./components/pages/FormPembayaran";
-import HomeTitle from "./components/pages/HomeTitle";
-// import { Audio } from "react-loader-spinner";
+
 // import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 //import API
@@ -27,6 +25,7 @@ import { DetailFasilitasSekolah } from "./components/pages/DetailFasilitasSekola
 import { FormRegisterEdit } from "./components/pages/FormRegisterEdit";
 import { FormPembayaranEdit } from "./components/pages/FormPembayaranEdit";
 import FormUserAdd from "./components/pages/FormUserAdd";
+import { TambahLaporanDataSiswa } from "./components/pages/TambahLaporanDataSiswa";
 
 function App() {
   const navigate = useNavigate();
@@ -113,6 +112,12 @@ function App() {
         exact
         path="/fasilitas-sekolah"
         element={<DetailFasilitasSekolah />}
+      />
+
+      <Route
+        exact
+        path="/tambah-data-siswa/"
+        element={TambahLaporanDataSiswa}
       />
     </Routes>
   );
