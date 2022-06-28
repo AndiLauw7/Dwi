@@ -11,12 +11,8 @@ import { UserContext } from "../../context/userContext";
 import NavbarUser from "../navbars/NavbarUser";
 
 export const DetailTentangSekolah = () => {
-<<<<<<< HEAD
   const [state, dispatch] = useContext(UserContext);
-=======
-  const [state, dispatch] = useContext(UserContext)
 
->>>>>>> b300fd2b81aa51bf0e927e9ef7b097376d293f5c
   return (
     <div>
       {/* <NavTop /> */}

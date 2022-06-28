@@ -33,7 +33,7 @@ function App() {
   const location = useLocation();
 
   const [state, dispatch] = useContext(UserContext);
- 
+
   useEffect(() => {
     // Redirect Auth
     if (!localStorage.token) {
@@ -48,7 +48,6 @@ function App() {
     }
   }, [localStorage.token]);
 
-
   const checkUser = async () => {
     try {
       const config = {
@@ -59,7 +58,7 @@ function App() {
       const response = await API.get("/check-auth", config);
       console.log(response);
       if (response?.status === 401) {
-         dispatch({
+        dispatch({
           type: "AUTH_ERROR",
         });
       }
@@ -83,25 +82,22 @@ function App() {
     }
   };
 
-  
-
-
   useEffect(() => {
-    checkUser()
-  },[])
-
-
+    checkUser();
+  }, []);
 
   return (
     <Routes>
-      {/* <Audio height="100" width="100" color="grey" ariaLabel="loading" />; */}
       <Route exact path="/" element={<Home />} />
-      {/* <Route exact path="/home-title" element={<HomeTitle />} /> */}
       <Route exact path="/profile/:id" element={<Profile />} />
       <Route exact path="/form-ppdb" element={<FormRegister />} />
       <Route exact path="/form-ppdb/edit/:id" element={<FormRegisterEdit />} />
-      {/* <Route exact path="/form-pembayaran" element={<FormPembayaran />} /> */}
-      <Route exact path="/form-pembayaran/edit/:id" element={<FormPembayaranEdit />} />
+
+      <Route
+        exact
+        path="/form-pembayaran/edit/:id"
+        element={<FormPembayaranEdit />}
+      />
       <Route exact path="/user/add" element={<FormUserAdd />} />
 
       <Route exact path="/dashboard/*" element={<Dashboard />} />

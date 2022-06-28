@@ -40,7 +40,12 @@ function NavTop(props) {
               Fasilitas Sekolah
             </Nav.Link>
             <NavDropdown title="Pendaftaran" id="basic-nav-dropdown">
-              <NavDropdown.Item id="ppdb">info PPDB</NavDropdown.Item>
+              <NavDropdown.Item
+                id="ppdb"
+                onClick={() => navigate("/registrasi")}
+              >
+                info PPDB
+              </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link>Kontak</Nav.Link>
           </Nav>

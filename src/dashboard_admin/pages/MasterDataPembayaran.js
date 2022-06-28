@@ -46,7 +46,9 @@ const columns = [
           {bukti_pembayaran === "http://localhost:5000/uploads/null" ? (
             <p>-</p>
           ) : (
-            <img src={bukti_pembayaran} alt="img" width={100} />
+            <div className="text-center">
+              <img src={bukti_pembayaran} alt="img" width={100} />
+            </div>
           )}
         </>
       );

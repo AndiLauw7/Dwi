@@ -97,7 +97,7 @@ export default function MasterDataSiswa() {
       <MyTable
         // colAct={ActComp}
         columns={columns}
-        // pathAdd={"/form-ppdb"}
+        pathAdd={"/form-ppdb"}
         url={"/registrasi"}
       />
     </MyPage>
