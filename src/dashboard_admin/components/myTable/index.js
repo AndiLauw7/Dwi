@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, InputGroup, Pagination, Table } from 'react-bootstrap'
 import PropTypes from 'prop-types';
-import { RiAddLine, RiPulseLine, RiSearch2Line } from 'react-icons/ri';
+import { RiAddLine, RiCloseLine, RiPulseLine, RiSearch2Line } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import { API } from '../../../configAPI/api';
 
@@ -33,6 +33,8 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
     const navigate = useNavigate()
     const [data, setData] = useState([])
     const [search, setSearch] = useState("")
+    const [searchValue, setSearchValue] = useState("")
+    const [btnSearch, setBtnSearch] = useState(true)
     const [dataId, setDataId] = useState("")
     const [page, setPage] = useState(1)
     const [perPage, setPerPage] = useState(8)
@@ -40,14 +42,9 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
 
     const totalPage = Math.ceil(total / perPage)
 
-    console.log(totalPage, total, perPage);
-
-    console.log(page);
-
-
     const getData = async () => {
         try {
-            const response = await API.get(`${url}`)
+            const response = await API.get(`${url}?page=${page}&perPage=${perPage}&search=${search}`)
             setData(response.data.data.data)
             setTotal(response.data.data.total);
 
@@ -57,19 +54,23 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
     }
 
     const handleSearch = async () => {
-        try {
-            const response = await API.get(`${url}?page=${page}&perPage=${perPage}&search=${search}`)
-            setData(response.data.data.data)
-        } catch (error) {
-            console.log(error);
-        }
+        setPage(1)
+        setSearchValue(search)
+        setBtnSearch(false)
+
+    }
+
+    const handleClear = () => {
+        setSearchValue("")
+        setSearch("")
+        setBtnSearch(true)
+
     }
 
 
     useEffect(() => {
         getData()
-        handleSearch()
-    }, [search, dataId, page]);
+    }, [searchValue, dataId, page]);
 
 
 
@@ -81,11 +82,20 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
                         type="text"
                         placeholder="Cari Nama"
                         aria-describedby="search"
+                        value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
-                    <Button variant="primary" id="search" onClick={handleSearch}>
-                        <RiSearch2Line />
-                    </Button>
+                    {btnSearch ? (
+                        <Button variant="primary" id="search" onClick={handleSearch}>
+                            <RiSearch2Line />
+                        </Button>
+                    ) : (
+                        <Button variant="danger" id="search" onClick={handleClear}>
+                            <RiCloseLine />
+                        </Button>
+                    )}
+
+
                 </InputGroup>
                 {pathAdd && (
                     <Button variant="primary" id="search" onClick={() => navigate(pathAdd)}>
@@ -117,12 +127,12 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
             <div className='d-flex justify-content-end align-items-center'>
 
                 <Pagination >
-                   
-                    <Pagination.First disabled={page <= 1} onClick={() => setPage(1)}/>
-                    <Pagination.Prev disabled={page <= 1} onClick={() => setPage(current => current - 1)}/>
-                        <div className='d-flex justify-content-center align-items-center px-3'>{page}/{totalPage}</div>
-                    <Pagination.Next disabled={page >= totalPage}  onClick={() => setPage(current => current + 1)}/>
-                    <Pagination.Last disabled={page >= totalPage} onClick={() => setPage(totalPage)}/>
+
+                    <Pagination.First disabled={page <= 1} onClick={() => setPage(1)} />
+                    <Pagination.Prev disabled={page <= 1} onClick={() => setPage(current => current - 1)} />
+                    <div className='d-flex justify-content-center align-items-center px-3'>{page}/{totalPage}</div>
+                    <Pagination.Next disabled={page >= totalPage} onClick={() => setPage(current => current + 1)} />
+                    <Pagination.Last disabled={page >= totalPage} onClick={() => setPage(totalPage)} />
                 </Pagination>
             </div>
         </div>
