@@ -105,7 +105,6 @@ function App() {
       {state.user.role === "admin" || state.user.role === "kepalasekolah" ? (
         <>
           <Route exact path="/dashboard/*" element={<Dashboard />} />
-         
         </>
       ) : <Route exact path="/login" element={<Login />} />}
 

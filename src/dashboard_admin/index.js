@@ -10,7 +10,9 @@ import MasterDataPembayaran from "./pages/MasterDataPembayaran";
 import MasterDataSiswa from "./pages/MasterDataSiswa";
 import User from "./pages/User";
 import { UserContext } from "../context/userContext";
-import  TambahLaporanDataSiswa  from "./pages/TambahLaporanDataSiswa";
+import  TambahLaporanDataSiswa  from "./pages/AddDataSiswa";
+import AddDataSiswa from "./pages/AddDataSiswa";
+import { EditDataSiswa } from "./pages/EditDataSiswa";
 
 export default () => {
   const navigate = useNavigate();
@@ -53,8 +55,13 @@ export default () => {
         />
          <Route
             exact
-            path="/tambah-data-siswa/"
-            element={<TambahLaporanDataSiswa />}
+            path="/form-data-siswa/add"
+            element={<AddDataSiswa  />}
+          />
+          <Route
+            exact
+            path="/form-data-siswa/edit/:id"
+            element={<EditDataSiswa  />}
           />
         <Route exact path="/user" element={<User />} />
         <Route exact path="/profile" element={<Profile />} />

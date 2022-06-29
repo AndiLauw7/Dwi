@@ -1,18 +1,76 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import logo from "../../assets/img/PPDB.jpeg";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { API } from "../../configAPI/api";
+import { UserContext } from "../../context/userContext";
+import moment from "moment";
 import MyPage from "../components/myPage";
 
-export default function TambahLaporanDataSiswa() {
+const defValue = {
+  nama_lengkap: "",
+  jenis_kelamin: "",
+  tempat_lahir: "",
+  tanggal_lahir: "",
+  agama: "",
+  alamat: "",
+  nomer_hp: "",
+  createBy: ""
+};
+
+export const EditDataSiswa = () => {
+  const navigate = useNavigate();
   const location = useLocation()
+  const { id } = useParams()
+  const [state, dispatch] = useContext(UserContext)
+  const [data, setData] = useState({ ...defValue });
+  console.log(data);
+
+  const handleChange = (e) => {
+    console.log(e.target.name);
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+      createBy: state.user.id
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const config = { headers: { "Content-type": "application/json" } };
+      const body = JSON.stringify(data);
+      const response = await API.patch(`/registrasi/${id}`, body, config);
+      console.log(response);
+      if (response.status === 201) {
+        navigate("/dashboard/master_data_siswa")
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getData = async () => {
+    try {
+      const response = await API.get(`/registrasi/${id}`)
+      setData(response.data.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+
+
   return (
     <div>
-      <MyPage title={"Tambah Laporan Siswa"} url={location.pathname}>
+      <MyPage title={"Edit Data Siswa"} url={location.pathname}>
+
         <Container className="mt-5">
           <div
-            style={{
-              marginTop: "100px",
-            }}
           >
             <Row>
               <Col md={6}>
@@ -27,7 +85,8 @@ export default function TambahLaporanDataSiswa() {
                       type="text"
                       placeholder=""
                       name="nama_lengkap"
-                    // onChange={handleChange}
+                      value={data.nama_lengkap}
+                      onChange={handleChange}
                     />
                   </Form.Group>
 
@@ -37,7 +96,7 @@ export default function TambahLaporanDataSiswa() {
                     required
                   >
                     <Form.Label>Jenis Kelamin</Form.Label>
-                    <Form.Select name="jenis_kelamin">
+                    <Form.Select name="jenis_kelamin" onChange={handleChange} value={data.jenis_kelamin}>
                       <option selected>Pilih jenis kelamin</option>
                       <option value="laki-laki">Laki-laki</option>
                       <option value="perempuan">Perempuan</option>
@@ -54,7 +113,8 @@ export default function TambahLaporanDataSiswa() {
                       type="text"
                       placeholder=""
                       name="tempat_lahir"
-                    // onChange={handleChange}
+                      value={data.tempat_lahir}
+                      onChange={handleChange}
                     />
                   </Form.Group>
 
@@ -68,7 +128,8 @@ export default function TambahLaporanDataSiswa() {
                       type="date"
                       placeholder=""
                       name="tanggal_lahir"
-                    // onChange={handleChange}
+                      value={data.tanggal_lahir}
+                      onChange={handleChange}
                     />
                   </Form.Group>
 
@@ -82,7 +143,8 @@ export default function TambahLaporanDataSiswa() {
                       type="text"
                       placeholder=""
                       name="agama"
-                    // onChange={handleChange}
+                      value={data.agama}
+                      onChange={handleChange}
                     />
                   </Form.Group>
 
@@ -96,7 +158,8 @@ export default function TambahLaporanDataSiswa() {
                       type="number"
                       placeholder=""
                       name="nomer_hp"
-                    // onChange={handleChange}
+                      value={data.nomer_hp}
+                      onChange={handleChange}
                     />
                   </Form.Group>
 
@@ -104,7 +167,8 @@ export default function TambahLaporanDataSiswa() {
                   <Form.Control
                     className="mb-3"
                     name="alamat"
-                    //   onChange={handleChange}
+                    value={data.alamat}
+                    onChange={handleChange}
                     as="textarea"
                     rows={3}
                     required
@@ -113,16 +177,15 @@ export default function TambahLaporanDataSiswa() {
                   <Button
                     variant="primary"
                     className="w-100 px-5 "
-                  //   onClick={handleSubmit}
-                  // onClick={handleSubmit() => navigate("/registrasi")}
+                    onClick={handleSubmit}
                   >
-                    Daftar
+                    Simpan
                   </Button>
                 </Form>
               </Col>
               <Col md={6} className="text-center">
                 <img
-                  // src={logo}
+                  src={logo}
                   alt=""
                   style={{
                     width: "475px",
@@ -133,6 +196,8 @@ export default function TambahLaporanDataSiswa() {
           </div>
         </Container>
       </MyPage>
+
+
     </div>
   );
 };

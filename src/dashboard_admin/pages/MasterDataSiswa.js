@@ -77,7 +77,7 @@ const ActComp = (data, setDataId) => {
         title="edit"
         className="text-success"
         style={{ fontSize: 20, cursor: "pointer" }}
-        onClick={() => navigate(`/form-ppdb/edit/${id}`)}
+        onClick={() => navigate(`/dashboard/form-data-siswa/edit/${id}`)}
       />
       <RiDeleteBin2Line
         title="delete"
@@ -96,7 +96,7 @@ export default function MasterDataSiswa() {
       <MyTable
         colAct={ActComp}
         columns={columns}
-        pathAdd={"/form-ppdb"}
+        pathAdd={"/dashboard/form-data-siswa/add"}
         url={"/registrasi"}
       />
     </MyPage>
