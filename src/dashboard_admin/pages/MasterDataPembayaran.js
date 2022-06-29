@@ -129,7 +129,7 @@ const ActComp = (data, setDataId) => {
             title="edit"
             className="text-success"
             style={{ fontSize: 20, cursor: "pointer" }}
-            onClick={() => navigate(`/form-pembayaran/edit/${id}`)}
+            onClick={() => navigate(`/dashboard/form-data-pembayaran/edit/${id}`)}
           />
         </>
       ) : (

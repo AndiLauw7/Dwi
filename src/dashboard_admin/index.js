@@ -10,9 +10,10 @@ import MasterDataPembayaran from "./pages/MasterDataPembayaran";
 import MasterDataSiswa from "./pages/MasterDataSiswa";
 import User from "./pages/User";
 import { UserContext } from "../context/userContext";
-import  TambahLaporanDataSiswa  from "./pages/AddDataSiswa";
+import TambahLaporanDataSiswa from "./pages/AddDataSiswa";
 import AddDataSiswa from "./pages/AddDataSiswa";
 import { EditDataSiswa } from "./pages/EditDataSiswa";
+import EditDataPembayaran from "./pages/EditDataPembayaran";
 
 export default () => {
   const navigate = useNavigate();
@@ -24,9 +25,9 @@ export default () => {
     if (localStorage.token) {
       if (user === "admin" || user === "kepalasekolah") {
         return navigate(location.pathname);
-      } else if(user === "siswa") {
+      } else if (user === "siswa") {
         return navigate("/")
-      } 
+      }
     } else {
       return navigate("/login");
     }
@@ -53,16 +54,22 @@ export default () => {
           path="/master_pembayaran"
           element={<MasterDataPembayaran />}
         />
-         <Route
-            exact
-            path="/form-data-siswa/add"
-            element={<AddDataSiswa  />}
-          />
-          <Route
-            exact
-            path="/form-data-siswa/edit/:id"
-            element={<EditDataSiswa  />}
-          />
+        <Route
+          exact
+          path="/form-data-siswa/add"
+          element={<AddDataSiswa />}
+        />
+        <Route
+          exact
+          path="/form-data-siswa/edit/:id"
+          element={<EditDataSiswa />}
+        />
+
+        <Route
+          exact
+          path="/form-data-pembayaran/edit/:id"
+          element={<EditDataPembayaran />}
+        />
         <Route exact path="/user" element={<User />} />
         <Route exact path="/profile" element={<Profile />} />
       </Routes>

@@ -31,7 +31,7 @@ export default function AddDataSiswa() {
     setData({
       ...data,
       [e.target.name]: e.target.value,
-      createBy: state.user.id,
+      createBy: id,
     });
   };
 
@@ -42,6 +42,7 @@ export default function AddDataSiswa() {
       const body = JSON.stringify(data);
       const response = await API.post("/registrasi/add", body, config);
       console.log(response);
+
       if(response.statusText = "ok"){
         navigate("/dashboard/master_data_siswa")
       }

@@ -69,12 +69,6 @@ export default () => {
                   >
                     Data Pembayaran
                   </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item
-                    onClick={() => navigate("/dashboard/master_pembayaran")}
-                  >
-                    Data Pembayaran
-                  </NavDropdown.Item>
                 </NavDropdown>
                 
                 <Nav.Link
