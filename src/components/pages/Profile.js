@@ -24,6 +24,7 @@ function Profile() {
 
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
+  const [editProfile,setEditProfile] = useState(null)
   const [preview, setPreview] = useState(null);
   const [state, dispatch] = useContext(UserContext);
   const [avatar, setAvatar] = useState(null);
@@ -52,7 +53,7 @@ function Profile() {
         formData.set("image", user?.image[0], user?.image[0]?.name);
       }
       formData.set("username", user.username);
-      formData.set("email", form.email);
+      formData.set("email", user.email);
 
       const response = await API.patch(
         "/edit-user/" + user.id,
@@ -60,10 +61,17 @@ function Profile() {
         config
       );
       setEdit(false);
+      setEditProfile(response.statusText)
+      dispatch({
+        type: "USER_UPDATE",
+        payload: { ...user, image:user?.image[0]?.name,}
+      })
     } catch (error) {
       console.log(error);
     }
   };
+
+
 
   const handleChange = (e) => {
     setUser({
@@ -94,7 +102,7 @@ function Profile() {
 
   return (
     <>
-      <NavbarUser />
+      <NavbarUser editProfile={editProfile} />
       <Container fluid className="px-5">
         <h1 className="my-5">
           <dt>My Profile</dt>
@@ -153,6 +161,7 @@ function Profile() {
                   className="form-control"
                   type="file"
                   name="image"
+                  filename={user.image}
                   onChange={handleChange}
                   required
                 />

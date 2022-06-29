@@ -2,18 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "../src/assets/css/styles.css";
 import "./index.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { UserContextProvider } from "./context/userContext";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Suspense } from "react";
+import LoadingBar from "./components/loadingBar";
+const App = React.lazy(() => import('./App'))
 
 ReactDOM.render(
 	<React.StrictMode>
-		<UserContextProvider>
-			<Router>
-				<App />
-			</Router>
-		</UserContextProvider>
+		<Suspense fallback={<LoadingBar />}>
+			<UserContextProvider>
+				<Router>
+					<App />
+				</Router>
+			</UserContextProvider>
+		</Suspense>
 	</React.StrictMode>,
 	document.getElementById("root")
 );

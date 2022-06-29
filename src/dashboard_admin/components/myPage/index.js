@@ -15,7 +15,7 @@ export default ({ title, url, children }) => {
     <>
       <Navbar />
 
-      <Container className="my-3">
+      <Container className="mt-2">
         {url !== undefined ? (
           <Breadcrumb>
             <Breadcrumb.Item>{parseUrl[1]}</Breadcrumb.Item>
@@ -24,8 +24,7 @@ export default ({ title, url, children }) => {
         ) : (
           ""
         )}
-        <h3 className="fw-bold mt-5">{title}</h3>
-
+        <h3 className="fw-bold">{title}</h3>
         {children}
       </Container>
     </>

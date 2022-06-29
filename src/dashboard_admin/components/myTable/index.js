@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, InputGroup, Pagination, Table } from 'react-bootstrap'
 import PropTypes from 'prop-types';
-import { RiAddLine, RiCloseLine, RiPulseLine, RiSearch2Line } from 'react-icons/ri';
+import { RiAddLine, RiCloseLine, RiSearch2Line } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import { API } from '../../../configAPI/api';
 
@@ -63,7 +63,7 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
 
     const handleSearch = async () => {
         setPage(1)
-        setSearchValue(search)
+        setSearch(searchValue)
         setBtnSearch(false)
 
     }
@@ -78,20 +78,20 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
 
     useEffect(() => {
         getData()
-    }, [searchValue, dataId, page]);
+    }, [search, dataId, page]);
 
 
 
     return (
         <div>
-            <div className="d-flex justify-content-end my-3 mb-5 gap-3">
+            <div className="d-flex justify-content-end mb-3 gap-3">
                 <InputGroup style={{ width: "300px" }}>
                     <Form.Control
                         type="text"
                         placeholder="Cari Nama"
                         aria-describedby="search"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
+                        value={searchValue}
+                        onChange={(e) => setSearchValue(e.target.value)}
                     />
                     {btnSearch ? (
                         <Button variant="primary" id="search" onClick={handleSearch}>
