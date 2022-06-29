@@ -16,7 +16,7 @@ import avatarDummy from "../../assets/img/anakSd.jpg"
 import { API } from "../../configAPI/api";
 export const path = "http://localhost:5000/uploads/";
 
-function NavbarUser({editProfile}) {
+function NavbarUser() {
   const navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
   const [avatar, setAvatar] = useState(null);
@@ -44,11 +44,14 @@ function NavbarUser({editProfile}) {
   const getUser = async () => {
     const response = await API.get(`/user/${id}`);
     setAvatar(response.data.data.datauser.image);
-  };
+  }
 
+  console.log("navbar");
+
+  console.log(state, avatar);
   useEffect(() => {
     getUser()
-  }, [editProfile]);
+  }, [state]);
 
   return (
     <Navbar bg="light" sticky="top" className="shadow">
