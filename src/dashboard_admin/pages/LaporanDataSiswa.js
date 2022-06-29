@@ -92,12 +92,12 @@ const ActComp = (data, setDataId) => {
 export default function MasterDataSiswa() {
   const location = useLocation();
   return (
-    // url={location.pathname}
-    <MyPage title={"Master Data Siswa"}>
+    
+    <MyPage title={"Master Data Siswa"} url={location.pathname}>
       <MyTable
         colAct={ActComp}
         columns={columns}
-        pathAdd={"/tambah-data-siswa"}
+        pathAdd={"/dashboard/tambah-data-siswa"}
         url={"/registrasi"}
       />
     </MyPage>

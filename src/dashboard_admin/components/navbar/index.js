@@ -32,15 +32,15 @@ export default () => {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark">
-        <Container>
+      <Navbar bg="dark" variant="dark" style={{position: "relative", zIndex: 9999}} >
+        <Container >
           <Navbar.Brand>SD Karya Bangsa</Navbar.Brand>
-          <Nav className="ms-auto pe-5">
+          <Nav className="ms-auto pe-5" >
             <Nav.Link className="mx-2" onClick={() => navigate("/dashboard")}>
               Home
             </Nav.Link>
 
-            <NavDropdown title="Laporan" className="mx-2">
+            <NavDropdown title="Laporan" className="mx-2 drop-down" >
               <NavDropdown.Item
                 onClick={() => navigate("/dashboard/laporan_data_siswa")}
               >
@@ -57,7 +57,7 @@ export default () => {
 
             {user !== "kepalasekolah" ? (
               <>
-                <NavDropdown title="Master" className="mx-2">
+                <NavDropdown title="Master" className="mx-2" >
                   <NavDropdown.Item
                     onClick={() => navigate("/dashboard/master_data_siswa")}
                   >
@@ -69,7 +69,14 @@ export default () => {
                   >
                     Data Pembayaran
                   </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item
+                    onClick={() => navigate("/dashboard/master_pembayaran")}
+                  >
+                    Data Pembayaran
+                  </NavDropdown.Item>
                 </NavDropdown>
+                
                 <Nav.Link
                   className="mx-2"
                   onClick={() => navigate("/dashboard/user")}
@@ -107,6 +114,8 @@ export default () => {
                     </span>
                     <span className="fw-bold ms-3">Profile</span>
                   </Dropdown.Item>
+
+                  
 
                   <Dropdown.Divider />
                   <Dropdown.Item onClick={handleLogOut}>

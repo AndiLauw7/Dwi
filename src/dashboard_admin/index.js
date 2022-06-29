@@ -10,6 +10,7 @@ import MasterDataPembayaran from "./pages/MasterDataPembayaran";
 import MasterDataSiswa from "./pages/MasterDataSiswa";
 import User from "./pages/User";
 import { UserContext } from "../context/userContext";
+import  TambahLaporanDataSiswa  from "./pages/TambahLaporanDataSiswa";
 
 export default () => {
   const navigate = useNavigate();
@@ -50,6 +51,11 @@ export default () => {
           path="/master_pembayaran"
           element={<MasterDataPembayaran />}
         />
+         <Route
+            exact
+            path="/tambah-data-siswa/"
+            element={<TambahLaporanDataSiswa />}
+          />
         <Route exact path="/user" element={<User />} />
         <Route exact path="/profile" element={<Profile />} />
       </Routes>
