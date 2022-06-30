@@ -28,6 +28,8 @@ function Profile() {
   const [state, dispatch] = useContext(UserContext);
   const [avatar, setAvatar] = useState(null);
   const [user, setUser] = useState({});
+  const [pembayaran, setPmbayaran] = useState([]);
+  const [imgPembayaran, setImgPembayaran] = useState([]);
 
   console.log(user, avatar);
 
@@ -82,16 +84,20 @@ function Profile() {
     navigate("/Profile/" + user.id);
   };
 
-  const grtPembayaran = async () => {
-    const response = await API.get(`/pembayaran/:id/${id}`);
-    setAvatar(response.data.data.datauser.image);
-    setUser(response.data.data.datauser);
+  const getPembayaran = async () => {
+    const response = await API.get(`/pembayaran/${id}`);
+    console.log(response);
+    setPmbayaran(response.data.data.data);
+    setImgPembayaran(response.data.data.data.bukti_pembayaran);
+    console.log(response.data.data.data);
+    console.log(response.data.data.data.bukti_pembayaran);
   };
 
   useEffect(() => {
     setAvatar(state.user.image);
     setUser(state.user);
-    // getUser();
+    getPembayaran();
+    setImgPembayaran();
   }, [state]);
 
   return (
@@ -200,6 +206,21 @@ function Profile() {
               }}
             />
           </>
+          <div className="text-center">
+            <p>{pembayaran.nama_lengkap}</p>
+            <img
+              src={path + imgPembayaran}
+              style={{ width: "250px ", borderRadius: "5px" }}
+              alt=""
+            />
+            <div>
+              {pembayaran.status_pembayaran ? (
+                <p style={{ color: "green" }}>Sudah Lunas</p>
+              ) : (
+                <p style={{ color: "red" }}>Belum Bayar</p>
+              )}
+            </div>
+          </div>
         </Row>
       </Container>
     </>
