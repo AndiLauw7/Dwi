@@ -86,32 +86,34 @@ function App() {
 
   return (
     <Routes>
-<<<<<<< HEAD
-=======
       {state.user.role === "siswa" ? (
         <>
           <Route exact path="/profile/:id" element={<Profile />} />
           <Route exact path="/form-ppdb" element={<FormRegister />} />
-          <Route exact path="/form-ppdb/edit/:id" element={<FormRegisterEdit />} />
+          <Route
+            exact
+            path="/form-ppdb/edit/:id"
+            element={<FormRegisterEdit />}
+          />
           <Route
             exact
             path="/form-pembayaran/edit/:id"
             element={<FormPembayaranEdit />}
           />
-          
         </>
-      ) : <Route exact path="/login" element={<Login />} />}
-
+      ) : (
+        <Route exact path="/login" element={<Login />} />
+      )}
 
       {state.user.role === "admin" || state.user.role === "kepalasekolah" ? (
         <>
           <Route exact path="/dashboard/*" element={<Dashboard />} />
         </>
-      ) : <Route exact path="/login" element={<Login />} />}
-
+      ) : (
+        <Route exact path="/login" element={<Login />} />
+      )}
 
       <Route exact path="/registrasi" element={<Register />} />
->>>>>>> b8b8b243f55ba1b64b4d1a6a559fc866f5bb3699
       <Route exact path="/" element={<Home />} />
       <Route exact path="/profile/:id" element={<Profile />} />
       <Route exact path="/form-ppdb" element={<FormRegister />} />

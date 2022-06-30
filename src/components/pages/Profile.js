@@ -207,17 +207,25 @@ function Profile() {
             />
           </>
           <div className="text-center">
-            <p>{pembayaran.nama_lengkap}</p>
+            <p> Atas Nama Pembayaran : {pembayaran.nama_lengkap}</p>
+            <p> Bukti Pembayaran</p>
             <img
               src={path + imgPembayaran}
               style={{ width: "250px ", borderRadius: "5px" }}
               alt=""
             />
+
             <div>
               {pembayaran.status_pembayaran ? (
-                <p style={{ color: "green" }}>Sudah Lunas</p>
+                <p className="text-success fw-bold">
+                  {" "}
+                  Status Pembayaran : Sudah Lunas
+                </p>
               ) : (
-                <p style={{ color: "red" }}>Belum Bayar</p>
+                <p className="text-danger fw-bold">
+                  {" "}
+                  Status Pembayaran : Belum Bayar
+                </p>
               )}
             </div>
           </div>

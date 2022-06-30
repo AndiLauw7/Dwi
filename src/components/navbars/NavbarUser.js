@@ -12,7 +12,7 @@ import {
 import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
 import Swal from "sweetalert2";
-import avatarDummy from "../../assets/img/anakSd.jpg"
+import avatarDummy from "../../assets/img/anakSd.jpg";
 import { API } from "../../configAPI/api";
 export const path = "http://localhost:5000/uploads/";
 
@@ -44,13 +44,13 @@ function NavbarUser() {
   const getUser = async () => {
     const response = await API.get(`/user/${id}`);
     setAvatar(response.data.data.datauser.image);
-  }
+  };
 
   console.log("navbar");
 
   console.log(state, avatar);
   useEffect(() => {
-    getUser()
+    getUser();
   }, [state]);
 
   return (
@@ -83,7 +83,7 @@ function NavbarUser() {
                 <img
                   src={avatar === path + "null" ? avatarDummy : avatar}
                   alt="avatar"
-                  className="rounded-circle border border-3 border-primary "
+                  className="rounded-circle border border-1 border-primary "
                   style={{
                     width: "3rem",
                     height: "3rem",
