@@ -14,6 +14,7 @@ import TambahLaporanDataSiswa from "./pages/AddDataSiswa";
 import AddDataSiswa from "./pages/AddDataSiswa";
 import { EditDataSiswa } from "./pages/EditDataSiswa";
 import EditDataPembayaran from "./pages/EditDataPembayaran";
+import FormUserAdd from "./pages/FormUserAdd";
 
 export default () => {
   const navigate = useNavigate();
@@ -64,6 +65,8 @@ export default () => {
           path="/form-data-siswa/edit/:id"
           element={<EditDataSiswa />}
         />
+
+        <Route exact path="/user/add" element={<FormUserAdd />} />
 
         <Route
           exact

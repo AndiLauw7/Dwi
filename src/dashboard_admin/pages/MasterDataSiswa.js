@@ -30,7 +30,11 @@ const columns = [
   {
     heading: "Tanggal Lahir",
     selector: "tanggal_lahir",
+<<<<<<< HEAD
     format: (tanggal_lahir) => moment(tanggal_lahir).format("DD-MMM-YYYY"),
+=======
+    format: ( tanggal_lahir ) => moment(tanggal_lahir).format("DD-MMM-YYYY"),
+>>>>>>> b8b8b243f55ba1b64b4d1a6a559fc866f5bb3699
   },
   {
     heading: "Agama",
