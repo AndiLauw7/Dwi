@@ -26,7 +26,6 @@ import { FormRegisterEdit } from "./components/pages/FormRegisterEdit";
 import { FormPembayaranEdit } from "./components/pages/FormPembayaranEdit";
 import FormUserAdd from "./components/pages/FormUserAdd";
 
-
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,7 +35,7 @@ function App() {
   useEffect(() => {
     // Redirect Auth
     if (!localStorage.token) {
-      navigate("/");
+      navigate("/login");
     } else {
       if (state.user.role == "admin") {
         navigate("/dashboard");
@@ -87,30 +86,22 @@ function App() {
 
   return (
     <Routes>
-      {state.user.role === "siswa" ? (
-        <>
-          <Route exact path="/profile/:id" element={<Profile />} />
-          <Route exact path="/form-ppdb" element={<FormRegister />} />
-          <Route exact path="/form-ppdb/edit/:id" element={<FormRegisterEdit />} />
-          <Route
-            exact
-            path="/form-pembayaran/edit/:id"
-            element={<FormPembayaranEdit />}
-          />
-          <Route exact path="/user/add" element={<FormUserAdd />} />
-        </>
-      ) : <Route exact path="/login" element={<Login />} />}
-
-
-      {state.user.role === "admin" || state.user.role === "kepalasekolah" ? (
-        <>
-          <Route exact path="/dashboard/*" element={<Dashboard />} />
-        </>
-      ) : <Route exact path="/login" element={<Login />} />}
-
-
-      <Route exact path="/registrasi" element={<Register />} />
       <Route exact path="/" element={<Home />} />
+      <Route exact path="/profile/:id" element={<Profile />} />
+      <Route exact path="/form-ppdb" element={<FormRegister />} />
+      <Route exact path="/form-ppdb/edit/:id" element={<FormRegisterEdit />} />
+
+      <Route
+        exact
+        path="/form-pembayaran/edit/:id"
+        element={<FormPembayaranEdit />}
+      />
+      <Route exact path="/user/add" element={<FormUserAdd />} />
+
+      <Route exact path="/dashboard/*" element={<Dashboard />} />
+      <Route exact path="/login" element={<Login />} />
+      <Route exact path="/registrasi" element={<Register />} />
+
       <Route
         exact
         path="/tentang-sd-karya-bangsa"
@@ -122,11 +113,7 @@ function App() {
         element={<DetailFasilitasSekolah />}
       />
 
-      <Route
-        exact
-        path="/*"
-        element={<div>Page Not Found</div>}
-      />
+      <Route exact path="/*" element={<div>Page Not Found</div>} />
     </Routes>
   );
 }

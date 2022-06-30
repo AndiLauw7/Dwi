@@ -58,14 +58,12 @@ function Profile() {
       setEdit(false);
       dispatch({
         type: "USER_UPDATE",
-        payload: { ...user, image:user?.image[0]?.name,}
-      })
+        payload: { ...user, image: user?.image[0]?.name },
+      });
     } catch (error) {
       console.log(error);
     }
   };
-
-
 
   const handleChange = (e) => {
     setUser({
@@ -84,11 +82,11 @@ function Profile() {
     navigate("/Profile/" + user.id);
   };
 
-  // const getUser = async () => {
-  //   const response = await API.get(`/user/${id}`);
-  //   setAvatar(response.data.data.datauser.image);
-  //   setUser(response.data.data.datauser);
-  // };
+  const grtPembayaran = async () => {
+    const response = await API.get(`/pembayaran/:id/${id}`);
+    setAvatar(response.data.data.datauser.image);
+    setUser(response.data.data.datauser);
+  };
 
   useEffect(() => {
     setAvatar(state.user.image);
@@ -98,7 +96,7 @@ function Profile() {
 
   return (
     <>
-      <NavbarUser  />
+      <NavbarUser />
       <Container fluid className="px-5">
         <h1 className="my-5">
           <dt>My Profile</dt>
@@ -190,10 +188,9 @@ function Profile() {
             </>
           )}
         </Stack>
-        {/* <Row> */}
-        {/* <Stack direction="horizontal"  gap={5}> */}
-        {/* <>
-            <h2 className="my-3 fw-bold">Journey Post</h2>
+        <Row>
+          <>
+            <h2 className="my-3 fw-bold">Pembayaran Ku</h2>
             <hr
               style={{
                 height: "2px",
@@ -203,7 +200,7 @@ function Profile() {
               }}
             />
           </>
-        </Row> */}
+        </Row>
       </Container>
     </>
   );

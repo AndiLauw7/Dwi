@@ -17,7 +17,7 @@ const columns = [
     selector: "registrasi.nama_lengkap",
   },
   {
-    heading: "Nama Lengkap",
+    heading: "Nama pembayaran",
     selector: "nama_lengkap",
     format: (nama_lengkap) => {
       return <>{nama_lengkap === null ? "-" : nama_lengkap}</>;
@@ -129,7 +129,9 @@ const ActComp = (data, setDataId) => {
             title="edit"
             className="text-success"
             style={{ fontSize: 20, cursor: "pointer" }}
-            onClick={() => navigate(`/dashboard/form-data-pembayaran/edit/${id}`)}
+            onClick={() =>
+              navigate(`/dashboard/form-data-pembayaran/edit/${id}`)
+            }
           />
         </>
       ) : (
