@@ -24,7 +24,7 @@ import { API, setAuthToken } from "./configAPI/api";
 import { DetailFasilitasSekolah } from "./components/pages/DetailFasilitasSekolah";
 import { FormRegisterEdit } from "./components/pages/FormRegisterEdit";
 import { FormPembayaranEdit } from "./components/pages/FormPembayaranEdit";
-import FormUserAdd from "./components/pages/FormUserAdd";
+import FormUserAdd from "./dashboard_admin/pages/FormUserAdd";
 
 
 function App() {
@@ -97,7 +97,7 @@ function App() {
             path="/form-pembayaran/edit/:id"
             element={<FormPembayaranEdit />}
           />
-          <Route exact path="/user/add" element={<FormUserAdd />} />
+          
         </>
       ) : <Route exact path="/login" element={<Login />} />}
 

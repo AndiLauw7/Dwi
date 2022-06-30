@@ -8,6 +8,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { API } from "../../configAPI/api";
+import ImgModal from "../components/modal/ImgModal";
 import MyPage from "../components/myPage";
 import MyTable from "../components/myTable";
 
@@ -39,18 +40,22 @@ const columns = [
   {
     heading: "Bukti Pembayaran",
     selector: "bukti_pembayaran",
-    format: (bukti_pembayaran) => {
-      console.log(bukti_pembayaran);
+    format: function Format (bukti_pembayaran) {
+      const [imgModal, setImgModal] = useState(false)
+      const handleOpen = () => setImgModal(!imgModal)
+      const handleClose = () => setImgModal(!imgModal)
       return (
         <>
           {bukti_pembayaran === "http://localhost:5000/uploads/null" ? (
             <p>-</p>
           ) : (
-            <div className="text-center">
+            <div onClick={handleOpen} className="text-center">
               <img src={bukti_pembayaran} alt="img" width={100} />
             </div>
           )}
+            <ImgModal show={imgModal} handleClose={handleClose} img={bukti_pembayaran} />
         </>
+
       );
     },
   },
@@ -76,6 +81,7 @@ const ActComp = (data, setDataId) => {
   const [selectData, setSelectData] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+
 
   const { id } = data;
 

@@ -64,7 +64,7 @@ export default function User() {
       <MyTable
         colAct={ActComp}
         columns={columns}
-        pathAdd={"/user/add"}
+        pathAdd={"/dashboard/user/add"}
         url={"/users"}
       />
     </MyPage>

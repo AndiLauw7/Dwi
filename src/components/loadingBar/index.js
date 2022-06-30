@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Spinner } from 'react-bootstrap'
-import LoadingBar from 'react-top-loading-bar'
 
 export default () => {
     
