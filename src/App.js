@@ -122,8 +122,6 @@ function App() {
         element={<DetailFasilitasSekolah />}
       />
 
-
-
       <Route
         exact
         path="/*"
