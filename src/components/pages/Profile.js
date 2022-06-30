@@ -20,7 +20,7 @@ export const path = "http://localhost:5000/uploads/";
 
 function Profile() {
   const title = "Profile";
-  document.title = "The Journey | " + title;
+  document.title = "Sd Karya Bangsa | " + title;
 
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
@@ -52,7 +52,7 @@ function Profile() {
         formData.set("image", user?.image[0], user?.image[0]?.name);
       }
       formData.set("username", user.username);
-      formData.set("email", form.email);
+      formData.set("email", user.email);
 
       const response = await API.patch(
         "/edit-user/" + user.id,
