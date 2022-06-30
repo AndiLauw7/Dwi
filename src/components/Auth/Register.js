@@ -167,7 +167,7 @@ export default function Login() {
                   </Button>
                 </Form>
 
-                <p className="text-center text-muted">
+                {/* <p className="text-center text-muted">
                   Forget Password ? Click
                   <a
                     // onClick={() => handleRegis(true)}
@@ -176,7 +176,7 @@ export default function Login() {
                   >
                     Here
                   </a>
-                </p>
+                </p> */}
               </Card.Body>
             </Card>
           </Col>

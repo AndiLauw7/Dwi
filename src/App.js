@@ -25,7 +25,7 @@ import { DetailFasilitasSekolah } from "./components/pages/DetailFasilitasSekola
 import { FormRegisterEdit } from "./components/pages/FormRegisterEdit";
 import { FormPembayaranEdit } from "./components/pages/FormPembayaranEdit";
 import FormUserAdd from "./components/pages/FormUserAdd";
-import { TambahLaporanDataSiswa } from "./components/pages/TambahLaporanDataSiswa";
+
 
 function App() {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ function App() {
   useEffect(() => {
     // Redirect Auth
     if (!localStorage.token) {
-      navigate("/login");
+      navigate("/");
     } else {
       if (state.user.role == "admin") {
         navigate("/dashboard");
@@ -87,22 +87,30 @@ function App() {
 
   return (
     <Routes>
-      <Route exact path="/" element={<Home />} />
-      <Route exact path="/profile/:id" element={<Profile />} />
-      <Route exact path="/form-ppdb" element={<FormRegister />} />
-      <Route exact path="/form-ppdb/edit/:id" element={<FormRegisterEdit />} />
+      {state.user.role === "siswa" ? (
+        <>
+          <Route exact path="/profile/:id" element={<Profile />} />
+          <Route exact path="/form-ppdb" element={<FormRegister />} />
+          <Route exact path="/form-ppdb/edit/:id" element={<FormRegisterEdit />} />
+          <Route
+            exact
+            path="/form-pembayaran/edit/:id"
+            element={<FormPembayaranEdit />}
+          />
+          <Route exact path="/user/add" element={<FormUserAdd />} />
+        </>
+      ) : <Route exact path="/login" element={<Login />} />}
 
-      <Route
-        exact
-        path="/form-pembayaran/edit/:id"
-        element={<FormPembayaranEdit />}
-      />
-      <Route exact path="/user/add" element={<FormUserAdd />} />
 
-      <Route exact path="/dashboard/*" element={<Dashboard />} />
-      <Route exact path="/login" element={<Login />} />
+      {state.user.role === "admin" || state.user.role === "kepalasekolah" ? (
+        <>
+          <Route exact path="/dashboard/*" element={<Dashboard />} />
+        </>
+      ) : <Route exact path="/login" element={<Login />} />}
+
+
       <Route exact path="/registrasi" element={<Register />} />
-
+      <Route exact path="/" element={<Home />} />
       <Route
         exact
         path="/tentang-sd-karya-bangsa"
@@ -116,8 +124,8 @@ function App() {
 
       <Route
         exact
-        path="/tambah-data-siswa/"
-        element={TambahLaporanDataSiswa}
+        path="/*"
+        element={<div>Page Not Found</div>}
       />
     </Routes>
   );

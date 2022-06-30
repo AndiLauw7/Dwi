@@ -29,13 +29,9 @@ function Profile() {
   const [avatar, setAvatar] = useState(null);
   const [user, setUser] = useState({});
 
+  console.log(user, avatar);
+
   const { id } = useParams();
-  const datauser = state.user.id;
-  const [form, setForm] = useState({
-    username: "",
-    email: "",
-    image: "",
-  });
 
   const handleSubmit = async (e) => {
     try {
@@ -60,10 +56,16 @@ function Profile() {
         config
       );
       setEdit(false);
+      dispatch({
+        type: "USER_UPDATE",
+        payload: { ...user, image:user?.image[0]?.name,}
+      })
     } catch (error) {
       console.log(error);
     }
   };
+
+
 
   const handleChange = (e) => {
     setUser({
@@ -82,19 +84,21 @@ function Profile() {
     navigate("/Profile/" + user.id);
   };
 
-  const getUser = async () => {
-    const response = await API.get(`/user/${id}`);
-    setAvatar(response.data.data.datauser.image);
-    setUser(response.data.data.datauser);
-  };
+  // const getUser = async () => {
+  //   const response = await API.get(`/user/${id}`);
+  //   setAvatar(response.data.data.datauser.image);
+  //   setUser(response.data.data.datauser);
+  // };
 
   useEffect(() => {
-    getUser();
-  }, []);
+    setAvatar(state.user.image);
+    setUser(state.user);
+    // getUser();
+  }, [state]);
 
   return (
     <>
-      <NavbarUser />
+      <NavbarUser  />
       <Container fluid className="px-5">
         <h1 className="my-5">
           <dt>My Profile</dt>
@@ -119,7 +123,7 @@ function Profile() {
             <Form onSubmit={handleSubmit}>
               <div className="text-center mt-3 mb-2">
                 <img
-                  src={preview ? preview : avatar}
+                  src={preview ? preview : path + avatar}
                   style={{
                     width: "150px",
                     height: "150px",
@@ -153,6 +157,7 @@ function Profile() {
                   className="form-control"
                   type="file"
                   name="image"
+                  filename={user.image}
                   onChange={handleChange}
                   required
                 />
@@ -164,7 +169,7 @@ function Profile() {
           ) : (
             <>
               <img
-                src={preview ? preview : avatar}
+                src={preview ? preview : path + avatar}
                 alt="avatar"
                 className="rounded-circle border border-1 border-primary mb-3"
                 style={{

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useMemo } from "react";
 import { UserContext } from "../../context/userContext";
 import {
   Navbar,
@@ -12,6 +12,7 @@ import {
 import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
 import Swal from "sweetalert2";
+import avatarDummy from "../../assets/img/anakSd.jpg"
 import { API } from "../../configAPI/api";
 export const path = "http://localhost:5000/uploads/";
 
@@ -19,10 +20,6 @@ function NavbarUser() {
   const navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
   const [avatar, setAvatar] = useState(null);
-
-  // console.log("jalan");
-  // const { id } = useParams();
-  const user = state.user;
   const id = state.user.id;
 
   const handleLogOut = () => {
@@ -46,15 +43,15 @@ function NavbarUser() {
 
   const getUser = async () => {
     const response = await API.get(`/user/${id}`);
-
     setAvatar(response.data.data.datauser.image);
+  }
 
-    console.log(response.data.data.datauser.image);
-  };
+  console.log("navbar");
 
+  console.log(state, avatar);
   useEffect(() => {
-    getUser();
-  });
+    getUser()
+  }, [state]);
 
   return (
     <Navbar bg="light" sticky="top" className="shadow">
@@ -84,7 +81,7 @@ function NavbarUser() {
             <Dropdown align="end">
               <Dropdown.Toggle as={Nav.Link} className="Dropdown-Toggle">
                 <img
-                  src={avatar}
+                  src={avatar === path + "null" ? avatarDummy : avatar}
                   alt="avatar"
                   className="rounded-circle border border-3 border-primary "
                   style={{

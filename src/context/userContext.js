@@ -20,6 +20,12 @@ const reducer = (state, action) => {
         user: payload,
       };
 
+    case "USER_UPDATE": 
+    return{
+      ...state,
+      user: payload
+    }
+
     // Creaet case "AUTH_ERROR" here ...
     case "AUTH_ERROR":
     case "LOGOUT":

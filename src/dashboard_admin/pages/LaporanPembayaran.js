@@ -135,8 +135,8 @@ const columns = [
 export default function LaporanDataPembayaran() {
   const location = useLocation();
   return (
-    // url={location.pathname}
-    <MyPage title={"Laporan Data Pembayaran"}>
+    
+    <MyPage title={"Laporan Data Pembayaran"} url={location.pathname}>
       <MyTable columns={columns} url={"/pembayaran"} />
       {/* colAct={ActComp}  */}
     </MyPage>
