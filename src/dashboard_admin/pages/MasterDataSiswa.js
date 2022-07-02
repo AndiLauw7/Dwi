@@ -117,8 +117,8 @@ export default function MasterDataSiswa() {
         columns={columns}
         pathAdd={"/dashboard/form-data-siswa/add"}
         url={"/registrasi"}
-        expExcel
-        nameColExcel={"DATA SISWA"}
+        // expExcel
+        // nameColExcel={"DATA SISWA"}
       />
     </MyPage>
   );

@@ -8,7 +8,7 @@ export default function Profile() {
   return (
     <MyPage title={"Profile"}>
       <div className="d-flex justify-content-center align-items-center my-5">
-        <img src={avatarDummy} className="rounded-circle" width={300} />
+        <img src={avatarDummy} className="rounded-circle" width={300}  />
       </div>
       <div className="text-center">
         <h5>{state.user.username}</h5>

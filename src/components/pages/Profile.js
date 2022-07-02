@@ -191,6 +191,7 @@ function Profile() {
                 style={{
                   width: "150px",
                   height: "150px",
+                  objectFit: "cover"
                 }}
               />
               <h4>
