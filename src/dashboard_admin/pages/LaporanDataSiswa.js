@@ -5,6 +5,7 @@ import { RiDeleteBin2Line, RiEdit2Line } from "react-icons/ri";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { API } from "../../configAPI/api";
+import Excel from "../components/importFile/Excel";
 import MyPage from "../components/myPage";
 import MyTable from "../components/myTable";
 
@@ -91,14 +92,16 @@ const ActComp = (data, setDataId) => {
 
 export default function MasterDataSiswa() {
   const location = useLocation();
+
   return (
-    
     <MyPage title={"Master Data Siswa"} url={location.pathname}>
+
       <MyTable
         colAct={ActComp}
         columns={columns}
         pathAdd={"/dashboard/tambah-data-siswa"}
         url={"/registrasi"}
+        
       />
     </MyPage>
   );

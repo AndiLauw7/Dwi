@@ -89,6 +89,25 @@ const ActComp = (data, setDataId) => {
   );
 };
 
+
+
+// const dataSet= [
+//   {
+//     columns : [
+//       {title: "Tanggal Registrasi"},
+//       {title: "Nama Lengkap"},
+//       {title: "Jenis Kelamin"},
+//       {title: "Tempat Lahir"},
+//       {title: "Tanggal Lahir"},
+//       {title: "Agama"},
+//       {title: "Alamat"},
+//       {title: "Nomer HP"},
+
+//       data: 
+//     ]
+//   }
+// ]
+
 export default function MasterDataSiswa() {
   const location = useLocation();
   return (
@@ -98,6 +117,8 @@ export default function MasterDataSiswa() {
         columns={columns}
         pathAdd={"/dashboard/form-data-siswa/add"}
         url={"/registrasi"}
+        expExcel
+        nameColExcel={"DATA SISWA"}
       />
     </MyPage>
   );

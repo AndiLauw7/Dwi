@@ -4,39 +4,40 @@ import PropTypes from 'prop-types';
 import { RiAddLine, RiCloseLine, RiSearch2Line } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import { API } from '../../../configAPI/api';
+import Excel from '../importFile/Excel';
 
 const TableHeading = ({ item, index }) => <th key={index}>{item.heading}</th>;
 
 const TableRow = ({ item, columns, index, colNo, colAct, setDataId }) => {
-  return (
-    <tr>
-      {colNo && <td>{index + 1}</td>}
-      {columns.map((colItem, idx) => {
-        if (colItem.selector.includes(".")) {
-          const itemSplit = colItem.selector.split(".");
-          return (
-            <td key={idx}>
-              {colItem.format
-                ? colItem.format(item[itemSplit[0]][itemSplit[1]])
-                : item[itemSplit[0]][itemSplit[1]]}
-            </td>
-          );
-        }
+    return (
+        <tr>
+            {colNo && <td>{index + 1}</td>}
+            {columns.map((colItem, idx) => {
+                if (colItem.selector.includes(".")) {
+                    const itemSplit = colItem.selector.split(".");
+                    return (
+                        <td key={idx}>
+                            {colItem.format
+                                ? colItem.format(item[itemSplit[0]][itemSplit[1]])
+                                : item[itemSplit[0]][itemSplit[1]]}
+                        </td>
+                    );
+                }
 
-        return (
-          <td key={idx}>
-            {colItem.format
-              ? colItem.format(item[`${colItem.selector}`])
-              : item[`${colItem.selector}`]}
-          </td>
-        );
-      })}
-      {colAct && <td>{colAct(item, setDataId)}</td>}
-    </tr>
-  );
+                return (
+                    <td key={idx}>
+                        {colItem.format
+                            ? colItem.format(item[`${colItem.selector}`])
+                            : item[`${colItem.selector}`]}
+                    </td>
+                );
+            })}
+            {colAct && <td>{colAct(item, setDataId)}</td>}
+        </tr>
+    );
 };
 
-const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
+const MyTable = ({ columns, url, colNo, colAct, pathAdd, expExcel, nameColExcel }) => {
 
     const navigate = useNavigate()
     const [data, setData] = useState([])
@@ -75,6 +76,32 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
 
     }
 
+    const convertHeading = (data) => {
+        let result = []
+        for(let i = 0; i < data.length; i++){
+            result.push(data[i]?.heading);
+        }
+        console.log(result);
+        return result
+    }
+
+    const convertColumns = (data) => {
+        let result = []
+        for(let i = 0; i < data.length; i++){
+             result.push(Object.values(data[i]));
+        }
+        console.log(result);
+        return result
+    }
+
+
+    const dataSet = [
+        {
+            columns: convertHeading(columns),
+            data: convertColumns(data)
+        },
+    ]
+
 
     useEffect(() => {
         getData()
@@ -84,6 +111,9 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
 
     return (
         <div>
+            {expExcel && <Excel dataSet={dataSet} element={<button>Download Data</button>} name={nameColExcel} />}
+
+
             <div className="d-flex justify-content-end mb-3 gap-3">
                 <InputGroup style={{ width: "300px" }}>
                     <Form.Control
@@ -142,21 +172,22 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd }) => {
                     <Pagination.Next disabled={page >= totalPage} onClick={() => setPage(current => current + 1)} />
                     <Pagination.Last disabled={page >= totalPage} onClick={() => setPage(totalPage)} />
                 </Pagination>
-            </div> 
-    </div>
-  );
+            </div>
+        </div>
+    );
 };
 
 MyTable.prototype = {
-  columns: PropTypes.array,
-  data: PropTypes.array,
-  colNo: PropTypes.bool,
-  colAct: PropTypes.func,
+    columns: PropTypes.array,
+    data: PropTypes.array,
+    colNo: PropTypes.bool,
+    colAct: PropTypes.func,
+    expExcel: PropTypes.bool,
 };
 
 MyTable.defaultProps = {
-  colNo: true,
-  // colAct: false
+    colNo: true,
+    expExcel: false
 };
 
 export default MyTable;
