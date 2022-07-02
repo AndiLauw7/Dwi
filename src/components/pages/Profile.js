@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import {
   Container,
   Stack,
@@ -12,6 +12,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import NavbarUser from "../navbars/NavbarUser";
+import avatarDummy from "../../assets/img/anakSd.jpg";
 import { UserContext } from "../../context/userContext";
 import { API } from "../../configAPI/api";
 import Close from "../../assets/img/close.png";
@@ -20,7 +21,7 @@ export const path = "http://localhost:5000/uploads/";
 
 function Profile() {
   const title = "Profile";
-  document.title = "The Journey | " + title;
+  document.title = "Sd Karya Bangsa | " + title;
 
   const navigate = useNavigate();
   const [edit, setEdit] = useState(false);
@@ -28,10 +29,16 @@ function Profile() {
   const [state, dispatch] = useContext(UserContext);
   const [avatar, setAvatar] = useState(null);
   const [user, setUser] = useState({});
+  const [pembayaran, setPmbayaran] = useState([]);
+  const [imgPembayaran, setImgPembayaran] = useState([]);
 
-  console.log(user, avatar);
 
   const { id } = useParams();
+  // const id = useMemo(() => {
+  //   return state.user.id;
+  //  },[]) 
+  console.log(user, avatar, id, pembayaran.status_pembayaran);
+
 
   const handleSubmit = async (e) => {
     try {
@@ -58,14 +65,12 @@ function Profile() {
       setEdit(false);
       dispatch({
         type: "USER_UPDATE",
-        payload: { ...user, image:user?.image[0]?.name,}
-      })
+        payload: { ...user, image: user?.image[0]?.name },
+      });
     } catch (error) {
       console.log(error);
     }
   };
-
-
 
   const handleChange = (e) => {
     setUser({
@@ -81,24 +86,35 @@ function Profile() {
 
   const handleEdit = () => {
     setEdit(!edit);
+    setPreview(avatar)
     navigate("/Profile/" + user.id);
   };
 
-  // const getUser = async () => {
-  //   const response = await API.get(`/user/${id}`);
-  //   setAvatar(response.data.data.datauser.image);
-  //   setUser(response.data.data.datauser);
-  // };
+  const getPembayaran = async () => {
+    const response = await API.get(`/pembayaran/${id}`);
+    console.log(response);
+    setPmbayaran(response.data.data.data);
+    setImgPembayaran(response.data.data.data.bukti_pembayaran);
+    console.log(response.data.data.data);
+    console.log(response.data.data.data.bukti_pembayaran);
+  };
+
+  const getUser = async () => {
+    const response = await API.get(`/user/${id}`);
+    setAvatar(response.data.data.datauser.image);
+    setUser(response.data.data.datauser);
+    // setAvatar(response.data.data.datauser.image);
+  };
 
   useEffect(() => {
-    setAvatar(state.user.image);
-    setUser(state.user);
-    // getUser();
+    getUser()
+    getPembayaran();
+    // setImgPembayaran();
   }, [state]);
 
   return (
     <>
-      <NavbarUser  />
+      <NavbarUser />
       <Container fluid className="px-5">
         <h1 className="my-5">
           <dt>My Profile</dt>
@@ -123,7 +139,7 @@ function Profile() {
             <Form onSubmit={handleSubmit}>
               <div className="text-center mt-3 mb-2">
                 <img
-                  src={preview ? preview : path + avatar}
+                  src={preview === null ? avatarDummy : preview}
                   style={{
                     width: "150px",
                     height: "150px",
@@ -169,7 +185,7 @@ function Profile() {
           ) : (
             <>
               <img
-                src={preview ? preview : path + avatar}
+                src={avatar === null ? avatarDummy : avatar}
                 alt="avatar"
                 className="rounded-circle border border-1 border-primary mb-3"
                 style={{
@@ -190,10 +206,9 @@ function Profile() {
             </>
           )}
         </Stack>
-        {/* <Row> */}
-        {/* <Stack direction="horizontal"  gap={5}> */}
-        {/* <>
-            <h2 className="my-3 fw-bold">Journey Post</h2>
+        <Row>
+          <>
+            <h2 className="my-3 fw-bold">Pembayaran Ku</h2>
             <hr
               style={{
                 height: "2px",
@@ -203,7 +218,53 @@ function Profile() {
               }}
             />
           </>
-        </Row> */}
+          {
+            pembayaran.length !== 0 ? (
+              <div className="text-center">
+                <p> Atas Nama Pembayaran : {pembayaran.nama_lengkap}</p>
+                <p> Bukti Pembayaran</p>
+
+                {
+                  imgPembayaran !== null ? (
+
+                    <img
+                      src={imgPembayaran}
+                      style={{ width: "250px ", borderRadius: "5px" }}
+                      alt=""
+                    />
+                  ) : (<p>Anda Belum Menyelesaikan Pembayaran</p>)
+                }
+
+                <div>
+                  {pembayaran.bukti_pembayaran !== null ?
+                    <>
+                      {pembayaran.status_pembayaran ? (
+                        <p className="text-success fw-bold">
+                          {" "}
+                          Status Pembayaran : Sudah Lunas
+                        </p>
+                      ) : (
+                        <p className="text-danger fw-bold">
+                          {" "}
+                          Status Pembayaran : pending
+                        </p>
+                      )}
+                    </>
+
+                    : (
+                      <p className="text-danger fw-bold">
+                        {" "}
+                        Status Pembayaran : Belum Bayar
+                      </p>
+                    )}
+                </div>
+              </div>
+            ) : (
+              <p>Anda Belum Mengisi Form Pendaftaran</p>
+            )
+          }
+
+        </Row>
       </Container>
     </>
   );

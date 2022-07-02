@@ -29,7 +29,7 @@ export const FasilitasSekolah = ({ id }) => {
       id={id}
       // className="fasilitas-sekolah"
       style={{
-        backgroundColor: "#212529",
+        backgroundColor: " #474b4f",
         borderRadius: "5px",
         scrollMarginTop: "200px",
       }}

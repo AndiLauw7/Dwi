@@ -12,15 +12,18 @@ import {
 import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
 import Swal from "sweetalert2";
-import avatarDummy from "../../assets/img/anakSd.jpg"
+import avatarDummy from "../../assets/img/anakSd.jpg";
 import { API } from "../../configAPI/api";
+import { RiHandCoinLine, RiLogoutCircleLine, RiUser3Line } from "react-icons/ri";
 export const path = "http://localhost:5000/uploads/";
 
 function NavbarUser() {
   const navigate = useNavigate();
   const [state, dispatch] = useContext(UserContext);
   const [avatar, setAvatar] = useState(null);
-  const id = state.user.id;
+  const id = useMemo(() => {
+   return state.user.id;
+  },[state]) 
 
   const handleLogOut = () => {
     Swal.fire({
@@ -44,13 +47,11 @@ function NavbarUser() {
   const getUser = async () => {
     const response = await API.get(`/user/${id}`);
     setAvatar(response.data.data.datauser.image);
-  }
+  };
 
-  console.log("navbar");
-
-  console.log(state, avatar);
   useEffect(() => {
-    getUser()
+    getUser();
+    // setAvatar(state.user.image)
   }, [state]);
 
   return (
@@ -81,9 +82,9 @@ function NavbarUser() {
             <Dropdown align="end">
               <Dropdown.Toggle as={Nav.Link} className="Dropdown-Toggle">
                 <img
-                  src={avatar === path + "null" ? avatarDummy : avatar}
+                  src={avatar === null ? avatarDummy : avatar}
                   alt="avatar"
-                  className="rounded-circle border border-3 border-primary "
+                  className="rounded-circle border border-1 border-primary "
                   style={{
                     width: "3rem",
                     height: "3rem",
@@ -98,15 +99,9 @@ function NavbarUser() {
                   onClick={() => navigate(`/Profile/${id}`)}
                 >
                   <span>
-                    <img
-                      src="../assets/user2.svg"
-                      alt="user-profile"
-                      width={30}
-                      height={30}
-                      className="me-3"
-                    />
+                    <RiUser3Line size={30} />
                   </span>
-                  <span className="fw-bold">Profile</span>
+                  <span className="fw-bold ms-3">Profile</span>
                 </Dropdown.Item>
 
                 <Dropdown.Item
@@ -114,29 +109,17 @@ function NavbarUser() {
                   onClick={() => navigate(`/form-pembayaran/edit/${id}`)}
                 >
                   <span>
-                    <img
-                      src="../assets/write1.svg"
-                      alt="write1"
-                      width={30}
-                      height={30}
-                      className="me-3"
-                    />
+                    <RiHandCoinLine size={30} />
                   </span>
-                  <span className="fw-bold">Pembayaran</span>
+                  <span className="fw-bold ms-3">Pembayaran</span>
                 </Dropdown.Item>
 
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={handleLogOut}>
                   <span>
-                    <img
-                      src="../assets/logout.svg"
-                      alt="logout"
-                      width={30}
-                      height={30}
-                      className="me-3"
-                    />
+                    <RiLogoutCircleLine size={30} />
                   </span>
-                  <span className="fw-bold">Log Out</span>
+                  <span className="fw-bold ms-3">Log Out</span>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

@@ -20,7 +20,7 @@ const columns = [
     selector: "registrasi.nama_lengkap",
   },
   {
-    heading: "Nama Lengkap",
+    heading: "Nama Pembayaran",
     selector: "nama_lengkap",
     format: (nama_lengkap) => {
       return <>{nama_lengkap === null ? "-" : nama_lengkap}</>;
@@ -135,7 +135,6 @@ const columns = [
 export default function LaporanDataPembayaran() {
   const location = useLocation();
   return (
-    
     <MyPage title={"Laporan Data Pembayaran"} url={location.pathname}>
       <MyTable columns={columns} url={"/pembayaran"} />
       {/* colAct={ActComp}  */}

@@ -7,19 +7,19 @@ import { UserContextProvider } from "./context/userContext";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Suspense } from "react";
 import LoadingBar from "./components/loadingBar";
-const App = React.lazy(() => import('./App'))
+const App = React.lazy(() => import("./App"));
 
 ReactDOM.render(
-	<React.StrictMode>
-		<Suspense fallback={<LoadingBar />}>
-			<UserContextProvider>
-				<Router>
-					<App />
-				</Router>
-			</UserContextProvider>
-		</Suspense>
-	</React.StrictMode>,
-	document.getElementById("root")
+  <React.StrictMode>
+    <Suspense fallback={<LoadingBar />}>
+      <UserContextProvider>
+        <Router>
+          <App />
+        </Router>
+      </UserContextProvider>
+    </Suspense>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
