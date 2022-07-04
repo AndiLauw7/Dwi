@@ -13,7 +13,7 @@ const columns = [
   {
     heading: "Tgl Registrasi",
     selector: "tgl_registrasi",
-    format: ({ tgl_registrasi }) =>
+    format: ( tgl_registrasi ) =>
       moment(tgl_registrasi).format("DD-MMM-YYYY"),
   },
   {
@@ -31,7 +31,7 @@ const columns = [
   {
     heading: "Tanggal Lahir",
     selector: "tanggal_lahir",
-    format: ({ tanggal_lahir }) => moment(tanggal_lahir).format("DD-MMM-YYYY"),
+    format: ( tanggal_lahir ) => moment(tanggal_lahir).format("DD-MMM-YYYY"),
   },
   {
     heading: "Agama",
@@ -101,7 +101,7 @@ export default function MasterDataSiswa() {
         columns={columns}
         pathAdd={"/dashboard/tambah-data-siswa"}
         url={"/registrasi"}
-        
+        dateRangePicker
       />
     </MyPage>
   );
