@@ -137,7 +137,7 @@ export default function LaporanDataPembayaran() {
   // url={location.pathname}
   return (
     <MyPage title={"Laporan Data Pembayaran"}>
-      <MyTable columns={columns} url={"/pembayaran"} dateRangePicker />
+      <MyTable columns={columns} url={"/pembayaran"} />
       {/* colAct={ActComp}  */}
     </MyPage>
   );
