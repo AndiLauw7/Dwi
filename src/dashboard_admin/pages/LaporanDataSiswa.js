@@ -13,8 +13,7 @@ const columns = [
   {
     heading: "Tgl Registrasi",
     selector: "tgl_registrasi",
-    format: ( tgl_registrasi ) =>
-      moment(tgl_registrasi).format("DD-MMM-YYYY"),
+    format: (tgl_registrasi) => moment(tgl_registrasi).format("DD-MMM-YYYY"),
   },
   {
     heading: "Nama Lengkap",
@@ -31,7 +30,7 @@ const columns = [
   {
     heading: "Tanggal Lahir",
     selector: "tanggal_lahir",
-    format: ( tanggal_lahir ) => moment(tanggal_lahir).format("DD-MMM-YYYY"),
+    format: (tanggal_lahir) => moment(tanggal_lahir).format("DD-MMM-YYYY"),
   },
   {
     heading: "Agama",
@@ -91,11 +90,10 @@ const ActComp = (data, setDataId) => {
 };
 
 export default function MasterDataSiswa() {
-  const location = useLocation();
+  // const location = useLocation();
 
   return (
-    <MyPage title={"Master Data Siswa"} url={location.pathname}>
-
+    <MyPage title={"Laporan Data Peserta Didik"}>
       <MyTable
         colAct={ActComp}
         columns={columns}

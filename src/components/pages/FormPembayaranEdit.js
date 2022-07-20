@@ -6,32 +6,29 @@ import { Footer } from "../navbars/Footer";
 
 import NavbarUser from "../navbars/NavbarUser";
 
-
 const defValue = {
-  nama_lengkap : "",
-  bukti_pembayaran: ""
-}
+  nama_lengkap: "",
+  bukti_pembayaran: "",
+};
 
 export const FormPembayaranEdit = () => {
-  const {id} = useParams()
-  const navigate = useNavigate()
-  const [form, setForm] = useState({...defValue})
-  
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [form, setForm] = useState({ ...defValue });
 
   const handleChange = (e) => {
-		setForm({
+    setForm({
       ...form,
-			[e.target.name]:
-				e.target.type === "file" ? e.target.files : e.target.value,
-		});
+      [e.target.name]:
+        e.target.type === "file" ? e.target.files : e.target.value,
+    });
 
-		// if (e.target.type === "file") {
-		// 	let url = URL.createObjectURL(e.target.files[0]);
-		// 	// console.log(url);
-		// 	setAvatar(url);
-		// }
-	};
-  
+    // if (e.target.type === "file") {
+    // 	let url = URL.createObjectURL(e.target.files[0]);
+    // 	// console.log(url);
+    // 	setAvatar(url);
+    // }
+  };
 
   const handleSubmit = async (e) => {
     try {
@@ -57,7 +54,7 @@ export const FormPembayaranEdit = () => {
       console.log(response);
       console.log(formData);
       if (response.status === 200) {
-        alert("Post Masuk Pa eKO");
+        alert("Pembayaran Berhasil");
         navigate("/");
       }
     } catch (error) {
@@ -94,30 +91,26 @@ export const FormPembayaranEdit = () => {
                   />
                 </Form.Group>
 
-                {/* <Form.Group
-                  className="mb-2"
-                  controlId="exampleForm.ControlInput1"
-                  required
-                >
-                  <Form.Label>Tanggal Pembayaran</Form.Label>
-                  <Form.Control
-                    type="date"
-                    placeholder=""
-                    name="tanggal_lahir"
-                  />
-                </Form.Group> */}
-
                 <Form.Group
                   className="mb-2"
                   controlId="exampleForm.ControlInput1"
                   required
                 >
                   <Form.Label>Bukti Pembayaran</Form.Label>
-                   
-                  <Form.Control type="file" placeholder="" name="bukti_pembayaran"  onChange={handleChange}/>
+
+                  <Form.Control
+                    type="file"
+                    placeholder=""
+                    name="bukti_pembayaran"
+                    onChange={handleChange}
+                  />
                 </Form.Group>
 
-                <Button variant="primary" className="w-100 px-5 mt-3 " onClick={handleSubmit}>
+                <Button
+                  variant="primary"
+                  className="w-100 px-5 mt-3 "
+                  onClick={handleSubmit}
+                >
                   Submit
                 </Button>
               </Form>

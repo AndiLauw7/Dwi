@@ -133,10 +133,11 @@ const columns = [
 // };
 
 export default function LaporanDataPembayaran() {
-  const location = useLocation();
+  // const location = useLocation();
+  // url={location.pathname}
   return (
-    <MyPage title={"Laporan Data Pembayaran"} url={location.pathname}>
-      <MyTable columns={columns} url={"/pembayaran"} />
+    <MyPage title={"Laporan Data Pembayaran"}>
+      <MyTable columns={columns} url={"/pembayaran"} dateRangePicker />
       {/* colAct={ActComp}  */}
     </MyPage>
   );

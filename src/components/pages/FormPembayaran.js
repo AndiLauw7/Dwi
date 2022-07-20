@@ -54,7 +54,7 @@ export const FormPembayaran = () => {
       console.log(response);
       console.log(formData);
       if (response.status === 200) {
-        alert("Post Masuk Pa eKO");
+        alert("Pembayaran Berhasil");
         navigate("/");
       }
     } catch (error) {
