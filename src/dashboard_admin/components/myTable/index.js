@@ -55,6 +55,7 @@ const MyTable = ({
   expExcel,
   nameColExcel,
   dateRangePicker,
+  report,
 }) => {
   const ref = useRef();
   const navigate = useNavigate();
@@ -75,11 +76,17 @@ const MyTable = ({
 
   const getData = async () => {
     try {
-      const response = await API.get(
-        `${url}?page=${page}&perPage=${perPage}&search=${search}&start=${dateStart}&end=${dateEnd}`
-      );
+      let response;
+      if (!report) {
+        response = await API.get(
+          `${url}?page=${page}&perPage=${perPage}&search=${search}`
+        );
+      } else {
+        response = await API.get(
+          `${url}?page=${page}&perPage=${perPage}&search=${search}&start=${dateStart}&end=${dateEnd}`
+        );
+      }
       setData(response.data.data.data);
-      console.log(response.data.data.data);
       setTotal(response.data.data.total);
       console.log(response);
       // setDateStart(response.data.data.data[0].tgl_registrasi)
@@ -127,7 +134,7 @@ const MyTable = ({
 
   useEffect(() => {
     if (dateStart === "" || dateEnd === "") {
-      setDateStart(moment().subtract(1, "months").format("MM-DD-YYYY"));
+      setDateStart(moment().subtract(1, "months").format("MM-DD-YYYY "));
       setDateEnd(moment().format("MM-DD-YYYY"));
     }
     getData();
@@ -161,7 +168,7 @@ const MyTable = ({
                     // onFocus={() => (ref.current.type = "date")}
                     // onBlur={() => (ref.current.type = "date")}
                     placeholder="Start Date"
-                    name="tanggal_pembayaran"
+                    name="tanggal_lahir"
                     onChange={(e) => setDateStart(e.target.value)}
                   />
                 </Form.Group>
@@ -177,7 +184,7 @@ const MyTable = ({
                   <Form.Control
                     type="date"
                     placeholder="End Date"
-                    name="tanggal_pembayaran"
+                    name="tanggal_lahir"
                     onChange={(e) => setDateEnd(e.target.value)}
                   />
                 </Form.Group>

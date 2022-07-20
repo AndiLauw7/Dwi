@@ -98,8 +98,9 @@ export default function MasterDataSiswa() {
         colAct={ActComp}
         columns={columns}
         pathAdd={"/dashboard/tambah-data-siswa"}
-        url={"/registrasi"}
+        url={"/registrasi-report"}
         dateRangePicker
+        report
       />
     </MyPage>
   );
