@@ -38,7 +38,7 @@ const TableRow = ({ item, columns, index, colNo, colAct, setDataId }) => {
     );
 };
 
-const MyTable = ({ columns, url, colNo, colAct, pathAdd, expExcel, nameColExcel, dateRangePicker }) => {
+const MyTable = ({ columns, url, colNo, colAct, pathAdd, expExcel, nameColExcel, dateRangePicker, report }) => {
     const ref = useRef()
     const navigate = useNavigate()
     const [data, setData] = useState([])
@@ -57,16 +57,23 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd, expExcel, nameColExcel,
     const totalPage = Math.ceil(total / perPage)
 
     const getData = async () => {
-        try {
-            const response = await API.get(`${url}?page=${page}&perPage=${perPage}&search=${search}&start=${dateStart}&end=${dateEnd}`)
-            setData(response.data.data.data)
-            setTotal(response.data.data.total);
-            console.log(response);
-            // setDateStart(response.data.data.data[0].tgl_registrasi)
+        
+            try {
+                let response
+                if(!report){
+                    response = await API.get(`${url}?page=${page}&perPage=${perPage}&search=${search}`)
+                } else {
+                    response = await API.get(`${url}?page=${page}&perPage=${perPage}&search=${search}&start=${dateStart}&end=${dateEnd}`)
 
-        } catch (error) {
-            console.log(error);
-        }
+                }
+                setData(response.data.data.data)
+                setTotal(response.data.data.total);
+                console.log(response);
+                // setDateStart(response.data.data.data[0].tgl_registrasi)
+    
+            } catch (error) {
+                console.log(error);
+            }
     }
 
     const handleSearch = async () => {
@@ -112,7 +119,7 @@ const MyTable = ({ columns, url, colNo, colAct, pathAdd, expExcel, nameColExcel,
 
     useEffect(() => {
         if(dateStart === "" || dateEnd === ""){
-            setDateStart(moment().subtract(1, 'months').format("MM-DD-YYYY"))
+            setDateStart(moment().subtract(1, 'months').format("MM-DD-YYYY "))
             setDateEnd(moment().format("MM-DD-YYYY"))
         }
         getData()
